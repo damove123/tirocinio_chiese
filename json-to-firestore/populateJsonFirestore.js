@@ -1,3 +1,19 @@
+import firebase from "firebase.json";
+
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+const fs = require('fs');
+const { resolve } = require('path');
+// Initialize Firebase
+// Get your firebase credentials from 
+// the firebase console for your project
+firebase.initializeApp({
+  apiKey: "AIzaSyC2R1A_Q-ioAKh43aTCnlIoGcUoFDsyWS8",
+  authDomain: "tirocinio-7b6c2.firebaseapp.com",
+  projectId: "tirocinio-7b6c2"
+});
+
 
 /**
  * Tutorial on how to upload json data to firestore
