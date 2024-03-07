@@ -10,5 +10,8 @@
     "frameworksBackend": {
       "region": "europe-west1"
     }
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }
