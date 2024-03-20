@@ -7,19 +7,56 @@
 </head>
 <body>
 <h1>Dati CSV</h1>
-<table>
+<table id="csvTable">
+    <thead>
     <tr>
         <th>Colonna 1</th>
         <th>Colonna 2</th>
+        <th>Colonna 3</th>
+        <th>Colonna 4</th>
+        <th>Colonna 5</th>
+        <th>Colonna 6</th>
+        <th>Colonna 7</th>
+        <th>Colonna 8</th>
+        <th>Colonna 9</th>
+        <th>Colonna 10</th>
+        <th>Colonna 11</th>
+        <th>Colonna 12</th>
+        <th>Colonna 13</th>
+        <th>Colonna 14</th>
+        <th>Colonna 15</th>
+        <th>Colonna 16</th>
+        <th>Colonna 17</th>
+        <th>Colonna 18</th>
         <!-- Aggiungi altre colonne se necessario -->
     </tr>
-    {% for row in data %}
-    <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <!-- Aggiungi altre celle se necessario -->
-    </tr>
-    {% endfor %}
+    </thead>
+    <tbody>
+    <!-- Le righe verranno aggiunte qui dallo script -->
+    </tbody>
 </table>
+
+<script>
+    // Supponendo che `data` sia il tuo array di dati CSV
+    let data = [];
+
+    // Funzione per generare la tabella
+    function generateTable(data) {
+        const tableBody = document.getElementById('csvTable').getElementsByTagName('tbody')[0];
+        data.forEach((row, index) => {
+            if (index > 0) { // Salta la prima riga se contiene le intestazioni
+                let newRow = tableBody.insertRow();
+                row.forEach(cellData => {
+                    let newCell = newRow.insertCell();
+                    let newText = document.createTextNode(cellData);
+                    newCell.appendChild(newText);
+                });
+            }
+        });
+    }
+
+    // Chiamata alla funzione per generare la tabella
+    generateTable(data);
+</script>
 </body>
 </html>
