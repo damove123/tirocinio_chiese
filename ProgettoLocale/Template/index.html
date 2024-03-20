@@ -7,27 +7,15 @@
 </head>
 <body>
 <h1>Dati CSV</h1>
+
+<!-- Campo di input per caricare il file CSV -->
+<input type="file" id="csvFileInput" accept=".csv" onchange="readCSVAndGenerateTable(event)">
+
 <table id="csvTable">
     <thead>
     <tr>
         <th>Colonna 1</th>
         <th>Colonna 2</th>
-        <th>Colonna 3</th>
-        <th>Colonna 4</th>
-        <th>Colonna 5</th>
-        <th>Colonna 6</th>
-        <th>Colonna 7</th>
-        <th>Colonna 8</th>
-        <th>Colonna 9</th>
-        <th>Colonna 10</th>
-        <th>Colonna 11</th>
-        <th>Colonna 12</th>
-        <th>Colonna 13</th>
-        <th>Colonna 14</th>
-        <th>Colonna 15</th>
-        <th>Colonna 16</th>
-        <th>Colonna 17</th>
-        <th>Colonna 18</th>
         <!-- Aggiungi altre colonne se necessario -->
     </tr>
     </thead>
@@ -37,35 +25,35 @@
 </table>
 
 <script>
-    // Supponendo che `data` sia il tuo array di dati CSV
-    const fs = require('fs');
-    const csv = require('csv-parser');
-    let data = [];
-
-    function index() {
-
-        fs.createReadStream('/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/Chiese.CSV', { encoding: 'latin-1' })
-            .pipe(csv())
-            .on('data', (row) => {
-                data.push(row);
-            })
-            .on('end', () => {
-                renderTemplate('index.html', { data });
-            });
+    function readCSVAndGenerateTable(event) {
+        const input = event.target;
+        if ('files' in input && input.files.length > 0) {
+            readFileContent(input.files[0]).then(content => {
+                const data = parseCSV(content);
+                generateTable(data);
+            }).catch(error => console.log(error));
+        }
     }
 
-    function renderTemplate(templateName, context) {
-        // Your code for rendering the HTML template goes here
-        console.log(`Rendering ${templateName} with context:`, context);
+    function readFileContent(file) {
+        const reader = new FileReader();
+        return new Promise((resolve, reject) => {
+            reader.onload = event => resolve(event.target.result);
+            reader.onerror = error => reject(error);
+            reader.readAsText(file);
+        });
     }
 
-    index(); // Call the function to start reading the CSV file and render the template
+    function parseCSV(text) {
+        // Semplice esempio di parsing. Considera l'uso di una libreria per casi più complessi
+        return text.split('\n').map(row => row.split(','));
+    }
 
-    // Funzione per generare la tabella
     function generateTable(data) {
         const tableBody = document.getElementById('csvTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Pulisci la tabella prima di aggiungere nuove righe
         data.forEach((row, index) => {
-            if (index > 0) { // Salta la prima riga se contiene le intestazioni
+            if (index > 0) { // Opzionale: salta l'intestazione se già definita
                 let newRow = tableBody.insertRow();
                 row.forEach(cellData => {
                     let newCell = newRow.insertCell();
@@ -75,9 +63,7 @@
             }
         });
     }
-
-    // Chiamata alla funzione per generare la tabella
-    generateTable(data);
 </script>
 </body>
 </html>
+
