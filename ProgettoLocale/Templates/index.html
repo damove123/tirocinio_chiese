@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dati CSV</title>
+</head>
+<body>
+<h1>Dati CSV</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <!-- Aggiungi altre intestazioni delle colonne se necessario -->
+    </tr>
+    </thead>
+    <tbody>
+    {% for riga in dati %}
+    <tr>
+        <td>{{ riga[0] }}</td>
+        <td>{{ riga[1] }}</td>
+        <!-- Aggiungi altre colonne se il CSV ha più campi -->
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
