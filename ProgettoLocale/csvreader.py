@@ -1,7 +1,7 @@
 import json
 
 # Percorso al file JSON
-file_path = r"C:\Users\matte\OneDrive\Documenti\tirocinio_chiese\fileExcel\_RepertiPivi.json"
+file_path = "/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/RepertiPolo.json"
 
 # Carica il JSON da file
 with open(file_path, 'r', encoding='utf-8') as file:
@@ -14,7 +14,7 @@ for obj in data:
     if "Latino" in obj:
         # Assicurati che il valore di "Latino" sia una stringa prima di chiamare replace
         if isinstance(obj['Latino'], str):
-            obj['Latino'] = obj['Latino'].replace('\t', ' ')  # Sostituisci '\n' con '\t'
+            obj['Latino'] = obj['Latino'].replace('[ ]', '')  # Sostituisci '\n' con '\t'
         else:
             print("Il valore di 'Latino' non è una stringa", type(obj['Latino']))
 
