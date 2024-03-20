@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dati CSV</title>
+</head>
+<body>
+<h1>Dati CSV</h1>
+<table>
+    <tr>
+        <th>Colonna 1</th>
+        <th>Colonna 2</th>
+        <!-- Aggiungi altre colonne se necessario -->
+    </tr>
+    {% for row in data %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <!-- Aggiungi altre celle se necessario -->
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
