@@ -38,7 +38,28 @@
 
 <script>
     // Supponendo che `data` sia il tuo array di dati CSV
+    const fs = require('fs');
+    const csv = require('csv-parser');
     let data = [];
+
+    function index() {
+
+        fs.createReadStream('/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/Chiese.CSV', { encoding: 'latin-1' })
+            .pipe(csv())
+            .on('data', (row) => {
+                data.push(row);
+            })
+            .on('end', () => {
+                renderTemplate('index.html', { data });
+            });
+    }
+
+    function renderTemplate(templateName, context) {
+        // Your code for rendering the HTML template goes here
+        console.log(`Rendering ${templateName} with context:`, context);
+    }
+
+    index(); // Call the function to start reading the CSV file and render the template
 
     // Funzione per generare la tabella
     function generateTable(data) {
