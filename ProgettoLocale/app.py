@@ -14,28 +14,43 @@ def home():
 def leggi_json():
     try:
         # Leggere il Codice Chiesa immesso nel form
-        codice_chiesa = request.form['codice_chiesa']
+        nome_chiesa = request.form['nome_chiesa']
+        codice_chiesa = []
+        reperti_chiesa = []
 
         # Lista per memorizzare le corrispondenze trovate
         corrispondenze = []
 
         # Apro il file JSON
+        with open('/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/Chiese.json', 'r') as file:
+            # Carico il contenuto del file JSON in una lista di dizionari
+            dati1 = json.load(file)
+
         with open('/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/RepertiPolo.json', 'r') as file:
             # Carico il contenuto del file JSON in una lista di dizionari
-            dati = json.load(file)
+            dati2 = json.load(file)
 
-            # Cerco tutti i record con il Codice Chiesa specificato
-            for record in dati:
-                if record.get('Codice Chiesa') == codice_chiesa:
-                    # Aggiungo il record alla lista delle corrispondenze
-                    corrispondenze.append(record)
+        with open('/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/_RepertiPivi.json', 'r') as file:
+            # Carico il contenuto del file JSON in una lista di dizionari
+            dati3 = json.load(file)
 
-            if corrispondenze:
-                # Se ci sono corrispondenze, restituisco la lista di record
-                return jsonify(corrispondenze)
-            else:
-                # Se non ci sono corrispondenze, restituisco un messaggio
-                return jsonify({'messaggio': f'Codice Chiesa "{codice_chiesa}" non trovato'})
+        for chiesa in dati1:
+            if chiesa.get('Locale Nome della Chiesa') == nome_chiesa:
+                codice_chiesa = chiesa.get('Codice Chiesa')
+                break
+
+        for codice_da_trovare in dati2:
+            if codice_da_trovare.get('Codice Chiesa') == codice_chiesa:
+                reperti_chiesa.append(codice_da_trovare)
+
+        for codice_da_trovare in dati3:
+            if codice_da_trovare.get('Codice Chiesa') == codice_chiesa:
+                reperti_chiesa.append(codice_da_trovare)
+
+        if reperti_chiesa:
+            return jsonify(reperti_chiesa)
+        else:
+            return jsonify({'messaggio': 'Nessun reperto trovato per questa chiesa'})
 
     except Exception as e:
         # Se si verifica un'eccezione, restituisco un messaggio di errore
