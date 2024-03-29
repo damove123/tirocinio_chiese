@@ -14,26 +14,10 @@
     </style>
 </head>
 <body>
-<h1>Dati da CSV</h1>
-<table>
-    <thead>
-    <tr>
-        {% if data %}
-        {% for header in data[0] %}
-        <th>{{ header }}</th>
-        {% endfor %}
-        {% endif %}
-    </tr>
-    </thead>
-    <tbody>
-    {% for row in data[1:] %}
-    <tr>
-        {% for cell in row %}
-        <td>{{ cell }}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<form action="/leggi_json" method="post">
+    <label for="codice_chiesa">Inserisci il Codice Chiesa:</label>
+    <input type="text" id="codice_chiesa" name="codice_chiesa" required>
+    <button type="submit">Leggi JSON</button>
+</form>
 </body>
 </html>
