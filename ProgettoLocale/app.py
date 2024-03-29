@@ -21,7 +21,7 @@ def leggi_json():
         # Lista per memorizzare le corrispondenze trovate
         corrispondenze = []
 
-        # Apro il file JSON
+        # Apro i file JSON
         with open('/Users/albi/Desktop/Università/tirocinio_chiese/fileExcel/Chiese.json', 'r') as file:
             # Carico il contenuto del file JSON in una lista di dizionari
             dati1 = json.load(file)
