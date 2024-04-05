@@ -11,16 +11,22 @@ firebase_admin.initialize_app(cred, {
 
 app = Flask(__name__)
 
-#ref = db.reference("/Chiese").get()
-#formatted_ref = json.dumps(ref, indent=4, ensure_ascii=False)
-#print(formatted_ref)
+
 
 
 @app.route("/")
 def homepage():
-    ref = db.reference("/Chiese").get()
-    formatted_ref = json.dumps(ref, indent=4, ensure_ascii=False)
-    return formatted_ref
+    try:
+        ref = db.reference("/Chiese")
+        chiese = ref.get()
+        if chiese:
+            return render_template("index.html", chiese=chiese)
+        else:
+            return render_template("index.html", chiese=None)
+    except Exception as e:
+        app.logger.error(f"Errore durante il recupero dei dati: {e}")
+        return jsonify({'error': 'Impossibile completare la richiesta'}), 500
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

@@ -1,0 +1,24 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elenco Chiese</title>
+</head>
+<body>
+<h1>Elenco Chiese</h1>
+{% if chiese %}
+<ul>
+    {% for chiesa in chiese %}
+    <li>
+        <h2>Nome: {{ chiesa["Locale Nome della Chiesa"] }}</h2>
+        <p>Indirizzo: {{ chiesa.Sestiere }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Nessuna chiesa trovata.</p>
+{% endif %}
+</body>
+</html>
+</html>
