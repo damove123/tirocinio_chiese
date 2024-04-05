@@ -19,8 +19,7 @@ app = Flask(__name__)
 @app.route("/")
 def homepage():
     ref = db.reference("/Chiese").get()
-    formatted_ref = json.dumps(ref, indent=4, ensure_ascii=False)
-    return formatted_ref
+    return render_template('index.html', chiese=ref)
 
 if __name__ == "__main__":
     app.run()
