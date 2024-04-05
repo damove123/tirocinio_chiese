@@ -1,0 +1,34 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Stile per il campo di input */
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Stile per il pulsante di ricerca */
+.search-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Stile per il pulsante di ricerca al passaggio del mouse */
+.search-button:hover {
+    background-color: #45a049;
+}
