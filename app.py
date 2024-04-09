@@ -1,6 +1,11 @@
 import firebase_admin
 from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
+from arcgis.gis import GIS
+
+gis = GIS("https://www.arcgis.com", "alberto.zampedri_serendpt", "Albi2001!")
+
+mappa = gis.content.get("5ae37f33f52a4eefbc098507ddd9f92d")
 
 cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, {
