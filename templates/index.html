@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Ricerca Chiesa</title>
+    <title>Risultati Ricerca</title>
 </head>
 <body>
 <h1>Ricerca Chiesa</h1>
@@ -17,15 +17,63 @@
 <ul>
     {% for chiesa in chiese %}
     <li>
-        <h3>Nome: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
+        <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
         <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-        <p>Altri attributi: {{ chiesa }}</p>  <!-- Visualizza tutti gli attributi della chiesa -->
+        <h4>Reperti:</h4>
+        <ul>
+            {% for reperto in reperti %}
+            {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
+            <li>
+                <h5>Nome Reperto: {{ reperto["Primario Nome"] }}</h5>
+                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
+                <p>Anno di Morte: {{ reperto["Anno di Morte"] }}</p>
+                <p>Anno di Nascita: {{ reperto["Anno di Nascita"] }}</p>
+                <p>Arte: {{ reperto["Arte"] }}</p>
+                <p>Chiavistello: {{ reperto["Chiavistello"] }}</p>
+                <p>Codice Chiesa: {{ reperto["Codice Chiesa"] }}</p>
+                <p>Codice Reperto: {{ reperto["Codice Reperto"] }}</p>
+                <p>Cognome: {{ reperto["Cognome"] }}</p>
+                <p>Commenti: {{ reperto["Commenti"] }}</p>
+                <p>Data Rilevamento: {{ reperto["Data"] }}</p>
+                <p>Data di Morte: {{ reperto["Data di Morte"] }}</p>
+                <p>Data di Nascita: {{ reperto["Data di Nascita"] }}</p>
+                <p>Davanti: {{ reperto["Davanti"] }}</p>
+                <p>Destra: {{ reperto["Destra"] }}</p>
+                <p>Età di Morte: {{ reperto["Età di Morte"] }}</p>
+                <p>Forma: {{ reperto["Forma"] }}</p>
+                <p>Traduzione in Inglese: {{ reperto["Inglese"] }}</p>
+                <p>Inscrizione: {{ reperto["Inscrizione"] }}</p>
+                <p>Italiano: {{ reperto["Italiano"] }}</p>
+                <p>Larghezza: {{ reperto["Larghezza"] }}</p>
+                <p>Latino: {{ reperto["Latino"] }}</p>
+                <p>Lunghezza: {{ reperto["Lunghezza"] }}</p>
+                <p>Luogo: {{ reperto["Luogo"] }}</p>
+                <p>MAPINFO_ID: {{ reperto["MAPINFO_ID"] }}</p>
+                <p>Mese di Nascita: {{ reperto["Mese di Nascita"] }}</p>
+                <p>Mese di Morte: {{ reperto["Mese di Morte"] }}</p>
+                <p>Nome: {{ reperto["Nome"] }}</p>
+                <p>Orientazione de Geografico: {{ reperto["Orientazione de Geografico"] }}</p>
+                <p>Coordinata X: {{ reperto["Posizione - X Coordinato"] }}</p>
+                <p>Coordinata Y: {{ reperto["Posizione - Y Coordinato"] }}</p>
+                <p>Primario Materiale: {{ reperto["Primario Materiale"] }}</p>
+                <p>Primario Nome: {{ reperto["Primario Nome"] }}</p>
+                <p>Professione: {{ reperto["Professione"] }}</p>
+                <p>Retro {{ reperto["Retro"] }}</p>
+                <p>Secondo Nome: {{ reperto["Secondo Nome"] }}</p>
+                <p>Sinistra: {{ reperto["Sinistra"] }}</p>
+                <p>Testo di Fotografia: {{ reperto["Testo di Fotographia"] }}</p>
+                <p>Tipo: {{ reperto["Tipo"] }}</p>
+                <!-- Aggiungi qui altri attributi specifici del reperto -->
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
     </li>
     {% endfor %}
 </ul>
 {% else %}
 {% if query %}
-<p>Nessuna chiesa trovata per "{{ query }}".</p>
+<p>Nessun risultato trovato per "{{ query }}".</p>
 {% endif %}
 {% endif %}
 </body>
