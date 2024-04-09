@@ -1,30 +1,32 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href = "/static/style.css">
-    <title>Elenco Chiese</title>
+    <title>Ricerca Chiesa</title>
 </head>
 <body>
-<div class="search-bar">
-<input type="text" class="search-input" placeholder="Cerca...">
-<button class="search-button">Cerca</button>
-</div>
+<h1>Ricerca Chiesa</h1>
+<form action="/" method="GET">
+    <label for="search_input">Inserisci il nome della chiesa:</label><br>
+    <input type="text" id="search_input" name="query"><br>
+    <button type="submit">Cerca</button>
+</form>
 
-<h1>Elenco Chiese</h1>
 {% if chiese %}
+<h2>Risultati della ricerca per "{{ query }}"</h2>
 <ul>
     {% for chiesa in chiese %}
     <li>
-        <h2>Nome: {{ chiesa["Locale Nome della Chiesa"] }}</h2>
-        <p>Indirizzo: {{ chiesa.Sestiere }}</p>
+        <h3>Nome: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
+        <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
+        <p>Altri attributi: {{ chiesa }}</p>  <!-- Visualizza tutti gli attributi della chiesa -->
     </li>
     {% endfor %}
 </ul>
 {% else %}
-<p>Nessuna chiesa trovata.</p>
+{% if query %}
+<p>Nessuna chiesa trovata per "{{ query }}".</p>
+{% endif %}
 {% endif %}
 </body>
-</html>
 </html>
