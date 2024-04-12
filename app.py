@@ -3,21 +3,29 @@ from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
 import boto3
 
+
+
 # Configura il client S3
 s3_client = boto3.client('s3')
 
-def get_image_urls(bucket_name, church_code):
-    prefix = f"Church_Photos/{church_code}/Artifacts/"
+def get_image_urls(bucket_name, church_code, reperto_code):
+    # Il prefisso ora include anche il nome del file immagine specifico per il reperto.
+    prefix = f"Church_Photos/{church_code}/Artifacts/{reperto_code}.JPG"
     try:
         response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+        print("Response from S3:", response)  # Stampa la risposta completa per debug
         if response['KeyCount'] == 0:
             print(f"Nessun oggetto trovato con il prefisso {prefix}")
-        image_urls = [f"https://{bucket_name}.s3.amazonaws.com/{obj['Key']}" for obj in response.get('Contents', [])]
-        print(f"URLs trovate: {image_urls}")
-        return image_urls
+        else:
+            # Poiché ci aspettiamo un solo file, prendiamo direttamente il primo risultato.
+            image_url = f"https://{bucket_name}.s3.amazonaws.com/{response['Contents'][0]['Key']}"
+            return [image_url]
     except Exception as e:
         print(f"Errore nel recupero delle immagini: {e}")
         return []
+
+
+
 
 
 
@@ -49,13 +57,13 @@ def search_church():
             refPivi = db.reference("/RepertiPivi").get() or []
             for pivi in refPivi:
                 if pivi.get("Codice Chiesa") == codice_corrispondente:
-                    pivi['image_urls'] = get_image_urls('floor-tiles-vpc', pivi.get("Codice Reperto"))
+                    pivi['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente, pivi.get("Codice Reperto"))
                     resultsReperti.append(pivi)
 
             refPolo = db.reference("/RepertiPolo").get() or []
             for polo in refPolo:
                 if polo.get("Codice Chiesa") == codice_corrispondente:
-                    polo['image_urls'] = get_image_urls('floor-tiles-vpc', polo.get("Codice Reperto"))
+                    polo['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente, polo.get("Codice Reperto"))
                     resultsReperti.append(polo)
 
         if resultsChiese:
