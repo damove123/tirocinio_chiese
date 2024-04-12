@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-
-
     <meta charset="UTF-8">
     <title>Risultati Ricerca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.23/"></script>
     <script>
         require([
             "esri/Map",
             "esri/views/MapView",
-            "esri/WebMap"
-        ], function(Map, MapView, WebMap) {
+            "esri/WebMap",
+            "esri/Graphic"
+        ], function(Map, MapView, WebMap, Graphic) {
             var webMap = new WebMap({
                 portalItem: {
-                    // Usa il tuo ID mappa qui
                     id: "5ae37f33f52a4eefbc098507ddd9f92d"
                 }
             });
 
             var view = new MapView({
-                container: "viewDiv", // Riferimento all'elemento HTML che ospiterà la mappa
-                map: webMap
+                container: "viewDiv",
+                map: webMap,
+                zoom: 12, // Imposta un livello di zoom che ti permetta di visualizzare chiaramente la chiesa
+                center: [12.2306, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
             });
+
+
         });
     </script>
+
     <style>
         #viewDiv {
             height: 400px;
@@ -41,7 +45,6 @@
     <button type="submit">Cerca</button>
 </form>
 
-
 <div id="viewDiv"></div>
 
 {% if chiese %}
@@ -56,46 +59,17 @@
             {% for reperto in reperti %}
             {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
             <li>
-                <h5>Nome Reperto: {{ reperto["Primario Nome"] }}</h5>
+                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
+                <!-- Aggiunta delle immagini del reperto -->
+                {% if reperto.image_urls %}
+                {% for url in reperto.image_urls %}
+                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                {% endfor %}
+                {% else %}
+                <p>Nessuna immagine disponibile.</p>
+                {% endif %}
                 <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
-                <p>Anno di Morte: {{ reperto["Anno di Morte"] }}</p>
-                <p>Anno di Nascita: {{ reperto["Anno di Nascita"] }}</p>
-                <p>Arte: {{ reperto["Arte"] }}</p>
-                <p>Chiavistello: {{ reperto["Chiavistello"] }}</p>
-                <p>Codice Chiesa: {{ reperto["Codice Chiesa"] }}</p>
-                <p>Codice Reperto: {{ reperto["Codice Reperto"] }}</p>
-                <p>Cognome: {{ reperto["Cognome"] }}</p>
-                <p>Commenti: {{ reperto["Commenti"] }}</p>
-                <p>Data Rilevamento: {{ reperto["Data"] }}</p>
-                <p>Data di Morte: {{ reperto["Data di Morte"] }}</p>
-                <p>Data di Nascita: {{ reperto["Data di Nascita"] }}</p>
-                <p>Davanti: {{ reperto["Davanti"] }}</p>
-                <p>Destra: {{ reperto["Destra"] }}</p>
-                <p>Età di Morte: {{ reperto["Età di Morte"] }}</p>
-                <p>Forma: {{ reperto["Forma"] }}</p>
-                <p>Traduzione in Inglese: {{ reperto["Inglese"] }}</p>
-                <p>Inscrizione: {{ reperto["Inscrizione"] }}</p>
-                <p>Italiano: {{ reperto["Italiano"] }}</p>
-                <p>Larghezza: {{ reperto["Larghezza"] }}</p>
-                <p>Latino: {{ reperto["Latino"] }}</p>
-                <p>Lunghezza: {{ reperto["Lunghezza"] }}</p>
-                <p>Luogo: {{ reperto["Luogo"] }}</p>
-                <p>MAPINFO_ID: {{ reperto["MAPINFO_ID"] }}</p>
-                <p>Mese di Nascita: {{ reperto["Mese di Nascita"] }}</p>
-                <p>Mese di Morte: {{ reperto["Mese di Morte"] }}</p>
-                <p>Nome: {{ reperto["Nome"] }}</p>
-                <p>Orientazione de Geografico: {{ reperto["Orientazione de Geografico"] }}</p>
-                <p>Coordinata X: {{ reperto["Posizione - X Coordinato"] }}</p>
-                <p>Coordinata Y: {{ reperto["Posizione - Y Coordinato"] }}</p>
-                <p>Primario Materiale: {{ reperto["Primario Materiale"] }}</p>
-                <p>Primario Nome: {{ reperto["Primario Nome"] }}</p>
-                <p>Professione: {{ reperto["Professione"] }}</p>
-                <p>Retro {{ reperto["Retro"] }}</p>
-                <p>Secondo Nome: {{ reperto["Secondo Nome"] }}</p>
-                <p>Sinistra: {{ reperto["Sinistra"] }}</p>
-                <p>Testo di Fotografia: {{ reperto["Testo di Fotographia"] }}</p>
-                <p>Tipo: {{ reperto["Tipo"] }}</p>
-                <!-- Aggiungi qui altri attributi specifici del reperto -->
+                <!-- Continua con altri dettagli del reperto come prima -->
             </li>
             {% endif %}
             {% endfor %}
