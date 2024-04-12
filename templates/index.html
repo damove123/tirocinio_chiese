@@ -11,8 +11,15 @@
             "esri/Map",
             "esri/views/MapView",
             "esri/WebMap",
-            "esri/Graphic"
-        ], function(Map, MapView, WebMap, Graphic) {
+            "esri/Graphic",
+            "esri/config",
+            "esri/layers/GraphicsLayer",
+            "esri/geometry/Point",
+            "esri/widgets/Search"// Aggiungi il modulo 'esri/config' per configurare la chiave API
+        ], function(Map, MapView, WebMap, GraphicsLayer, Point, esriConfig) {
+            // Configura la tua chiave API
+            esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
+
             var webMap = new WebMap({
                 portalItem: {
                     id: "5ae37f33f52a4eefbc098507ddd9f92d"
@@ -26,8 +33,37 @@
                 center: [12.2306, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
             });
 
+            var sketchWidget = new Sketch({
+                view: view
+            });
+            view.ui.add(sketchWidget, "top-right");
 
+            // Aggiungi un gestore per l'evento clic sullo sketch layer
+            sketchWidget.on("create", function(event) {
+                if (event.state === "complete") {
+                    // Recupera il nome della chiesa associato al punto cliccato
+                    var nomeChiesa = event.graphic.attributes["Nome della proprietà che contiene il nome della chiesa"];
+
+                    // Inserisci il nome della chiesa nell'input di ricerca
+                    document.getElementById("search_input").value = nomeChiesa;
+                }
+            });
+
+            // Funzione per la ricerca
+            function search() {
+                var query = document.getElementById("search_input").value;
+                // Esegui la ricerca con il nome della chiesa inserito
+                // Esempio: esegui una query sul tuo dataset per trovare la chiesa corrispondente
+                // e visualizzare i risultati sulla mappa
+            }
+
+            // Aggiungi un gestore per il submit del form di ricerca
+            document.getElementById("search_form").addEventListener("submit", function(event) {
+                event.preventDefault(); // Previeni il comportamento predefinito del submit del form
+                search(); // Esegui la funzione di ricerca
+            });
         });
+
     </script>
 
     <style>
