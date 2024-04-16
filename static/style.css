@@ -3,12 +3,8 @@
 
 /* Reset CSS per eliminare i margini e i padding predefiniti */
 body, h1, h2, h3, p, ul, li {
-/* Stili generali */
-html, body {
-    height: 100%; /* Imposta altezza */
     margin: 0;
     padding: 0;
-    overflow: auto; /* Abilita lo scrolling */
     box-sizing: border-box;
 }
 
@@ -18,22 +14,14 @@ body {
     background: linear-gradient(135deg, #283048, #859398);
     color: #fff;
     line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
 }
 
-/* Stili per titoli, testo e form */
-h1, h2 {
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 1.5rem;
-}
-
+/* Stile per il titolo principale */
 h1 {
     font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2rem;
 }
 
 /* Stile per il titolo secondario */
@@ -48,6 +36,7 @@ h2 {
 p {
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
+    color: #ccc; /* Testo grigio */
 }
 
 /* Stile per i link */
@@ -59,7 +48,6 @@ a {
 
 a:hover {
     color: #4caf50;
-    background: #ff5722;
 }
 
 /* Stile per i pulsanti */
@@ -74,21 +62,6 @@ a:hover {
     text-transform: uppercase;
     transition: background-color 0.3s ease;
 }
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #283048, #859398);
-    color: #fff;
-    line-height: 1.6;
-    display: flex;        /* Imposta il layout a Flexbox */
-    justify-content: center; /* Centra gli elementi orizzontalmente */
-    align-items: center;  /* Opzionale: se vuoi anche centrare verticalmente */
-    min-height: 100vh;    /* Altezza minima per prendere l'intera altezza della viewport */
-    flex-direction: column; /* Orienta i figli in colonna (opzionale se hai più elementi) */
-    margin: 0;            /* Rimuovi i margini predefiniti */
-    padding: 0;           /* Rimuovi il padding predefinito */
-}
-
 
 .button:hover {
     background: #ff5722;
@@ -111,9 +84,13 @@ body {
     border-color: #00bcd4;
 }
 
-/* Stili per container e liste */
-.container, .form, .map-container {
-    width: 100%; /* Assicurati che occupi tutta la larghezza */
+/* Stile per i form */
+.form {
+    margin-bottom: 3rem;
+}
+
+/* Stile per i container */
+.container {
     max-width: 1200px;
     margin: auto;
     padding: 0 2rem;
@@ -134,13 +111,9 @@ li {
 /* Stile per le immagini */
 .relic-item {
     margin-bottom: 2rem;
-/* Stili per la mappa e gli elementi interattivi */
-#viewDiv {
-    height: 700px;
-    width: 90%; /* o la larghezza desiderata */
 }
 
-.relic-container, .image-container {
+.relic-container {
     display: flex;
     align-items: center;
 }
@@ -148,9 +121,8 @@ li {
 .image-container {
     flex: 0 0 200px;
     position: relative;
-    overflow: hidden; /* Gestione dello spazio e overflow */
     margin-right: 1rem;
-    /* Aggiunto overflow per abilitare lo scrolling */
+    overflow: hidden; /* Aggiunto overflow per abilitare lo scrolling */
 }
 
 .img-fluid {
@@ -160,8 +132,8 @@ li {
     border-radius: 5px;
 }
 
+/* Stile per il contenitore dell'iscrizione latina */
 .inscription-container {
-    flex: 1;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 0.5rem;
     border-radius: 5px;
@@ -173,6 +145,7 @@ li {
     margin-top: 1rem;
 }
 
+/* Stile per il testo dell'iscrizione latina */
 .latin-inscription {
     font-size: 0.8rem;
     margin: 0;
@@ -188,7 +161,6 @@ li {
     margin-bottom: 2rem;
     transition: transform 0.3s ease;
 }
-
 
 /* Stile hover per il div */
 .custom-div:hover {
@@ -221,11 +193,12 @@ li {
 
 .map-container{
     width: 100%;
-    height: 600px; /* Altezza desiderata per la mappa */
-    margin-bottom: 2rem; /* Aggiungi margine inferiore per separare dalla sezione successiva */
-    position: relative; /* Assicura che la mappa sia posizionata relativamente */
-    overflow: hidden; /* Nasconde eventuali contenuti che escono dal contenitore */
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 2rem;
+}
 
-.image-container:hover::before {
-    border-color: #00bcd4;
+#viewDiv{
+    height: 700px;
+    width: 100%;
 }
