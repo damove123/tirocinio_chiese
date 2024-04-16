@@ -5,6 +5,8 @@
     <title>Risultati Ricerca</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
     <script src="https://js.arcgis.com/4.23/"></script>
     <script>
         require([
@@ -51,7 +53,7 @@
     <button type="submit">Cerca</button>
 </form>
 
-<div id="viewDiv"></div>
+<div class="custom-div" id="viewDiv"></div>
 
 {% if chiese %}
     <h2>Risultati della ricerca per "{{ query }}"</h2>
@@ -64,12 +66,19 @@
                 <ul>
                     {% for reperto in reperti %}
                         {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
-                            <li>
+                            <li class="relic-item">
                                 <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
                                 <!-- Aggiunta delle immagini del reperto -->
                                 {% if reperto.image_urls %}
                                     {% for url in reperto.image_urls %}
-                                        <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                                        <div class="relic-container">
+                                            <div class="image-container">
+                                                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" class = img-fluid>
+                                            </div>
+                                            <div class="inscription-container">
+                                                <p class="latin-inscription">Inscrizione Latina: {{ reperto["Latino"] }}</p>
+                                            </div>
+                                        </div>
                                     {% endfor %}
                                 {% else %}
                                     <p>Nessuna immagine disponibile.</p>

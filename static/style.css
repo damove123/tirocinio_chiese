@@ -1,0 +1,160 @@
+/* Reset CSS per eliminare i margini e i padding predefiniti */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stile generale del corpo della pagina */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #283048, #859398);
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Stile per il titolo principale */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+/* Stile per il titolo secondario */
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+/* Stile per i paragrafi */
+p {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Stile per i link */
+a {
+    color: #00bcd4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #4caf50;
+}
+
+/* Stile per i pulsanti */
+.button {
+    background: #f44336;
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background: #ff5722;
+}
+
+/* Stile per gli input di testo */
+.input-field {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #00bcd4;
+}
+
+/* Stile per i form */
+.form {
+    margin-bottom: 3rem;
+}
+
+/* Stile per i container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+/* Stile per le liste non ordinate */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Stile per i singoli elementi di una lista */
+li {
+    margin-bottom: 1rem;
+}
+
+/* Stile per le immagini */
+.relic-item {
+    margin-bottom: 2rem;
+}
+
+.relic-container {
+    display: flex;
+    align-items: center;
+}
+
+.image-container {
+    flex: 0 0 200px;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.inscription-container {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centro il contenuto orizzontalmente */
+    word-wrap: break-word;
+}
+
+.latin-inscription {
+    font-size: 0.8rem;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+
+.custom-div {
+    background: linear-gradient(135deg, #2b5876, #4e4376);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Stile hover per il div */
+.custom-div:hover {
+    transform: translateY(-5px);
+}
