@@ -3,51 +3,72 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <title>Risultati Ricerca</title>
+    <style>
+        /* Stili personalizzati */
+        /* Aggiungi stili personalizzati qui */
+    </style>
 </head>
 <body>
-{% if chiese %}
-<h2>Risultati della ricerca per "{{ query }}"</h2>
-    <ul>
-        {% for chiesa in chiese %}
-        <li>
-            <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
-                <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-                <h4>Reperti:</h4>
-                <ul>
-                    {% for reperto in reperti %}
-                        {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
-                        <li>
-                            <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
-                            <!-- Aggiunta delle immagini del reperto -->
-                                {% if reperto.image_urls %}
-                                    {% for url in reperto.image_urls %}
-                                        <div class="relic-container">
-                                            <div class="image-container">
-                                                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" class="img-fluid">
-                                            </div>
-                                            <div class="inscription-container">
-                                                <p class="latin-inscription">Inscrizione Latina: <br>{{ reperto["Latino"] }}</p>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                    {% else %}
-                                        <p>Nessuna immagine disponibile.</p>
+<div class="container mt-5">
+    {% if chiese %}
+        <h2 class="mb-4">Risultati della ricerca per "{{ query }}"</h2>
+        <div class="accordion" id="chieseAccordion">
+            {% for chiesa in chiese %}
+                <div class="card">
+                    <div class="card-header" id="chiesa{{ chiesa["Codice Chiesa"] }}">
+                        <h3 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ chiesa["Codice Chiesa"] }}" aria-expanded="true" aria-controls="collapse{{ chiesa["Codice Chiesa"] }}">
+                                Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}
+                            </button>
+                        </h3>
+                    </div>
+                    <div id="collapse{{ chiesa["Codice Chiesa"] }}" class="collapse" aria-labelledby="chiesa{{ chiesa["Codice Chiesa"] }}" data-parent="#chieseAccordion">
+                        <div class="card-body">
+                            <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
+                            <h4>Reperti:</h4>
+                            <ul class="list-group">
+                                {% for reperto in reperti %}
+                                    {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
+                                        <li class="list-group-item">
+                                            <h5>Nome Reperto: {{ reperto["Nome Reperto"] }}</h5>
+                                            <!-- Aggiunta delle immagini del reperto -->
+                                            {% if reperto.image_urls %}
+                                                {% for url in reperto.image_urls %}
+                                                    <div class="relic-container">
+                                                        <div class="image-container">
+                                                            <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" class="img-fluid">
+                                                        </div>
+                                                        <div class="inscription-container">
+                                                            <p class="latin-inscription">Inscrizione Latina: <br>{{ reperto["Latino"] }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p>Nessuna immagine disponibile.</p>
+                                            {% endif %}
+                                            <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
+                                            <!-- Continua con altri dettagli del reperto come prima -->
+                                        </li>
                                     {% endif %}
-                                    <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
-                            <!-- Continua con altri dettagli del reperto come prima -->
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-{% if query %}
-<p>Nessun risultato trovato per "{{ query }}".</p>
-{% endif %}
-{% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% if query %}
+            <p>Nessun risultato trovato per "{{ query }}".</p>
+        {% endif %}
+    {% endif %}
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
