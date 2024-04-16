@@ -13,20 +13,23 @@ s3_client = boto3.client('s3')
 
 
 def get_image_urls(bucket_name, church_code, reperto_code):
+
+    extensions = ['jpg', 'JPG']
     # Il prefisso ora include anche il nome del file immagine specifico per il reperto.
-    prefix = f"Church_Photos/{church_code}/Artifacts/{reperto_code}.JPG"
-    try:
-        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
-        print("Response from S3:", response)  # Stampa la risposta completa per debug
-        if response['KeyCount'] == 0:
-            print(f"Nessun oggetto trovato con il prefisso {prefix}")
-        else:
-            # Poiché ci aspettiamo un solo file, prendiamo direttamente il primo risultato.
-            image_url = f"https://{bucket_name}.s3.amazonaws.com/{response['Contents'][0]['Key']}"
-            return [image_url]
-    except Exception as e:
-        print(f"Errore nel recupero delle immagini: {e}")
-        return []
+    for extension in extensions:
+        prefix = f"Church_Photos/{church_code}/Artifacts/{reperto_code}.{extension}"
+        try:
+            response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+            print("Response from S3:", response)  # Stampa la risposta completa per debug
+            if response['KeyCount'] == 0:
+                print(f"Nessun oggetto trovato con il prefisso {prefix}")
+            else:
+                # Poiché ci aspettiamo un solo file, prendiamo direttamente il primo risultato.
+                image_url = f"https://{bucket_name}.s3.amazonaws.com/{response['Contents'][0]['Key']}"
+                return [image_url]
+        except Exception as e:
+            print(f"Errore nel recupero delle immagini: {e}")
+    return []
 
 
 app = Flask(__name__)
@@ -74,3 +77,5 @@ def search_church():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+#vZhB/X2+X7V+Sgk17/cLvO7QuQMf5Uy+nS2Hue6k
