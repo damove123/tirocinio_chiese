@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Risultati Ricerca</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.23/"></script>
     <script>
@@ -23,7 +25,7 @@
                 container: "viewDiv",
                 map: webMap,
                 zoom: 12, // Imposta un livello di zoom che ti permetta di visualizzare chiaramente la chiesa
-                center: [12.2306, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
+                center: [12.2304, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
             });
 
 
@@ -50,31 +52,42 @@
 {% if chiese %}
 <h2>Risultati della ricerca per "{{ query }}"</h2>
 <ul>
+    <div class="container">
     {% for chiesa in chiese %}
     <li>
-        <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
-        <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-        <h4>Reperti:</h4>
-        <ul>
-            {% for reperto in reperti %}
-            {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
-            <li>
-                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
-                <!-- Aggiunta delle immagini del reperto -->
-                {% if reperto.image_urls %}
-                {% for url in reperto.image_urls %}
-                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
-                {% endfor %}
-                {% else %}
-                <p>Nessuna immagine disponibile.</p>
-                {% endif %}
-                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
-                <!-- Continua con altri dettagli del reperto come prima -->
-            </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
+        <div class="row">
+            <div class="col">
+                <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
+                <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
+                <h4>Reperti:</h4>
+                <ul>
+                    {% for reperto in reperti %}
+                    {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
+                    <div class="card">
+                        <div class="card-body">
+                            <li>
+                                <h5 class="card-title">Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
+                                <!-- Aggiunta delle immagini del reperto -->
+                                {% if reperto.image_urls %}
+                                {% for url in reperto.image_urls %}
+                                <img src="{{ url }}" class="card-img-top" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                                {% endfor %}
+                                {% else %}
+                                <p>Nessuna immagine disponibile.</p>
+                                {% endif %}
+                                <p class="card-text">Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
+                                <!-- Continua con altri dettagli del reperto come prima -->
+                            </li>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
     </li>
+    </div>
     {% endfor %}
 </ul>
 {% else %}
