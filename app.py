@@ -45,7 +45,7 @@ def search():
 @app.route("/")
 def search_church():
     try:
-        query = request.args.get('query')  # Ottieni il valore inserito nell'input di ricerca
+        query = request.args.get('query').lower()  # Ottieni il valore inserito nell'input di ricerca
         ref = db.reference("/Chiese")
         chiese = ref.get()
 
@@ -60,6 +60,9 @@ def search_church():
     except Exception as e:
         app.logger.error(f"Errore durante la ricerca della chiesa: {e}")
         return jsonify({'error': 'Impossibile completare la ricerca'}), 500
+
+
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
     <title>Ricerca Chiesa</title>
 </head>
@@ -8,8 +9,8 @@
 <h1>Ricerca Chiesa</h1>
 <form action="/" method="GET">
     <label for="search_input">Inserisci il nome della chiesa:</label><br>
-    <input type="text" id="search_input" name="query"><br>
-    <button type="submit">Cerca</button>
+    <input type="text" id="search_input" name="query" class="search-input"><br>
+    <button type="submit" class="search-button">Cerca</button>
 </form>
 
 {% if chiese %}

@@ -1,34 +1,54 @@
-.search-bar {
+/* Stili globali per il corpo della pagina */
+body {
+    font-family: Arial, sans-serif;
     display: flex;
+    justify-content: center;
     align-items: center;
-    width: 400px;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Stile per il form di ricerca, centrato orizzontalmente */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Stile per il campo di input */
 .search-input {
-    flex: 1;
-    border: none;
+    width: 100%; /* Larghezza massima all'interno del form */
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     outline: none;
+    box-sizing: border-box; /* Include padding e border nella larghezza totale */
+}
+
+.search-input:focus {
+    border-color: #007bff; /* Cambia colore bordo al focus */
+    box-shadow: 0 0 0 2px rgba(0,123,255,.25);
 }
 
 /* Stile per il pulsante di ricerca */
 .search-button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #007bff; /* Colore di sfondo */
+    color: white; /* Colore del testo */
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Transizione per l'hover */
 }
 
-/* Stile per il pulsante di ricerca al passaggio del mouse */
 .search-button:hover {
-    background-color: #45a049;
+    background-color: #0056b3; /* Colore al passaggio del mouse */
 }
