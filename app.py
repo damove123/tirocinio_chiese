@@ -1,68 +1,75 @@
 import firebase_admin
 from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
+import boto3
 
 cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
 })
 
+# Configura il client S3
+s3_client = boto3.client('s3')
+
+
+def get_image_urls(bucket_name, church_code, reperto_code):
+    # Il prefisso ora include anche il nome del file immagine specifico per il reperto.
+    prefix = f"Church_Photos/{church_code}/Artifacts/{reperto_code}.JPG"
+    try:
+        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+        print("Response from S3:", response)  # Stampa la risposta completa per debug
+        if response['KeyCount'] == 0:
+            print(f"Nessun oggetto trovato con il prefisso {prefix}")
+        else:
+            # Poiché ci aspettiamo un solo file, prendiamo direttamente il primo risultato.
+            image_url = f"https://{bucket_name}.s3.amazonaws.com/{response['Contents'][0]['Key']}"
+            return [image_url]
+    except Exception as e:
+        print(f"Errore nel recupero delle immagini: {e}")
+        return []
+
+
 app = Flask(__name__)
 
-'''
-@app.route("/")
-def homepage():
-    try:
-        ref = db.reference("/Chiese")
-        chiese = ref.get()
-        if chiese:
-            return render_template("index.html", chiese=chiese)
-        else:
-            return render_template("index.html", chiese=None)
-    except Exception as e:
-        app.logger.error(f"Errore durante il recupero dei dati: {e}")
-        return jsonify({'error': 'Impossibile completare la richiesta'}), 500
-'''
-'''
-@app.route("/search")
-def search():
-    query = request.args.get("query")
-    if query:
-        try:
-            ref = db.reference("/Chiese")
-            chiese = ref.get()
-            if chiese:
-                filtered_chiese = [chiesa for chiesa in chiese if query.lower() in chiesa.get("Nome Locale della Chiesa", "").lower()]
-                return render_template("index.html", chiese=filtered_chiese, query=query)
-            else:
-                return render_template("index.html", chiese=None, query=query)
-        except Exception as e:
-            app.logger.error(f"Errore durante la ricerca delle chiese: {e}")
-            return jsonify({'error': 'Impossibile completare la ricerca'}), 500
-    else:
-        return render_template("index.html", chiese=None, query="")
-'''
+
 @app.route("/")
 def search_church():
     try:
-        query = request.args.get('query').lower()  # Ottieni il valore inserito nell'input di ricerca
-        ref = db.reference("/Chiese")
-        chiese = ref.get()
+        query = request.args.get('query')
+        codice_corrispondente = None
+        chiese_ref = db.reference("/Chiese")
+        chiese = chiese_ref.get() or []
 
-        # Filtra le chiese che corrispondono alla query
-        results = [chiesa for chiesa in chiese if chiesa["Locale Nome della Chiesa"] == query]
+        for chiesa in chiese:
+            if chiesa.get("Locale Nome della Chiesa") == query:
+                codice_corrispondente = chiesa.get("Codice Chiesa")
+                break
 
+        resultsChiese = []
+        resultsReperti = []
+        if codice_corrispondente:
+            resultsChiese.extend([chiesa for chiesa in chiese if chiesa.get("Codice Chiesa") == codice_corrispondente])
 
-        if results:
-            return render_template("index.html", chiese=results, query=query)
+            refPivi = db.reference("/RepertiPivi").get() or []
+            for pivi in refPivi:
+                if pivi.get("Codice Chiesa") == codice_corrispondente:
+                    pivi['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente,
+                                                        pivi.get("Codice Reperto"))
+                    resultsReperti.append(pivi)
+
+            refPolo = db.reference("/RepertiPolo").get() or []
+            for polo in refPolo:
+                if polo.get("Codice Chiesa") == codice_corrispondente:
+                    polo['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente,
+                                                        polo.get("Codice Reperto"))
+                    resultsReperti.append(polo)
+
+        if resultsChiese:
+            return render_template("index.html", chiese=resultsChiese, reperti=resultsReperti, query=query)
         else:
-            return render_template("index.html", chiese=None, query=query)
+            return render_template("index.html", chiese=None, reperti=None, query=query)
     except Exception as e:
-        app.logger.error(f"Errore durante la ricerca della chiesa: {e}")
         return jsonify({'error': 'Impossibile completare la ricerca'}), 500
-
-
-
 
 
 if __name__ == "__main__":

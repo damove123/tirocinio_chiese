@@ -1,9 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
-    <title>Ricerca Chiesa</title>
+    <title>Risultati Ricerca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.23/"></script>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/WebMap",
+            "esri/Graphic",
+            "esri/config",
+            "esri/layers/GraphicsLayer",
+            "esri/geometry/Point",
+            "esri/widgets/Search"// Aggiungi il modulo 'esri/config' per configurare la chiave API
+        ], function(Map, MapView, WebMap, GraphicsLayer, Point, esriConfig) {
+            // Configura la tua chiave API
+            esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
+
+            var webMap = new WebMap({
+                portalItem: {
+                    id: "5ae37f33f52a4eefbc098507ddd9f92d"
+                }
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: webMap,
+                zoom: 12, // Imposta un livello di zoom che ti permetta di visualizzare chiaramente la chiesa
+                center: [12.2306, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
+            });
+
+            var sketchWidget = new Sketch({
+                view: view
+            });
+            view.ui.add(sketchWidget, "top-right");
+
+            // Aggiungi un gestore per l'evento clic sullo sketch layer
+            sketchWidget.on("create", function(event) {
+                if (event.state === "complete") {
+                    // Recupera il nome della chiesa associato al punto cliccato
+                    var nomeChiesa = event.graphic.attributes["Nome della proprietà che contiene il nome della chiesa"];
+
+                    // Inserisci il nome della chiesa nell'input di ricerca
+                    document.getElementById("search_input").value = nomeChiesa;
+                }
+            });
+
+            // Funzione per la ricerca
+            function search() {
+                var query = document.getElementById("search_input").value;
+                // Esegui la ricerca con il nome della chiesa inserito
+                // Esempio: esegui una query sul tuo dataset per trovare la chiesa corrispondente
+                // e visualizzare i risultati sulla mappa
+            }
+
+            // Aggiungi un gestore per il submit del form di ricerca
+            document.getElementById("search_form").addEventListener("submit", function(event) {
+                event.preventDefault(); // Previeni il comportamento predefinito del submit del form
+                search(); // Esegui la funzione di ricerca
+            });
+        });
+
+    </script>
+
+    <style>
+        #viewDiv {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <h1>Ricerca Chiesa</h1>
@@ -13,21 +82,42 @@
     <button type="submit" class="search-button">Cerca</button>
 </form>
 
+<div id="viewDiv"></div>
+
 {% if chiese %}
-<h2>Risultati della ricerca per "{{ query }}"</h2>
-<ul>
-    {% for chiesa in chiese %}
-    <li>
-        <h3>Nome: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
-        <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-        <p>Altri attributi: {{ chiesa }}</p>  <!-- Visualizza tutti gli attributi della chiesa -->
-    </li>
-    {% endfor %}
-</ul>
+    <h2>Risultati della ricerca per "{{ query }}"</h2>
+    <ul>
+        {% for chiesa in chiese %}
+            <li>
+                <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
+                <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
+                <h4>Reperti:</h4>
+                <ul>
+                    {% for reperto in reperti %}
+                        {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
+                            <li>
+                                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
+                                <!-- Aggiunta delle immagini del reperto -->
+                                {% if reperto.image_urls %}
+                                    {% for url in reperto.image_urls %}
+                                        <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                                    {% endfor %}
+                                {% else %}
+                                    <p>Nessuna immagine disponibile.</p>
+                                {% endif %}
+                                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
+                                <!-- Continua con altri dettagli del reperto come prima -->
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
 {% else %}
-{% if query %}
-<p>Nessuna chiesa trovata per "{{ query }}".</p>
-{% endif %}
+    {% if query %}
+        <p>Nessun risultato trovato per "{{ query }}".</p>
+    {% endif %}
 {% endif %}
 </body>
 </html>
