@@ -32,36 +32,6 @@
                 zoom: 12, // Imposta un livello di zoom che ti permetta di visualizzare chiaramente la chiesa
                 center: [12.2306, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
             });
-
-            var sketchWidget = new Sketch({
-                view: view
-            });
-            view.ui.add(sketchWidget, "top-right");
-
-            // Aggiungi un gestore per l'evento clic sullo sketch layer
-            sketchWidget.on("create", function(event) {
-                if (event.state === "complete") {
-                    // Recupera il nome della chiesa associato al punto cliccato
-                    var nomeChiesa = event.graphic.attributes["Nome della proprietà che contiene il nome della chiesa"];
-
-                    // Inserisci il nome della chiesa nell'input di ricerca
-                    document.getElementById("search_input").value = nomeChiesa;
-                }
-            });
-
-            // Funzione per la ricerca
-            function search() {
-                var query = document.getElementById("search_input").value;
-                // Esegui la ricerca con il nome della chiesa inserito
-                // Esempio: esegui una query sul tuo dataset per trovare la chiesa corrispondente
-                // e visualizzare i risultati sulla mappa
-            }
-
-            // Aggiungi un gestore per il submit del form di ricerca
-            document.getElementById("search_form").addEventListener("submit", function(event) {
-                event.preventDefault(); // Previeni il comportamento predefinito del submit del form
-                search(); // Esegui la funzione di ricerca
-            });
         });
 
     </script>
@@ -84,39 +54,40 @@
 <div id="viewDiv"></div>
 
 {% if chiese %}
-    <h2>Risultati della ricerca per "{{ query }}"</h2>
-    <ul>
-        {% for chiesa in chiese %}
+<h2>Risultati della ricerca per "{{ query }}"</h2>
+<ul>
+    {% for chiesa in chiese %}
+    <li>
+        <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
+        <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
+        <h4>Reperti:</h4>
+        <ul>
+            {% for reperto in reperti %}
+            {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
             <li>
-                <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
-                <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-                <h4>Reperti:</h4>
-                <ul>
-                    {% for reperto in reperti %}
-                        {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
-                            <li>
-                                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
-                                <!-- Aggiunta delle immagini del reperto -->
-                                {% if reperto.image_urls %}
-                                    {% for url in reperto.image_urls %}
-                                        <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
-                                    {% endfor %}
-                                {% else %}
-                                    <p>Nessuna immagine disponibile.</p>
-                                {% endif %}
-                                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
-                                <!-- Continua con altri dettagli del reperto come prima -->
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
+                <!-- Aggiunta delle immagini del reperto -->
+                {% if reperto.image_urls %}
+                {% for url in reperto.image_urls %}
+                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                {% endfor %}
+                {% else %}
+                <p>Nessuna immagine disponibile.</p>
+                {% endif %}
+                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
+                <!-- Continua con altri dettagli del reperto come prima -->
             </li>
-        {% endfor %}
-    </ul>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
 {% else %}
-    {% if query %}
-        <p>Nessun risultato trovato per "{{ query }}".</p>
-    {% endif %}
+{% if query %}
+<p>Nessun risultato trovato per "{{ query }}".</p>
+<p>Prova a cercare di nuovo usando un nome diverso. Utilizza il form qui sopra per effettuare una nuova ricerca.</p>
+{% endif %}
 {% endif %}
 </body>
 </html>
