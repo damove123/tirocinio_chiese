@@ -2,7 +2,11 @@ import firebase_admin
 from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
 from fuzzywuzzy import fuzz
+from flask_caching import Cache
 import boto3
+
+app = Flask(__name__)
+
 
 cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, {
@@ -45,9 +49,9 @@ def get_image_urls(bucket_name, church_code, reperto_code):
     return []
 
 
-app = Flask(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-
+@cache.cached(timeout=60)
 @app.route("/")
 def search_church():
     try:

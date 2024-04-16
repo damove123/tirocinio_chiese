@@ -230,3 +230,29 @@ li {
     transform: translate(0, 0); /* Posizione finale al centro */
     opacity: 1;
 }
+
+#modalImage {
+    width: 100%; /* imposta la larghezza al 100% del contenitore */
+    height: auto; /* mantiene il rapporto dimensionale dell'immagine */
+    display: block; /* rimuove qualsiasi margine aggiunto dall'elemento */
+    object-fit: cover; /* assicura che l'immagine copra l'intero contenitore senza lasciare spazi, ma può tagliare parti dell'immagine */
+}
+
+.modal-dialog {
+    display: flex; /* Imposta il display a flex per centrare il contenuto */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: center; /* Centra il contenuto verticalmente */
+    height: 100vh; /* Imposta l'altezza a tutto il viewport */
+    pointer-events: none; /* Previene interazioni dirette col modale per permettere clic attraverso di esso se necessario */
+    transform: translate(0, +30%);
+}
+
+.modal-content {
+    pointer-events: auto; /* Permette interazioni con il contenuto del modale */
+    width: auto; /* Larghezza automatica basata sul contenuto interno */
+    max-width: 100%; /* Evita che il modale esca dal viewport */
+
+}
+
+
+
