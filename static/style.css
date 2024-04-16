@@ -78,6 +78,21 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #283048, #859398);
+    color: #fff;
+    line-height: 1.6;
+    display: flex;        /* Imposta il layout a Flexbox */
+    justify-content: center; /* Centra gli elementi orizzontalmente */
+    align-items: center;  /* Opzionale: se vuoi anche centrare verticalmente */
+    min-height: 100vh;    /* Altezza minima per prendere l'intera altezza della viewport */
+    flex-direction: column; /* Orienta i figli in colonna (opzionale se hai più elementi) */
+    margin: 0;            /* Rimuovi i margini predefiniti */
+    padding: 0;           /* Rimuovi il padding predefinito */
+}
+
+
 .button:hover {
     background: #ff5722;
 }
@@ -164,13 +179,13 @@ li {
 }
 
 
-.custom-div {
-    height: 700px;
-    width: 90%;
-
+.map-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;  /* Assicurati che occupi tutta la larghezza */
 }
 
-/* Stile hover per il div */
-.custom-div:hover {
-    transform: translateY(-5px);
+#viewDiv {
+    height: 700px;
+    width: 90%;   /* o la larghezza desiderata */
 }
