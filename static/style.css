@@ -22,7 +22,6 @@ body {
 /* Stili per titoli, testo e form */
 h1, h2 {
     font-weight: bold;
-    color: #fff;
     margin-bottom: 1.5rem;
 }
 
@@ -97,7 +96,7 @@ ul {
 /* Stili per la mappa e gli elementi interattivi */
 #viewDiv {
     height: 700px;
-    width: 90%; /* o la larghezza desiderata */
+    width: 100%; /* o la larghezza desiderata */
 }
 
 .relic-container, .image-container {
