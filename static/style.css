@@ -1,5 +1,21 @@
-/* Stili personalizzati */
-/* Aggiungi stili personalizzati qui */
+
+/* Stili per il form di ricerca */
+form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Rimuove eventuali barre di scorrimento */
+}
 
 /* Reset CSS per eliminare i margini e i padding predefiniti */
 body, h1, h2, h3, p, ul, li {
@@ -36,7 +52,6 @@ h2 {
 p {
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
-    color: #ccc; /* Testo grigio */
 }
 
 /* Stile per i link */
@@ -105,7 +120,6 @@ ul {
 /* Stile per i singoli elementi di una lista */
 li {
     margin-bottom: 1rem;
-    color: #ccc; /* Testo grigio */
 }
 
 /* Stile per le immagini */
@@ -122,7 +136,6 @@ li {
     flex: 0 0 200px;
     position: relative;
     margin-right: 1rem;
-    overflow: hidden; /* Aggiunto overflow per abilitare lo scrolling */
 }
 
 .img-fluid {
@@ -132,8 +145,8 @@ li {
     border-radius: 5px;
 }
 
-/* Stile per il contenitore dell'iscrizione latina */
 .inscription-container {
+    flex: 1;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 0.5rem;
     border-radius: 5px;
@@ -142,16 +155,14 @@ li {
     align-items: center;
     justify-content: center; /* Centro il contenuto orizzontalmente */
     word-wrap: break-word;
-    margin-top: 1rem;
 }
 
-/* Stile per il testo dell'iscrizione latina */
 .latin-inscription {
     font-size: 0.8rem;
     margin: 0;
     white-space: pre-wrap;
-    color: #333; /* Testo scuro */
 }
+
 
 .custom-div {
     height: 700px;
@@ -162,28 +173,4 @@ li {
 /* Stile hover per il div */
 .custom-div:hover {
     transform: translateY(-5px);
-}
-
-/* Stili per i reperti */
-.relic-container h5 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #fff; /* Testo bianco */
-}
-
-/* Stile per la cornice delle immagini */
-.image-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid #fff; /* Cornice bianca */
-    transition: border-color 0.3s ease;
-}
-
-/* Stile per l'immagine quando viene passato sopra con il mouse */
-.image-container:hover::before {
-    border-color: #00bcd4; /* Cornice colorata al passaggio del mouse */
 }
