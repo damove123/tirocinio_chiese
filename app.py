@@ -83,7 +83,7 @@ def search_church():
                     resultsReperti.append(polo)
 
         if resultsChiese:
-            return render_template("index.html", chiese=resultsChiese, reperti=resultsReperti, query=query)
+            return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti, query=query)
         else:
             return render_template("index.html", chiese=None, reperti=None, query=query)
     except Exception as e:

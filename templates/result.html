@@ -1,0 +1,45 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Risultati Ricerca</title>
+</head>
+<body>
+{% if chiese %}
+<h2>Risultati della ricerca per "{{ query }}"</h2>
+<ul>
+    {% for chiesa in chiese %}
+    <li>
+        <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
+        <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
+        <h4>Reperti:</h4>
+        <ul>
+            {% for reperto in reperti %}
+            {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
+            <li>
+                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
+                <!-- Aggiunta delle immagini del reperto -->
+                {% if reperto.image_urls %}
+                {% for url in reperto.image_urls %}
+                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                {% endfor %}
+                {% else %}
+                <p>Nessuna immagine disponibile.</p>
+                {% endif %}
+                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
+                <!-- Continua con altri dettagli del reperto come prima -->
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+{% if query %}
+<p>Nessun risultato trovato per "{{ query }}".</p>
+{% endif %}
+{% endif %}
+</body>
+</html>
