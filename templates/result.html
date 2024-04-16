@@ -22,7 +22,7 @@
                 <!-- Aggiunta delle immagini del reperto -->
                 {% if reperto.image_urls %}
                 {% for url in reperto.image_urls %}
-                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
+                <img src="{{ url }}" alt="Immagine del {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
                 {% endfor %}
                 {% else %}
                 <p>Nessuna immagine disponibile.</p>
