@@ -67,6 +67,18 @@
         {% endif %}
     {% endif %}
 </div>
+<script>
+    // Seleziona tutti gli elementi con classe 'image-container'
+    var images = document.querySelectorAll('.image-container');
+
+    // Aggiungi un listener di evento 'click' a ciascun elemento
+    images.forEach(function(image) {
+        image.addEventListener('click', function() {
+            this.classList.toggle('img-zoom');
+        });
+    });
+</script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -125,6 +125,22 @@ li {
     overflow: hidden; /* Aggiunto overflow per abilitare lo scrolling */
 }
 
+.img-zoom {
+    position: fixed; /* Posizionamento fisso rispetto alla viewport */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.90); /* Centratura e ingrandimento moderato */
+    z-index: 1050; /* Alto z-index per essere sopra altri contenuti */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border: none; /* Rimuove bordi se presenti */
+    max-width: 90%; /* Massimo 90% della larghezza della viewport */
+    max-height: 90%; /* Massimo 90% dell'altezza della viewport */
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.7); /* Sfondo oscurato */
+    cursor: zoom-out; /* Cambia il cursore per indicare azione di zoom-out */
+}
+
+
+
 .img-fluid {
     max-width: 100%;
     height: auto;
