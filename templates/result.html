@@ -66,6 +66,16 @@
             <p>Nessun risultato trovato per "{{ query }}".</p>
         {% endif %}
     {% endif %}
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="" class="img-fluid" id="modalImage" alt="Immagine ingrandita">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     // Seleziona tutti gli elementi con classe 'image-container'
@@ -74,7 +84,10 @@
     // Aggiungi un listener di evento 'click' a ciascun elemento
     images.forEach(function(image) {
         image.addEventListener('click', function() {
-            this.classList.toggle('img-zoom');
+            var modalImage = document.getElementById('modalImage');
+            var imageURL = this.querySelector('img').getAttribute('src');
+            modalImage.src = imageURL;
+            $('#imageModal').modal('show');
         });
     });
 </script>
