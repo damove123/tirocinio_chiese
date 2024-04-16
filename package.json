@@ -1,0 +1,18 @@
+{
+  "name": "tirocinio_chiese",
+  "version": "1.0.0",
+  "description": "",
+  "main": "firebase.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Polli0/tirocinio_chiese.git"
+  },
+  "private": true,
+  "dependencies": {
+    "firebase": "^10.10.0",
+    "firebase-admin": "^12.0.0"
+  }
+}

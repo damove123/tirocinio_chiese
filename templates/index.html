@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Risultati Ricerca</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,58 +38,18 @@
 
     </script>
 
-    <style>
-        #viewDiv {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
 <h1>Ricerca Chiesa</h1>
 <form action="/" method="GET">
     <label for="search_input">Inserisci il nome della chiesa:</label><br>
-    <input type="text" id="search_input" name="query"><br>
-    <button type="submit">Cerca</button>
+    <input type="text" id="search_input" name="query" class="search-input"><br>
+    <button type="submit" class="search-button">Cerca</button>
 </form>
 
-<div id="viewDiv"></div>
+<div class="map-container">
+    <div class="custom-div" id="viewDiv"></div>
+</div>
 
-{% if chiese %}
-<h2>Risultati della ricerca per "{{ query }}"</h2>
-<ul>
-    {% for chiesa in chiese %}
-    <li>
-        <h3>Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}</h3>
-        <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-        <h4>Reperti:</h4>
-        <ul>
-            {% for reperto in reperti %}
-            {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
-            <li>
-                <h5>Nome Reperto: {{ reperto["Codice Reperto"] }}</h5>
-                <!-- Aggiunta delle immagini del reperto -->
-                {% if reperto.image_urls %}
-                {% for url in reperto.image_urls %}
-                <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" style="width:100px; height:auto;">
-                {% endfor %}
-                {% else %}
-                <p>Nessuna immagine disponibile.</p>
-                {% endif %}
-                <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
-                <!-- Continua con altri dettagli del reperto come prima -->
-            </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-{% if query %}
-<p>Nessun risultato trovato per "{{ query }}".</p>
-<p>Prova a cercare di nuovo usando un nome diverso. Utilizza il form qui sopra per effettuare una nuova ricerca.</p>
-{% endif %}
-{% endif %}
 </body>
 </html>
