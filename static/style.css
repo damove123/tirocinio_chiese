@@ -1,75 +1,60 @@
-
-/* Stili per il form di ricerca */
-form {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-label {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-html {
+/* Stili generali */
+html, body {
+    height: 100%; /* Imposta altezza */
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow: hidden; /* Rimuove eventuali barre di scorrimento */
-}
-
-/* Reset CSS per eliminare i margini e i padding predefiniti */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
+    overflow: auto; /* Abilita lo scrolling */
     box-sizing: border-box;
 }
 
-/* Stile generale del corpo della pagina */
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #283048, #859398);
     color: #fff;
     line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
-/* Stile per il titolo principale */
-h1 {
-    font-size: 3rem;
+/* Stili per titoli, testo e form */
+h1, h2 {
     font-weight: bold;
     color: #fff;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Stile per il titolo secondario */
+h1 {
+    font-size: 3rem;
+}
+
 h2 {
     font-size: 2rem;
-    font-weight: bold;
     color: #ccc;
-    margin-bottom: 1.5rem;
 }
 
-/* Stile per i paragrafi */
-p {
+p, label, li {
     font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-    color: #ccc; /* Testo grigio */
+    color: #ccc; /* Grigio per i testi minori */
+    margin-bottom: 1rem;
 }
 
-/* Stile per i link */
+/* Stili per link e pulsanti */
 a {
     color: #00bcd4;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-a:hover {
+a:hover, .button:hover {
     color: #4caf50;
+    background: #ff5722;
 }
 
-/* Stile per i pulsanti */
 .button {
     background: #f44336;
-    color: #fff;
     border: none;
     padding: 1rem 2rem;
     font-size: 1.6rem;
@@ -79,26 +64,7 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #283048, #859398);
-    color: #fff;
-    line-height: 1.6;
-    display: flex;        /* Imposta il layout a Flexbox */
-    justify-content: center; /* Centra gli elementi orizzontalmente */
-    align-items: center;  /* Opzionale: se vuoi anche centrare verticalmente */
-    min-height: 100vh;    /* Altezza minima per prendere l'intera altezza della viewport */
-    flex-direction: column; /* Orienta i figli in colonna (opzionale se hai più elementi) */
-    margin: 0;            /* Rimuovi i margini predefiniti */
-    padding: 0;           /* Rimuovi il padding predefinito */
-}
-
-
-.button:hover {
-    background: #ff5722;
-}
-
-/* Stile per gli input di testo */
+/* Stili per input e form */
 .input-field {
     width: 100%;
     padding: 1rem;
@@ -115,45 +81,30 @@ body {
     border-color: #00bcd4;
 }
 
-/* Stile per i form */
-.form {
-    margin-bottom: 3rem;
-}
-
-/* Stile per i container */
-.container {
+/* Stili per container e liste */
+.container, .form, .map-container {
+    width: 100%; /* Assicurati che occupi tutta la larghezza */
     max-width: 1200px;
     margin: auto;
     padding: 0 2rem;
 }
 
-/* Stile per le liste non ordinate */
 ul {
     list-style: none;
     padding: 0;
 }
 
-/* Stile per i singoli elementi di una lista */
-li {
-    margin-bottom: 1rem;
-    color: #ccc; /* Testo grigio */
+/* Stili per la mappa e gli elementi interattivi */
+#viewDiv {
+    height: 700px;
+    width: 90%; /* o la larghezza desiderata */
 }
 
-/* Stile per le immagini */
-.relic-item {
-    margin-bottom: 2rem;
-}
-
-.relic-container {
+.relic-container, .image-container {
     display: flex;
     align-items: center;
-}
-
-.image-container {
-    flex: 0 0 200px;
     position: relative;
-    margin-right: 1rem;
-    overflow: hidden; /* Aggiunto overflow per abilitare lo scrolling */
+    overflow: hidden; /* Gestione dello spazio e overflow */
 }
 
 .img-fluid {
@@ -163,7 +114,6 @@ li {
     border-radius: 5px;
 }
 
-/* Stile per il contenitore dell'iscrizione latina */
 .inscription-container {
     flex: 1;
     background-color: rgba(255, 255, 255, 0.8);
@@ -172,39 +122,16 @@ li {
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centro il contenuto orizzontalmente */
+    justify-content: center;
     word-wrap: break-word;
     margin-top: 1rem;
 }
 
-/* Stile per il testo dell'iscrizione latina */
 .latin-inscription {
     font-size: 0.8rem;
-    margin: 0;
-    white-space: pre-wrap;
-    color: #333; /* Testo scuro */
+    color: #333;
 }
 
-
-.map-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;  /* Assicurati che occupi tutta la larghezza */
-}
-
-#viewDiv {
-    height: 700px;
-    width: 90%;   /* o la larghezza desiderata */
-}
-
-/* Stili per i reperti */
-.relic-container h5 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #fff; /* Testo bianco */
-}
-
-/* Stile per la cornice delle immagini */
 .image-container::before {
     content: '';
     position: absolute;
@@ -212,11 +139,10 @@ li {
     left: 0;
     right: 0;
     bottom: 0;
-    border: 2px solid #fff; /* Cornice bianca */
+    border: 2px solid #fff;
     transition: border-color 0.3s ease;
 }
 
-/* Stile per l'immagine quando viene passato sopra con il mouse */
 .image-container:hover::before {
-    border-color: #00bcd4; /* Cornice colorata al passaggio del mouse */
+    border-color: #00bcd4;
 }
