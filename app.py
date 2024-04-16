@@ -3,10 +3,14 @@ from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
 import boto3
 
-
+cred = credentials.Certificate("credentials.json")
+firebase_admin.initialize_app(cred, {
+    "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
+})
 
 # Configura il client S3
 s3_client = boto3.client('s3')
+
 
 def get_image_urls(bucket_name, church_code, reperto_code):
     # Il prefisso ora include anche il nome del file immagine specifico per il reperto.
@@ -25,16 +29,8 @@ def get_image_urls(bucket_name, church_code, reperto_code):
         return []
 
 
-
-
-
-
-cred = credentials.Certificate("credentials.json")
-firebase_admin.initialize_app(cred, {
-    "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
-})
-
 app = Flask(__name__)
+
 
 @app.route("/")
 def search_church():
@@ -57,13 +53,15 @@ def search_church():
             refPivi = db.reference("/RepertiPivi").get() or []
             for pivi in refPivi:
                 if pivi.get("Codice Chiesa") == codice_corrispondente:
-                    pivi['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente, pivi.get("Codice Reperto"))
+                    pivi['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente,
+                                                        pivi.get("Codice Reperto"))
                     resultsReperti.append(pivi)
 
             refPolo = db.reference("/RepertiPolo").get() or []
             for polo in refPolo:
                 if polo.get("Codice Chiesa") == codice_corrispondente:
-                    polo['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente, polo.get("Codice Reperto"))
+                    polo['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente,
+                                                        polo.get("Codice Reperto"))
                     resultsReperti.append(polo)
 
         if resultsChiese:
@@ -72,6 +70,7 @@ def search_church():
             return render_template("index.html", chiese=None, reperti=None, query=query)
     except Exception as e:
         return jsonify({'error': 'Impossibile completare la ricerca'}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
