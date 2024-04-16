@@ -1,3 +1,22 @@
+
+/* Stili per il form di ricerca */
+form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Rimuove eventuali barre di scorrimento */
+}
+
 /* Reset CSS per eliminare i margini e i padding predefiniti */
 body, h1, h2, h3, p, ul, li {
     margin: 0;
