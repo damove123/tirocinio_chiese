@@ -125,6 +125,22 @@ li {
     overflow: hidden; /* Aggiunto overflow per abilitare lo scrolling */
 }
 
+.img-zoom {
+    position: fixed; /* Posizionamento fisso rispetto alla viewport */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.90); /* Centratura e ingrandimento moderato */
+    z-index: 1050; /* Alto z-index per essere sopra altri contenuti */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border: none; /* Rimuove bordi se presenti */
+    max-width: 90%; /* Massimo 90% della larghezza della viewport */
+    max-height: 90%; /* Massimo 90% dell'altezza della viewport */
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.7); /* Sfondo oscurato */
+    cursor: zoom-out; /* Cambia il cursore per indicare azione di zoom-out */
+}
+
+
+
 .img-fluid {
     max-width: 100%;
     height: auto;
@@ -171,7 +187,7 @@ li {
 .relic-container h5 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: #fff; /* Testo bianco */
+    color: black; /* Testo bianco */
 }
 
 /* Stile per la cornice delle immagini */
@@ -201,4 +217,16 @@ li {
 #viewDiv{
     height: 700px;
     width: 100%;
+}
+
+/* Stile per il modale con effetto fade */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translate(0, -50px); /* Posizione di partenza leggermente sopra il centro */
+    opacity: 0;
+}
+
+.modal.fade.show .modal-dialog {
+    transform: translate(0, 0); /* Posizione finale al centro */
+    opacity: 1;
 }
