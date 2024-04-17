@@ -1,4 +1,3 @@
-<!-- result.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,58 +14,90 @@
 <body>
 <div class="container mt-5">
     {% if chiese %}
-        <h2 class="mb-4">Risultati della ricerca per "{{ query }}"</h2>
-        <div class="accordion" id="chieseAccordion">
-            {% for chiesa in chiese %}
-                <div class="card">
-                    <div class="card-header" id="chiesa{{ chiesa["Codice Chiesa"] }}">
-                        <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ chiesa["Codice Chiesa"] }}" aria-expanded="true" aria-controls="collapse{{ chiesa["Codice Chiesa"] }}">
-                                Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}
-                            </button>
-                        </h3>
-                    </div>
-                    <div id="collapse{{ chiesa["Codice Chiesa"] }}" class="collapse" aria-labelledby="chiesa{{ chiesa["Codice Chiesa"] }}" data-parent="#chieseAccordion">
-                        <div class="card-body">
-                            <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
-                            <h4>Reperti:</h4>
-                            <ul class="list-group">
-                                {% for reperto in reperti %}
-                                    {% if reperto["Codice Chiesa"] == chiesa["Codice Chiesa"] %}
-                                        <li class="list-group-item">
-                                            <h5>Nome Reperto: {{ reperto["Nome Reperto"] }}</h5>
-                                            <!-- Aggiunta delle immagini del reperto -->
-                                            {% if reperto.image_urls %}
-                                                {% for url in reperto.image_urls %}
-                                                    <div class="relic-container">
-                                                        <div class="image-container">
-                                                            <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" class="img-fluid" data-image-url="{{ url }}">
-                                                        </div>
-                                                        <div class="inscription-container">
-                                                            <p class="latin-inscription">Inscrizione Latina: <br>{{ reperto["Latino"] }}</p>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            {% else %}
-                                                <p>Nessuna immagine disponibile.</p>
-                                            {% endif %}
-                                            <p>Altro Materiale: {{ reperto["Altro Materiale"] }}</p>
-                                            <!-- Continua con altri dettagli del reperto come prima -->
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+    <h2 class="mb-4">Risultati della ricerca per "{{ query }}"</h2>
+    <div class="accordion" id="chieseAccordion">
+        {% for chiesa in chiese %}
+        <div class="card">
+            <div class="card-header" id="chiesa{{ chiesa['Codice Chiesa'] }}">
+                <h3 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1{{ chiesa['Codice Chiesa'] }}" aria-expanded="true" aria-controls="collapse{{ chiesa['Codice Chiesa'] }}">
+                        Reperts
+                    </button>
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2{{ chiesa['Codice Chiesa'] }}" aria-expanded="true" aria-controls="collapse{{ chiesa['Codice Chiesa'] }}">
+                        Floor
+                    </button>
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3{{ chiesa['Codice Chiesa'] }}" aria-expanded="true" aria-controls="collapse{{ chiesa['Codice Chiesa'] }}">
+                        Church floor Plan
+                    </button>
+                </h3>
+            </div>
+            <div id="collapse1{{ chiesa['Codice Chiesa'] }}" class="collapse" aria-labelledby="chiesa{{ chiesa['Codice Chiesa'] }}" data-parent="#chieseAccordion">
+                <div class="card-body">
+                    <p>Indirizzo: {{ chiesa['Indirizzo'] }}</p>
+                    <h4>Reperti:</h4>
+                    <ul class="list-group">
+                        {% for reperto in reperti %}
+                        {% if reperto['Codice Chiesa'] == chiesa['Codice Chiesa'] %}
+                        <li class="list-group-item">
+                            <h5>Nome Reperto: {{ reperto['Nome Reperto'] }}</h5>
+                            <!-- Aggiunta delle immagini del reperto -->
+                            {% if reperto.image_urls %}
+                            {% for url in reperto.image_urls %}
+                            <div class="relic-container">
+                                <div class="image-container">
+                                    <img src="{{ url }}" alt="Immagine di {{ reperto['Codice Reperto'] }}" class="img-fluid" data-image-url="{{ url }}">
+                                </div>
+                                <div class="inscription-container">
+                                    <p class="latin-inscription">Inscrizione Latina: <br>{{ reperto['Latino'] }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <p>Nessuna immagine disponibile.</p>
+                            {% endif %}
+                            <p>Altro Materiale: {{ reperto['Altro Materiale'] }}</p>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
-            {% endfor %}
+            </div>
+            <div id="collapse2{{ chiesa['Codice Chiesa'] }}" class="collapse" aria-labelledby="chiesa{{ chiesa['Codice Chiesa'] }}" data-parent="#chieseAccordion">
+                <div class="card-body">
+                    {% if floor_images %}
+                    <h4>Foto dei Pavimenti:</h4>
+                    {% for url in floor_images %}
+                    <div class="floor-image-container">
+                        <img src="{{ url }}" alt="Immagine del pavimento della chiesa {{ chiesa['Codice Chiesa'] }}" class="img-fluid">
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Nessuna foto dei pavimenti disponibile.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div id="collapse3{{ chiesa['Codice Chiesa'] }}" class="collapse" aria-labelledby="chiesa{{ chiesa['Codice Chiesa'] }}" data-parent="#chieseAccordion">
+                <div>
+                    {% if general_images %}
+                    <h4>Foto Generali:</h4>
+                    {% for url in general_images %}
+                    <div class="general-image-container">
+                        <img src="{{ url }}" alt="Immagini generali della chiesa {{ chiesa['Codice Chiesa'] }}" class="img-fluid">
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>Nessuna foto disponibile.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
+        {% endfor %}
+    </div>
     {% else %}
-        {% if query %}
-            <p>Nessun risultato trovato per "{{ query }}".</p>
-        {% endif %}
+    {% if query %}
+    <p>Nessun risultato trovato per "{{ query }}".</p>
     {% endif %}
-
+    {% endif %}
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -91,10 +122,8 @@
         });
     });
 </script>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
