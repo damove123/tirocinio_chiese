@@ -67,6 +67,7 @@ def JtoCSV(dataList, filepath):
     print("finished writing to file: " + filepath)
 
 
+"""
 group_name = "MARB%20Artifacts"
 ck_id_list = getGroup(group_name)
 data = getData(ck_id_list)
@@ -77,5 +78,33 @@ for artifact in data:
         continue
 print(data[0].keys())
 
-csvfile = pd.read_csv("Churches.csv")
+csvfile = pd.read_csv("Churches_B12_Complete_Gathered_Church_Information - CSV sheet.csv")
 print(csvfile.head(5))
+
+"""
+
+
+def replace(string: str):
+    return string.replace(' ', '%20')
+
+
+def get_artifact_group(church_name):
+    immagini_reperti = []
+
+    church_data = pd.read_csv('Churches.csv')
+    # Ricerca della riga corrispondente al nome della chiesa inserito
+
+    artifact_info = church_data[church_data['Local Name'].str.contains(church_name, case=False, na=False)]
+    if artifact_info.empty:
+        return None
+    else:
+        # Estrai solo il contenuto dell'ultima colonna
+        ultima_colonna = church_data.columns[-1]
+        artifact_info = artifact_info[ultima_colonna]
+
+    print(artifact_info)
+
+
+get_artifact_group('Le Cappuccine')
+
+
