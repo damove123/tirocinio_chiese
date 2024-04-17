@@ -3,6 +3,8 @@ from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
 from fuzzywuzzy import fuzz
 from flask_caching import Cache
+import data
+
 import boto3
 
 app = Flask(__name__)
@@ -105,6 +107,7 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 @cache.cached(timeout=60)
 @app.route("/")
 def search_church():
+    """
     try:
         raw_query = request.args.get('query')
         query = normalize_name(raw_query)
@@ -143,7 +146,7 @@ def search_church():
             floorImages = get_floor_image_urls('floor-tiles-vpc', codice_corrispondente)
 
             generalImages = get_general_image_urls('floor-tiles-vpc', codice_corrispondente)
-
+        """
         if resultsChiese:
             return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti,
                                    floor_images=floorImages, general_images = generalImages ,query=query)
