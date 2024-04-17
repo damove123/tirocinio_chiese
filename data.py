@@ -95,7 +95,7 @@ def get_artifact_group(church_name):
     # Ricerca della riga corrispondente al nome della chiesa inserito
 
     artifact_info = church_data[church_data['Local Name'].str.contains(church_name, case=False, na=False)]
-    print(artifact_info[21])
+    print(artifact_info[0].keys())
 
     return immagini_reperti
 
