@@ -47,6 +47,32 @@ def get_image_urls(bucket_name, church_code, reperto_code):
     return []
 
 
+def get_general_image_urls(bucket_name, church_code):
+    extensions = ['jpg', 'JPG']
+    image_urls = []
+    prefix = f"Church_Photos/{church_code}/General/"
+
+    try:
+        # Recupero tutti gli oggetti che iniziano con il prefisso della cartella
+        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+        print("Response from S3:", response)  # Stampa la risposta completa per debug
+
+        if response['KeyCount'] > 0:
+            # Filtriamo i risultati per estensione
+            for item in response.get('Contents', []):
+                if any(item['Key'].endswith(ext) for ext in extensions):
+                    image_url = f"https://{bucket_name}.s3.amazonaws.com/{item['Key']}"
+                    image_urls.append(image_url)
+
+    except Exception as e:
+        print(f"Errore nel recupero delle immagini: {e}")
+
+    if not image_urls:
+        print("Non esistono altre foto per questa chiesa.")
+
+    return image_urls
+
+
 def get_floor_image_urls(bucket_name, church_code):
     extensions = ['jpg', 'JPG']
     image_urls = []
@@ -73,7 +99,6 @@ def get_floor_image_urls(bucket_name, church_code):
     return image_urls
 
 
-
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
@@ -90,6 +115,7 @@ def search_church():
         resultsChiese = []
         resultsReperti = []
         floorImages = []
+        generalImages = []
 
         for chiesa in chiese:
             chiesa_name = normalize_name(chiesa.get("Locale Nome della Chiesa"))
@@ -116,8 +142,11 @@ def search_church():
 
             floorImages = get_floor_image_urls('floor-tiles-vpc', codice_corrispondente)
 
+            generalImages = get_general_image_urls('floor-tiles-vpc', codice_corrispondente)
+
         if resultsChiese:
-            return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti, floor_images = floorImages ,query=query)
+            return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti,
+                                   floor_images=floorImages, general_images = generalImages ,query=query)
         else:
             return render_template("index.html", chiese=None, reperti=None, query=query)
     except Exception as e:
