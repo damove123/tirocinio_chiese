@@ -84,27 +84,47 @@ print(csvfile.head(5))
 """
 
 
-def replace(string: str):
+def sub(string: str):
     return string.replace(' ', '%20')
 
+def seperator(dataDict):
+    print(dataDict)
+    try:
+        outputdict = {"url": dataDict["media0_medium"],
+                      "id":dataDict["birth_certificate_birthID"],
+                      "inscription":dataDict["data_Inscription"]}
+    except:
+        outputdict = {"id":dataDict["birth_certificate_birthID"],
+                      "inscription":dataDict["data_Inscription"]}
+    return outputdict
+
+import csv
 
 def get_artifact_group(church_name):
     immagini_reperti = []
 
-    church_data = pd.read_csv('Churches.csv')
-    # Ricerca della riga corrispondente al nome della chiesa inserito
+    with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
+        artifact_info = None
+        reader = csv.reader(file)
 
-    artifact_info = church_data[church_data['Local Name'].str.contains(church_name, case=False, na=False)]
-    if artifact_info.empty:
-        return None
-    else:
-        # Estrai solo il contenuto dell'ultima colonna
-        ultima_colonna = church_data.columns[-1]
-        artifact_info = artifact_info[ultima_colonna]
+        for row in reader:
+            if church_name in row[2]:
+                artifact_info = row[-1]
+                # Collect all artifact information for processing outside the loop
 
-    print(artifact_info)
+        if artifact_info:
+            artifact_code = sub(artifact_info)
+            ck_id_list = getGroup(artifact_code)
+            artifact_url = getData(ck_id_list)
+            for artifact in artifact_url:
+                immagini_reperti.append(artifact)
+
+    return immagini_reperti
 
 
-get_artifact_group('Le Cappuccine')
-
-
+values = get_artifact_group("Le Cappuccine")
+#print(values)
+cleanData = []
+for value in values:
+    cleanData.append(seperator(value))
+print(cleanData)

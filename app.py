@@ -106,7 +106,7 @@ def get_floor_image_urls(bucket_name, church_code):
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
-def replace(string: str):
+def sub(string: str):
     return string.replace(' ', '%20')
 
 
@@ -115,28 +115,30 @@ def replace(string: str):
 def search_church():
     immagini_reperti = []
 
-
     try:
         raw_query = request.args.get('query')
         query = normalize_name(raw_query)
-        church_data = pd.read_csv('Churches_B12_Complete_Gathered_Church_Information - CSV sheet.csv')
-        # Ricerca della riga corrispondente al nome della chiesa inserito
-        artifact_info = church_data[church_data['Local Name'].str.contains(query, case=False, na=False)]
-        if artifact_info.empty:
-            return None
-        else:
-            # Estrai solo il contenuto dell'ultima colonna
-            ultima_colonna = church_data.columns[-1]
-            artifact_info = artifact_info[ultima_colonna]
 
-        ck_id_list = data.getGroup(replace(artifact_info))
-        data_url_cartella = data.getData(ck_id_list)
-        for artifacts in data_url_cartella:
-            immagini_reperti.append(artifacts)
+        with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
+            artifact_info = None
+            # Ricerca della riga corrispondente al nome della chiesa inserito
+            reader = csv.reader(file)
+
+            for row in reader:
+                if query in row[2]:
+                    artifact_info = row[-1]
+
+        artifact_code = sub(artifact_info)
+        ck_id_list = data.getGroup(artifact_code)
+        artifact_url = data.getData(ck_id_list)
+
+        for artifact in artifact_url:
+            immagini_reperti.append(artifact["media0_medium"])
+
 
 
     except Exception as e:
-        print("Errore nella ricerca", str(e))
+        print("Not find church", str(e))
 
     """
     try:
