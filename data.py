@@ -3,6 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 import csv
 
+
 def getGroup(groupName):
     """
     Returns all the "ck_id"s of the members of a group as a list
@@ -13,6 +14,7 @@ def getGroup(groupName):
     fbase = firebase.FirebaseApplication(firebase_url, None)
     result = fbase.get('/groups', groupName)
     return list(result['members'].keys())
+
 
 def getData(ck_id_list):
     """
@@ -27,7 +29,7 @@ def getData(ck_id_list):
         result = fbase.get('/data', ck_id)
         try:
             for index, key in enumerate(result['media']['images'].keys()):
-                result['media'+str(index)] = result['media']['images'][key]
+                result['media' + str(index)] = result['media']['images'][key]
             del result['media']
         except:
             pass
@@ -45,10 +47,11 @@ def flatten_dict(input_dict, parent_key='', sep='_'):
             flattened_dict[new_key] = value
     return flattened_dict
 
+
 def JtoCSV(dataList, filepath):
     l = 0
     for dic in data:
-        if len(dic.keys())>l:
+        if len(dic.keys()) > l:
             l = len(dic.keys())
             biggestDic = dic
 
@@ -61,7 +64,8 @@ def JtoCSV(dataList, filepath):
         for row in dataList:
             writer.writerow(row)
 
-    print("finished writing to file: "+ filepath)
+    print("finished writing to file: " + filepath)
+
 
 group_name = "MARB%20Artifacts"
 ck_id_list = getGroup(group_name)
@@ -73,5 +77,5 @@ for artifact in data:
         continue
 print(data[0].keys())
 
-csvfile = pd.read_csv("Churches_B12_Complete_Gathered_Church_Information - CSV sheet.csv")
+csvfile = pd.read_csv("Churches.csv")
 print(csvfile.head(5))

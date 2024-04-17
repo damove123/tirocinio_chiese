@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify, request
 from fuzzywuzzy import fuzz
 from flask_caching import Cache
 import data
+import csv
 
 import boto3
 
@@ -107,6 +108,7 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 @cache.cached(timeout=60)
 @app.route("/")
 def search_church():
+
     """
     try:
         raw_query = request.args.get('query')
@@ -147,6 +149,11 @@ def search_church():
 
             generalImages = get_general_image_urls('floor-tiles-vpc', codice_corrispondente)
         """
+    chiese = 'Churches.csv'
+    try:
+        raw_query = request.args.get('query')
+        query = normalize_name(raw_query)
+
         if resultsChiese:
             return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti,
                                    floor_images=floorImages, general_images = generalImages ,query=query)
