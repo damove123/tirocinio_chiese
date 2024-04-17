@@ -91,13 +91,20 @@ def replace(string: str):
 def get_artifact_group(church_name):
     immagini_reperti = []
 
-    church_data = pd.read_csv('Churches_B12_Complete_Gathered_Church_Information - CSV sheet.csv')
+    church_data = pd.read_csv('Churches.csv')
     # Ricerca della riga corrispondente al nome della chiesa inserito
 
     artifact_info = church_data[church_data['Local Name'].str.contains(church_name, case=False, na=False)]
-    print(artifact_info[0].keys())
+    if artifact_info.empty:
+        return None
+    else:
+        # Estrai solo il contenuto dell'ultima colonna
+        ultima_colonna = church_data.columns[-1]
+        artifact_info = artifact_info[ultima_colonna]
 
-    return immagini_reperti
+    print(artifact_info)
 
 
-print(get_artifact_group("Le Cappuccine"))
+get_artifact_group('Le Cappuccine')
+
+
