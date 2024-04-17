@@ -100,6 +100,7 @@ def seperator(dataDict):
 
 import csv
 
+
 def get_artifact_group(church_name):
     immagini_reperti = []
 
@@ -123,8 +124,16 @@ def get_artifact_group(church_name):
 
 
 values = get_artifact_group("Le Cappuccine")
-#print(values)
 cleanData = []
 for value in values:
     cleanData.append(seperator(value))
-print(cleanData)
+
+print("URLs Immagini:")
+for item in cleanData:
+    print(item['url'])
+print("URLs Immagini:")
+for item in cleanData:
+    print(item['id'])
+    print("URLs Immagini:")
+for item in cleanData:
+    print(item['inscription'])
