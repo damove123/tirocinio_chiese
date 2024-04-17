@@ -21,12 +21,20 @@
                 <div class="card">
                     <div class="card-header" id="chiesa{{ chiesa["Codice Chiesa"] }}">
                         <h3 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ chiesa["Codice Chiesa"] }}" aria-expanded="true" aria-controls="collapse{{ chiesa["Codice Chiesa"] }}">
-                                Chiesa: {{ chiesa["Locale Nome della Chiesa"] }}
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1{{ chiesa["Codice Chiesa"] }}" aria-expanded="true" aria-controls="collapse{{ chiesa["Codice Chiesa"] }}">
+                                Reperts
+                            </button>
+
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2{{ chiesa["Codice Chiesa"] }}" aria-expanded="true" aria-controls="collapse{{ chiesa["Codice Chiesa"] }}">
+                                Floor
+                            </button>
+
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3{{ chiesa["Codice Chiesa"] }}" aria-expanded="true" aria-controls="collapse{{ chiesa["Codice Chiesa"] }}">
+                                Church floor Plan
                             </button>
                         </h3>
                     </div>
-                    <div id="collapse{{ chiesa["Codice Chiesa"] }}" class="collapse" aria-labelledby="chiesa{{ chiesa["Codice Chiesa"] }}" data-parent="#chieseAccordion">
+                    <div id="collapse1{{ chiesa["Codice Chiesa"] }}" class="collapse" aria-labelledby="chiesa{{ chiesa["Codice Chiesa"] }}" data-parent="#chieseAccordion">
                         <div class="card-body">
                             <p>Indirizzo: {{ chiesa["Indirizzo"] }}</p>
                             <h4>Reperti:</h4>
@@ -57,6 +65,23 @@
                                 {% endfor %}
                             </ul>
                         </div>
+                    </div>
+                    <div id="collapse2{{ chiesa["Codice Chiesa"] }}" class="collapse" aria-labelledby="chiesa{{ chiesa["Codice Chiesa"] }}" data-parent="#chieseAccordion">
+                    <div class="card-body">
+                        {% if floor_images %}
+                        <h4>Foto dei Pavimenti:</h4>
+                        {% for url in floor_images %}
+                        <div class="floor-image-container">
+                            <img src="{{ url }}" alt="Immagine del pavimento della chiesa {{ chiesa['Codice Chiesa'] }}" class="img-fluid">
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>Nessuna foto dei pavimenti disponibile.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+<div id="collapse3{{ chiesa["Codice Chiesa"] }}" class="collapse" aria-labelledby="chiesa{{ chiesa["Codice Chiesa"] }}" data-parent="#chieseAccordion">
                     </div>
                 </div>
             {% endfor %}
