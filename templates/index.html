@@ -36,15 +36,60 @@
             });
         });
 
+        window.addEventListener('load', function() {
+            // Funzione per cliccare sul bottone all'interno della mappa
+            function clickBottoneMappa() {
+                var bottoneMappa = document.getElementById('18eeb5642be-widget-3-popup-title');
+                if (bottoneMappa) {
+                    bottoneMappa.click();
+                } else {
+                    console.log('Bottone nella mappa non trovato');
+                }
+            }
+
+            // Funzione per gestire il click sul bottone principale
+            function handleClickBottonePrincipale() {
+                // Ottieni il testo dall'elemento h2 con la classe specificata
+                var testoH2 = document.querySelector('.esri-widget__heading.esri-popup__header-title').textContent.trim();
+                // Imposta il valore dell'input di ricerca al testo ottenuto
+                document.getElementById('search_input').value = testoH2;
+                // Invia il modulo per eseguire la ricerca
+                document.getElementById('search_form').submit();
+            }
+
+            // Crea un MutationObserver per rilevare quando il bottone nella mappa viene aggiunto
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' && mutation.addedNodes.length) {
+                        // Se viene aggiunto un nuovo nodo, verifica se è il bottone nella mappa
+                        var newNode = mutation.addedNodes[0];
+                        if (newNode.id === '18eeb5642be-widget-3-popup-title') {
+                            // Se è il bottone nella mappa, attacca l'event listener
+                            newNode.addEventListener('click', handleClickBottonePrincipale);
+                        }
+                    }
+                });
+            });
+            // Specifica il nodo target e le opzioni per l'observer
+            var targetNode = document.getElementById('viewDiv'); // Sostituisci 'contenitore-mappa' con l'ID dell'elemento che contiene la mappa
+            var config = { childList: true };
+
+            // Avvia l'observer
+            observer.observe(targetNode, config);
+            // Esegui prima il clic sul bottone nella mappa
+            clickBottoneMappa();
+        });
+
     </script>
 
 </head>
 <body>
 <h1>Ricerca Chiesa</h1>
-<form action="/" method="GET">
+<form id="search_form" action="/" method="GET">
     <label for="search_input">Inserisci il nome della chiesa:</label><br>
     <input type="text" id="search_input" name="query" class="search-input"><br>
-    <button type="submit" class="search-button">Cerca</button>
+    <button type="submit" id="search_button" class="search-button">Cerca</button>
+    <button type="button" id="btn_ottieni_nome" class="btn btn-primary">Prendi Nome Chiesa</button>
 </form>
 
 <div class="map-container">
