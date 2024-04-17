@@ -3,6 +3,8 @@ from firebase_admin import db, credentials
 from flask import Flask, render_template, jsonify, request
 from fuzzywuzzy import fuzz
 from flask_caching import Cache
+import pandas as pd
+import csv
 import data
 
 import boto3
@@ -104,9 +106,34 @@ def get_floor_image_urls(bucket_name, church_code):
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
+def replace(string: str):
+    return string.replace(' ', '%20')
+
+
 @cache.cached(timeout=60)
 @app.route("/")
 def search_church():
+    immagini_reperti = []
+
+
+    try:
+        raw_query = request.args.get('query')
+        query = normalize_name(raw_query)
+        church_data = pd.read_csv('Churches_B12_Complete_Gathered_Church_Information - CSV sheet.csv')
+        # Ricerca della riga corrispondente al nome della chiesa inserito
+        artifact_info = church_data[church_data['Local Name'].str.contains(query, case=False, na=False)]
+        if artifact_info.empty:
+            return None
+
+        ck_id_list = data.getGroup(replace(artifact_info))
+        data_url_cartella = data.getData(ck_id_list)
+        for artifacts in data_url_cartella:
+            immagini_reperti.append(artifacts)
+
+
+    except Exception as e:
+        print("Errore nella ricerca", str(e))
+
     """
     try:
         raw_query = request.args.get('query')
@@ -146,7 +173,7 @@ def search_church():
             floorImages = get_floor_image_urls('floor-tiles-vpc', codice_corrispondente)
 
             generalImages = get_general_image_urls('floor-tiles-vpc', codice_corrispondente)
-        """
+        "
         if resultsChiese:
             return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti,
                                    floor_images=floorImages, general_images = generalImages ,query=query)
@@ -155,6 +182,8 @@ def search_church():
     except Exception as e:
         print("Errore durante la ricerca:", str(e))  # Aggiunge dettaglio sull'errore
         return jsonify({'error': 'Impossibile completare la ricerca: ' + str(e)}), 500
+
+        """
 
 
 if __name__ == "__main__":
