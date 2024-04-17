@@ -7,7 +7,6 @@ import boto3
 
 app = Flask(__name__)
 
-
 cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -30,7 +29,6 @@ def is_match(query, target):
 
 
 def get_image_urls(bucket_name, church_code, reperto_code):
-
     extensions = ['jpg', 'JPG']
     # Il prefisso ora include anche il nome del file immagine specifico per il reperto.
     for extension in extensions:
@@ -50,6 +48,7 @@ def get_image_urls(bucket_name, church_code, reperto_code):
 
 
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
 
 @cache.cached(timeout=60)
 @app.route("/")
@@ -98,4 +97,3 @@ def search_church():
 if __name__ == "__main__":
     app.run(debug=True)
 
-#vZhB/X2+X7V+Sgk17/cLvO7QuQMf5Uy+nS2Hue6k
