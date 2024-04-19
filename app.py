@@ -111,112 +111,67 @@ def sub(string: str):
 
 
 def seperator(dataDict):
-    print(dataDict)
     try:
-        outputdict = {"url": dataDict["media0_medium"],
-                      "id": dataDict["birth_certificate_birthID"],
-                      "inscription": dataDict["data_Inscription"]}
-    except:
-        outputdict = {"id": dataDict["birth_certificate_birthID"],
-                      "inscription": dataDict["data_Inscription"]}
+        outputdict = {
+            "url": dataDict.get("media0_medium"),  # Utilizziamo dataDict.get() per ottenere l'URL dell'immagine o None se non presente
+            "id": dataDict["birth_certificate_birthID"],
+            "inscription": dataDict["data_Inscription"]
+        }
+    except KeyError as e:
+        # Se una delle chiavi necessarie non è presente nel dataDict, restituiamo un dizionario con valori vuoti o None
+        outputdict = {
+            "url": None,
+            "id": dataDict.get("birth_certificate_birthID"),
+            "inscription": dataDict.get("data_Inscription")
+        }
     return outputdict
 
 
-@cache.cached(timeout=60)
+
 @app.route("/")
 def search_church():
     raw_query = request.args.get('query')
+    if not raw_query:
+        # Restituisce subito se non c'è una query
+        return render_template("index.html", message="Inserisci un termine di ricerca.")
+
     query = normalize_name(raw_query)
+    reperti = []
+    immagini = []
+    id = []
+    scritte = []
+
     try:
-        reperti = []
-        immagini= []
-        id = []
-        scritte = []
-
+        artifact_info = None
         with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
-            artifact_info = None
             reader = csv.reader(file)
-
             for row in reader:
-                if query in row[2]:
+                if len(row) > 2 and query in row[2]:
                     artifact_info = row[-1]
-                    # Collect all artifact information for processing outside the loop
+                    break
 
-            if artifact_info:
-                artifact_code = sub(artifact_info)
-                ck_id_list = data.getGroup(artifact_code)
-                artifact_url = data.getData(ck_id_list)
-                for artifact in artifact_url:
-                    reperti.append(artifact)
+        if artifact_info is None:
+            # Nessun risultato trovato nel CSV
+            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
-        cleanData = []
-        for value in reperti:
-            cleanData.append(seperator(value))
+        artifact_code = sub(artifact_info)
+        ck_id_list = data.getGroup(artifact_code)
+        artifact_url = data.getData(ck_id_list)
+        for artifact in artifact_url:
+            reperti.append(artifact)
+
+        cleanData = [seperator(value) for value in reperti]
 
         for item in cleanData:
             immagini.append(item['url'])
-        for item in cleanData:
             id.append(item['id'])
-        for item in cleanData:
-            scritte.append((item['inscription']))
+            scritte.append(item['inscription'])
 
-        if query:
-            return render_template("result.html", chiesa=query, reperti=immagini, scritte = scritte, query=query)
-        else:
-            return render_template("index.html", chiese=None, reperti=None, query=query)
+        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini, query=query)
+
     except Exception as e:
-        print("Not find church", str(e))
-
-    """
-    try:
-        raw_query = request.args.get('query')
-        query = normalize_name(raw_query)
-        codice_corrispondente = None
-        chiese_ref = db.reference("/Chiese")
-        chiese = chiese_ref.get() or []
-
-        resultsChiese = []
-        resultsReperti = []
-        floorImages = []
-        generalImages = []
-
-        for chiesa in chiese:
-            chiesa_name = normalize_name(chiesa.get("Locale Nome della Chiesa"))
-            if is_match(query, chiesa_name):
-                codice_corrispondente = chiesa.get("Codice Chiesa")
-                break
-
-        if codice_corrispondente:
-            resultsChiese.extend([chiesa for chiesa in chiese if chiesa.get("Codice Chiesa") == codice_corrispondente])
-
-            refPivi = db.reference("/RepertiPivi").get() or []
-            for pivi in refPivi:
-                if pivi.get("Codice Chiesa") == codice_corrispondente:
-                    pivi['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente,
-                                                        pivi.get("Codice Reperto"))
-                    resultsReperti.append(pivi)
-
-            refPolo = db.reference("/RepertiPolo").get() or []
-            for polo in refPolo:
-                if polo.get("Codice Chiesa") == codice_corrispondente:
-                    polo['image_urls'] = get_image_urls('floor-tiles-vpc', codice_corrispondente,
-                                                        polo.get("Codice Reperto"))
-                    resultsReperti.append(polo)
-
-            floorImages = get_floor_image_urls('floor-tiles-vpc', codice_corrispondente)
-
-            generalImages = get_general_image_urls('floor-tiles-vpc', codice_corrispondente)
-        "
-        if resultsChiese:
-            return render_template("result.html", chiese=resultsChiese, reperti=resultsReperti,
-                                   floor_images=floorImages, general_images = generalImages ,query=query)
-        else:
-            return render_template("index.html", chiese=None, reperti=None, query=query)
-    except Exception as e:
-        print("Errore durante la ricerca:", str(e))  # Aggiunge dettaglio sull'errore
-        return jsonify({'error': 'Impossibile completare la ricerca: ' + str(e)}), 500
-
-        """
+        print(f"Error in search_church: {str(e)}")
+        return render_template("index.html", message="Errore durante il processo di ricerca.")
 
 
 if __name__ == "__main__":
