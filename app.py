@@ -128,6 +128,11 @@ def search_church():
                 return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
             artifact_code = sub(artifact_info)
+            ck_id_list = data.getGroup(artifact_code)
+            artifact_url = data.getData(ck_id_list)
+            for artifact in artifact_url:
+                reperti.append(artifact)
+
             cleanData = [seperator(value) for value in reperti]
 
             for item in cleanData:
@@ -142,7 +147,6 @@ def search_church():
             return render_template("index.html", message="Errore durante il processo di ricerca.")
     else:
         return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
-
 
 def formatta_nome(codice_reperto):
     uppercase_letters = codice_reperto.split('_')[0]
