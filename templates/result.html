@@ -38,17 +38,17 @@
     </div>
     <div class="row" id="repertiRow" style="display: none;"> <!-- Aggiunto stile inline per nascondere inizialmente i reperti -->
         {% for i in range(reperti|length) %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    {% if immagini[i] %}
-                        <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ reperti[i] }}</h5>
-                        <p class="card-text">{{ scritte[i] }}</p>
-                    </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if immagini[i] %}
+                <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ reperti[i] }}</h5>
+                    <p class="card-text">{{ scritte[i] }}</p>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
