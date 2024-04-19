@@ -74,9 +74,6 @@ def logout():
     return redirect(url_for('search_church'))  # Reindirizza l'utente alla homepage dopo il logout
 
 
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
-
-
 def sub(string: str):
     return string.replace(' ', '%20')
 
