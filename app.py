@@ -9,7 +9,6 @@ import re
 
 app = Flask(__name__)
 app.secret_key = '123456789'
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 login_manager = LoginManager(app)
 
@@ -54,7 +53,7 @@ def is_match(query, target):
 
 
 # Route per il login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -75,6 +74,7 @@ def login():
 def logout():
     logout_user()  # Effettua il logout dell'utente
     return redirect(url_for('search_church'))  # Reindirizza l'utente alla homepage dopo il logout
+
 
 # Normalizza il nome
 def normalize_name(name):
@@ -161,6 +161,7 @@ def search_church():
     else:
         return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
 
+
 def formatta_nome(codice_reperto):
     uppercase_letters = codice_reperto.split('_')[0]
     # Aggiunge "%20Artifacts" alla stringa di lettere maiuscole
@@ -189,13 +190,16 @@ def search_reperto():
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
-            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte, immagini=reperto_url, query=query)
+            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte,
+                                   immagini=reperto_url, query=query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
 
     except Exception as e:
         print("Errore:", e)
-        return render_template("index.html", message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia valido.")
+        return render_template("index.html", message="Errore nel processo di ricerca. Assicurati che il codice del "
+                                                     "reperto sia valido.")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
