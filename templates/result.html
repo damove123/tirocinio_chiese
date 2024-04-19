@@ -2,56 +2,32 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risultati della Ricerca per "{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Risultati Ricerca</title>
+    <style>
+        .container { margin-top: 20px; }
+        .image-container img { width: 100%; height: auto; }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    {% if chiese %}
-    <h2 class="mb-4">Risultati della ricerca per "{{ query }}"</h2>
-    <div class="accordion" id="chieseAccordion">
-        {% for chiesa in chiese %}
-        <div class="card">
-            <div class="card-header" id="heading{{ chiesa['Codice Chiesa'] }}">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
-                        {{ chiesa['Local Name'] }}
-                    </button>
-                </h2>
-            </div>
-
-            <div id="collapse{{ loop.index }}" class="collapse" aria-labelledby="heading{{ chiesa['Codice Chiesa'] }}" data-parent="#chieseAccordion">
-                <div class="card-body">
-                    <h4>Reperti:</h4>
-                    {% for reperto in reperti %}
-                    {% if reperto['Codice Chiesa'] == chiesa['Church Code'] %}
-                    <div class="list-group mb-3">
-                        <div class="list-group-item">
-                            <h5 class="mb-1">{{ reperto['Codice Reperto'] }}</h5>
-                            {% if reperto.image_urls %}
-                            <div class="relic-image-container mb-2">
-                                {% for url in reperto.image_urls %}
-                                <img src="{{ url }}" alt="Immagine di {{ reperto['Nome Reperto'] }}" class="img-thumbnail">
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            <p>Nessuna immagine disponibile per questo reperto.</p>
-                            {% endif %}
-                            <p>{{ reperto['Descrizione'] }}</p>
-                        </div>
-                    </div>
+<div class="container">
+    <h2>Risultati della ricerca per "{{ chiesa }}"</h2>
+    <div class="row">
+        {% for i in range(reperti|length) %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if immagini[i] %}
+                        <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto">
                     {% endif %}
-                    {% endfor %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ reperti[i] }}</h5>
+                        <p class="card-text">{{ scritte[i] }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
-    {% else %}
-    <p>Nessun risultato trovato per "{{ query }}".</p>
-    {% endif %}
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
