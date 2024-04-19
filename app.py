@@ -113,19 +113,19 @@ def sub(string: str):
 def seperator(dataDict):
     try:
         outputdict = {
-            "url": dataDict.get("media0_medium"),  # Utilizziamo dataDict.get() per ottenere l'URL dell'immagine o None se non presente
+            "url": dataDict.get("media0_medium"),
+            # Utilizziamo dataDict.get() per ottenere l'URL dell'immagine o None se non presente
             "id": dataDict["birth_certificate_birthID"],
-            "inscription": dataDict["data_Inscription"]
+            "inscription": dataDict["data_Transcription"]
         }
     except KeyError as e:
         # Se una delle chiavi necessarie non è presente nel dataDict, restituiamo un dizionario con valori vuoti o None
         outputdict = {
             "url": None,
             "id": dataDict.get("birth_certificate_birthID"),
-            "inscription": dataDict.get("data_Inscription")
+            "inscription": dataDict.get("data_Transcription")
         }
     return outputdict
-
 
 
 @app.route("/")

@@ -1,212 +1,72 @@
-/* Stili personalizzati */
-/* Aggiungi stili personalizzati qui */
-
-/* Reset CSS per eliminare i margini e i padding predefiniti */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Stile generale del corpo della pagina */
 body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #283048, #859398);
-    color: #fff;
-    line-height: 1.6;
+    font-family: 'Times New Roman', serif; /* Font simile a quello usato nell'antica Roma */
+    background-color: #f9f9f9; /* Colore sfondo beige chiaro */
+    color: #333; /* Colore testo scuro */
+    padding-top: 40px;
 }
 
-/* Stile per il titolo principale */
-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 2rem;
-}
-
-/* Stile per il titolo secondario */
 h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #ccc;
-    margin-bottom: 1.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #963; /* Colore testo marrone */
 }
 
-/* Stile per i paragrafi */
-p {
-    font-size: 1.6rem;
-    margin-bottom: 1.5rem;
-    color: #ccc; /* Testo grigio */
-}
-
-/* Stile per i link */
-a {
-    color: #00bcd4;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #4caf50;
-}
-
-/* Stile per i pulsanti */
-.button {
-    background: #f44336;
-    color: #fff;
+.dropdown-toggle {
+    background-color: #963; /* Sfondo marrone */
+    color: #fff; /* Testo bianco */
     border: none;
-    padding: 1rem 2rem;
+    border-radius: 20px; /* Bordo arrotondato */
+    padding: 10px 20px;
     font-size: 1.6rem;
     cursor: pointer;
-    border-radius: 5px;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
 }
 
-.button:hover {
-    background: #ff5722;
+.dropdown-toggle:hover {
+    background-color: #bba; /* Sfondo marrone chiaro al passaggio del mouse */
 }
 
-/* Stile per gli input di testo */
-.input-field {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.6rem;
-    border: 2px solid #fff;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #fff;
-    transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-    outline: none;
-    border-color: #00bcd4;
-}
-
-/* Stile per i form */
-.form {
-    margin-bottom: 3rem;
-}
-
-/* Stile per i container */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 2rem;
-}
-
-/* Stile per le liste non ordinate */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-/* Stile per i singoli elementi di una lista */
-li {
-    margin-bottom: 1rem;
-    color: #ccc; /* Testo grigio */
-}
-
-/* Stile per le immagini */
-.relic-item {
-    margin-bottom: 2rem;
-}
-
-.relic-container {
-    display: flex;
-    align-items: center;
-}
-
-.image-container {
-    flex: 0 0 200px;
-    position: relative;
-    margin-right: 1rem;
-    overflow: hidden; /* Aggiunto overflow per abilitare lo scrolling */
-}
-
-.img-zoom {
-    position: fixed; /* Posizionamento fisso rispetto alla viewport */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.90); /* Centratura e ingrandimento moderato */
-    z-index: 1050; /* Alto z-index per essere sopra altri contenuti */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    border: none; /* Rimuove bordi se presenti */
-    max-width: 90%; /* Massimo 90% della larghezza della viewport */
-    max-height: 90%; /* Massimo 90% dell'altezza della viewport */
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.7); /* Sfondo oscurato */
-    cursor: zoom-out; /* Cambia il cursore per indicare azione di zoom-out */
-}
-
-
-
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px;
-}
-
-/* Stile per il contenitore dell'iscrizione latina */
-.inscription-container {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 0.5rem;
-    border-radius: 5px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centro il contenuto orizzontalmente */
-    word-wrap: break-word;
-    margin-top: 1rem;
-}
-
-/* Stile per il testo dell'iscrizione latina */
-.latin-inscription {
-    font-size: 0.8rem;
-    margin: 0;
-    white-space: pre-wrap;
-    color: #333; /* Testo scuro */
-}
-
-.custom-div {
-    background: linear-gradient(135deg, #2b5876, #4e4376);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    padding: 2rem;
-    margin-bottom: 2rem;
+.card {
+    background-color: #ffe; /* Sfondo beige */
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombra leggera */
     transition: transform 0.3s ease;
 }
 
-/* Stile hover per il div */
-.custom-div:hover {
-    transform: translateY(-5px);
+.card:hover {
+    transform: translateY(-5px); /* Effetto di sollevamento al passaggio del mouse */
 }
 
-/* Stili per i reperti */
-.relic-container h5 {
+.card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+}
+
+.card-title {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: black; /* Testo bianco */
+    font-weight: bold;
+    color: #963; /* Colore testo marrone */
+    margin-top: 20px;
+    text-align: center;
 }
 
-/* Stile per la cornice delle immagini */
-.image-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid #fff; /* Cornice bianca */
-    transition: border-color 0.3s ease;
+.card-text {
+    font-size: 1.6rem;
+    color: #333; /* Colore testo scuro */
+    text-align: center;
 }
 
-/* Stile per l'immagine quando viene passato sopra con il mouse */
-.image-container:hover::before {
-    border-color: #00bcd4; /* Cornice colorata al passaggio del mouse */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
-
 .map-container{
     width: 100%;
     max-width: 1200px;
@@ -218,97 +78,3 @@ li {
     height: 700px;
     width: 100%;
 }
-
-/* Stile per il modale con effetto fade */
-.modal.fade .modal-dialog {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: translate(0, -50px); /* Posizione di partenza leggermente sopra il centro */
-    opacity: 0;
-}
-
-.modal.fade.show .modal-dialog {
-    transform: translate(0, 0); /* Posizione finale al centro */
-    opacity: 1;
-}
-
-#modalImage {
-    width: 100%; /* imposta la larghezza al 100% del contenitore */
-    height: auto; /* mantiene il rapporto dimensionale dell'immagine */
-    display: block; /* rimuove qualsiasi margine aggiunto dall'elemento */
-    object-fit: cover; /* assicura che l'immagine copra l'intero contenitore senza lasciare spazi, ma può tagliare parti dell'immagine */
-}
-
-.modal-dialog {
-    display: flex; /* Imposta il display a flex per centrare il contenuto */
-    justify-content: center; /* Centra il contenuto orizzontalmente */
-    align-items: center; /* Centra il contenuto verticalmente */
-    height: 100vh; /* Imposta l'altezza a tutto il viewport */
-    pointer-events: none; /* Previene interazioni dirette col modale per permettere clic attraverso di esso se necessario */
-    transform: translate(0, +30%);
-}
-
-.modal-content {
-    pointer-events: auto; /* Permette interazioni con il contenuto del modale */
-    width: auto; /* Larghezza automatica basata sul contenuto interno */
-    max-width: 100%; /* Evita che il modale esca dal viewport */
-
-}
-
-/* Stile per il dropdown */
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 2rem;
-}
-
-.dropdown-menu {
-    display: none; /* Nascondi i contenuti del menù a tendina fino al click */
-    position: absolute;
-    background: rgba(0, 0, 0, 0.9); /* Sfondo traslucido nero */
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 8px;
-    padding: 12px 16px;
-}
-
-.dropdown-item {
-    color: #00bcd4; /* Colori accesi per gli item */
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.dropdown-item:hover {
-    background-color: #555; /* Cambia sfondo all'hover */
-    color: #fff;
-}
-
-.dropdown-toggle {
-    background: #2b5876; /* Gradients for button */
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.dropdown-toggle:hover {
-    background: #4e4376; /* Cambia sfondo del bottone all'hover */
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block; /* Mostra il menù a tendina quando si passa sopra */
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .dropdown-menu {
-        width: 100%; /* Rendi il menù a tendina largo quanto il dispositivo su schermi più piccoli */
-    }
-}
-
-

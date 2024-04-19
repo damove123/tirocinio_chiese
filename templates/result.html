@@ -5,29 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risultati della Ricerca per "{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .container { margin-top: 20px; }
-        .image-container img { width: 100%; height: auto; }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 <div class="container">
     <h2>Risultati della ricerca per "{{ chiesa }}"</h2>
-
-    <!-- Menù a tendina per la vista della ricerca -->
     <div class="dropdown">
-        <button class="dropdown-toggle button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Seleziona la Vista
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+            Reperti
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Lista</a>
-            <a class="dropdown-item" href="#">Galleria</a>
-            <a class="dropdown-item" href="#">Dettaglio</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="repertiMenu">
+            <!-- Rimuovi la visualizzazione iniziale dei reperti dal template -->
         </div>
     </div>
-
-
-    <div class="row">
+    <div class="row" id="repertiRow" style="display: none;"> <!-- Aggiunto stile inline per nascondere inizialmente i reperti -->
         {% for i in range(reperti|length) %}
             <div class="col-md-4 mb-4">
                 <div class="card">
@@ -47,5 +38,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Mostra i reperti quando il pulsante viene cliccato
+        $(".dropdown-toggle").click(function() {
+            $("#repertiRow").toggle();
+        });
+    });
+</script>
 </body>
 </html>
