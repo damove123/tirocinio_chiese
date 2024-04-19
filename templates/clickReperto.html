@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <title>Dettaglio Reperto</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<div class="container">
-    <h1>Dettagli del Reperto</h1>
-    <div class="reperto-info">
-        <h2>Codice del Reperto: {{ reperto }}</h2>
-        {% if immagini %}
-        <img src="{{ immagini }}" alt="Immagine del Reperto" style="width:100%; max-width: 600px;">
-        {% else %}
-        <p>Nessuna immagine disponibile per questo reperto.</p>
-        {% endif %}
-        {% if scritte %}
-        <h3>Trascrizione:</h3>
-        <p>{{ scritte }}</p>
-        {% else %}
-        <p>Nessuna trascrizione disponibile per questo reperto.</p>
-        {% endif %}
+    <div class="container">
+        <h1>Dettagli del Reperto</h1>
+        <div class="reperto-info">
+            <h2>Codice del Reperto: {{ reperto }}</h2>
+            {% if immagini %}
+                <img src="{{ immagini }}" alt="Immagine del Reperto">
+            {% else %}
+                <p>Nessuna immagine disponibile per questo reperto.</p>
+            {% endif %}
+            {% if scritte %}
+                <h3>Trascrizione:</h3>
+                <p>{{ scritte }}</p>
+            {% else %}
+                <p>Nessuna trascrizione disponibile per questo reperto.</p>
+            {% endif %}
+        </div>
+        <a class="link" href="/">Torna alla ricerca</a>
     </div>
-    <a href="/">Torna alla ricerca</a>
-</div>
 </body>
-</html>
+

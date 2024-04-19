@@ -140,13 +140,15 @@ def search_church():
                 id.append(item['id'])
                 scritte.append(item['inscription'])
 
-            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini, query=query)
+            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
+                                   query=query)
 
         except Exception as e:
             print(f"Error in search_church: {str(e)}")
             return render_template("index.html", message="Errore durante il processo di ricerca.")
     else:
         return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
+
 
 def formatta_nome(codice_reperto):
     uppercase_letters = codice_reperto.split('_')[0]
@@ -176,13 +178,17 @@ def search_reperto():
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
-            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte, immagini=reperto_url, query=query)
+            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte,
+                                   immagini=reperto_url, query=query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
 
     except Exception as e:
         print("Errore:", e)
-        return render_template("index.html", message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia valido.")
+        return render_template("index.html",
+                               message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
+                                       "valido.")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
