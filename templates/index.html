@@ -13,13 +13,10 @@
             "esri/Map",
             "esri/views/MapView",
             "esri/WebMap",
-            "esri/Graphic",
-            "esri/config",
-            "esri/layers/GraphicsLayer",
-            "esri/geometry/Point",
-            "esri/widgets/Search"// Aggiungi il modulo 'esri/config' per configurare la chiave API
-        ], function(Map, MapView, WebMap, GraphicsLayer, Point, esriConfig) {
-            // Configura la tua chiave API
+            "esri/layers/FeatureLayer",
+            "esri/PopupTemplate",
+            "esri/config"
+        ], function(Map, MapView, WebMap, FeatureLayer, PopupTemplate, esriConfig) {
             esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
 
             var webMap = new WebMap({
@@ -31,11 +28,29 @@
             var view = new MapView({
                 container: "viewDiv",
                 map: webMap,
-                zoom: 12, // Imposta un livello di zoom che ti permetta di visualizzare chiaramente la chiesa
-                center: [12.2306, 45.4417] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
+                zoom: 12,
+                center: [12.2306, 45.4417] // Assicurati che le coordinate siano corrette
             });
+
+            var template = new PopupTemplate({
+                title: "{Name}", // Assicurati che il nome sia il campo corretto
+                content: "<button onclick='redirectToFlask(\"{Codice_Rep}\")'>Visualizza Dettagli</button>" // Assicurati che Artifact_Code sia il campo corretto
+            });
+
+            var layer = new FeatureLayer({
+                url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer/0r_url",
+                outFields: ["*"],
+                popupTemplate: template
+            });
+
+            webMap.add(layer);
+
+            window.redirectToFlask = function(artifactCode) {
+                window.location.href = `/search?query=${encodeURIComponent(artifactCode)}`;
+            };
         });
     </script>
+
 </head>
 <body>
 <h1>Ricerca Chiesa</h1>
