@@ -16,9 +16,6 @@ firebase_admin.initialize_app(cred, {
     "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
 })
 
-# Configura il client S3
-s3_client = boto3.client('s3')
-
 
 def normalize_name(name):
     if not name:
@@ -30,77 +27,6 @@ def normalize_name(name):
 def is_match(query, target):
     # Utilizza una soglia per determinare se considerare un match valido
     return fuzz.ratio(query, target) > 80  # ad esempio, una soglia del 80%
-
-
-def get_image_urls(bucket_name, church_code, reperto_code):
-    extensions = ['jpg', 'JPG']
-    # Il prefisso ora include anche il nome del file immagine specifico per il reperto.
-    for extension in extensions:
-        prefix = f"Church_Photos/{church_code}/Artifacts/{reperto_code}.{extension}"
-        try:
-            response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
-            print("Response from S3:", response)  # Stampa la risposta completa per debug
-            if response['KeyCount'] == 0:
-                print(f"Nessun oggetto trovato con il prefisso {prefix}")
-            else:
-                # Poiché ci aspettiamo un solo file, prendiamo direttamente il primo risultato.
-                image_url = f"https://{bucket_name}.s3.amazonaws.com/{response['Contents'][0]['Key']}"
-                return [image_url]
-        except Exception as e:
-            print(f"Errore nel recupero delle immagini: {e}")
-    return []
-
-
-def get_general_image_urls(bucket_name, church_code):
-    extensions = ['jpg', 'JPG']
-    image_urls = []
-    prefix = f"Church_Photos/{church_code}/General/"
-
-    try:
-        # Recupero tutti gli oggetti che iniziano con il prefisso della cartella
-        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
-        print("Response from S3:", response)  # Stampa la risposta completa per debug
-
-        if response['KeyCount'] > 0:
-            # Filtriamo i risultati per estensione
-            for item in response.get('Contents', []):
-                if any(item['Key'].endswith(ext) for ext in extensions):
-                    image_url = f"https://{bucket_name}.s3.amazonaws.com/{item['Key']}"
-                    image_urls.append(image_url)
-
-    except Exception as e:
-        print(f"Errore nel recupero delle immagini: {e}")
-
-    if not image_urls:
-        print("Non esistono altre foto per questa chiesa.")
-
-    return image_urls
-
-
-def get_floor_image_urls(bucket_name, church_code):
-    extensions = ['jpg', 'JPG']
-    image_urls = []
-    prefix = f"Church_Photos/{church_code}/Floor/"
-
-    try:
-        # Recupero tutti gli oggetti che iniziano con il prefisso della cartella
-        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
-        print("Response from S3:", response)  # Stampa la risposta completa per debug
-
-        if response['KeyCount'] > 0:
-            # Filtriamo i risultati per estensione
-            for item in response.get('Contents', []):
-                if any(item['Key'].endswith(ext) for ext in extensions):
-                    image_url = f"https://{bucket_name}.s3.amazonaws.com/{item['Key']}"
-                    image_urls.append(image_url)
-
-    except Exception as e:
-        print(f"Errore nel recupero delle immagini: {e}")
-
-    if not image_urls:
-        print("Non esistono foto dei pavimenti per questa chiesa.")
-
-    return image_urls
 
 
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})

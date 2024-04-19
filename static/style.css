@@ -1,8 +1,44 @@
+
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Times New Roman', serif; /* Font simile a quello usato nell'antica Roma */
     background-color: #f9f9f9; /* Colore sfondo beige chiaro */
     color: #333; /* Colore testo scuro */
     padding-top: 40px;
+}
+
+/* Stile per il titolo principale */
+h1 {
+    font-size: 2.5rem;
+    font-family: serif;
+    color: #8B4513; /* Marrone */
+    margin-bottom: 20px;
+}
+
+/* Stile per il label */
+label {
+    font-size: 1.6rem;
+    font-family: serif;
+    color: #8B4513; /* Marrone */
+}
+
+/* Stile per l'input di testo */
+input[type="text"] {
+    font-size: 1.4rem;
+    font-family: serif;
+}
+
+/* Stile per il pulsante */
+button {
+    font-size: 1.4rem;
+    font-family: serif;
+    background-color: #8B4513; /* Marrone */
+    color: #FFF; /* Bianco */
 }
 
 h2 {
@@ -77,4 +113,45 @@ h2 {
 #viewDiv{
     height: 700px;
     width: 100%;
+}
+
+#search_form {
+    text-align: center;
+}
+
+.search-input {
+    width: 70%;
+    padding: 10px;
+    font-size: 1.6rem;
+    border: 2px solid #963; /* Bordo marrone */
+    border-radius: 5px;
+}
+
+.search-button {
+    background-color: #963; /* Sfondo marrone */
+    color: #fff; /* Testo bianco */
+    border: none;
+    border-radius: 20px; /* Bordo arrotondato */
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #bba; /* Sfondo marrone chiaro al passaggio del mouse */
+}
+
+.map-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.custom-div {
+    background-color: #ffe; /* Sfondo beige */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    width: 100%;
+    height: 500px; /* Altezza fissa */
 }
