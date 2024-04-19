@@ -1,9 +1,13 @@
 import firebase_admin
 from firebase_admin import db, credentials
-from flask import Flask, render_template, request
+from flask import Flask, render_template, jsonify, request
+from fuzzywuzzy import fuzz
+from flask_caching import Cache
 import pandas as pd
 import csv
 import data
+
+import boto3
 
 app = Flask(__name__)
 
@@ -12,38 +16,89 @@ firebase_admin.initialize_app(cred, {
     "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
 })
 
+
+def normalize_name(name):
+    if not name:
+        return ""  # Restituisci una stringa vuota se il nome è None o vuoto
+    name = name.replace("S.", "San").replace("St.", "Santo")
+    return name.strip()
+
+
+def is_match(query, target):
+    # Utilizza una soglia per determinare se considerare un match valido
+    return fuzz.ratio(query, target) > 80  # ad esempio, una soglia del 80%
+
+
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
+
+def sub(string: str):
+    return string.replace(' ', '%20')
+
+
+def seperator(dataDict):
+    try:
+        outputdict = {
+            "url": dataDict.get("media0_medium"),
+            # Utilizziamo dataDict.get() per ottenere l'URL dell'immagine o None se non presente
+            "id": dataDict["birth_certificate_birthID"],
+            "inscription": dataDict["data_Transcription"]
+        }
+    except KeyError as e:
+        # Se una delle chiavi necessarie non è presente nel dataDict, restituiamo un dizionario con valori vuoti o None
+        outputdict = {
+            "url": None,
+            "id": dataDict.get("birth_certificate_birthID"),
+            "inscription": dataDict.get("data_Transcription")
+        }
+    return outputdict
+
+
 @app.route("/")
 def search_church():
-    query = request.args.get('query')
-    if not query:
+    raw_query = request.args.get('query')
+    if not raw_query:
+        # Restituisce subito se non c'è una query
         return render_template("index.html", message="Inserisci un termine di ricerca.")
 
-    reperti, immagini, ids, scritte = [], [], [], []
+    query = normalize_name(raw_query)
+    reperti = []
+    immagini = []
+    id = []
+    scritte = []
 
     try:
+        artifact_info = None
         with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
             reader = csv.reader(file)
-            found = False
             for row in reader:
-                if query.lower() in row[2].lower():  # Assumo che il nome della chiesa sia nella terza colonna
-                    found = True
-                    ck_id_list = data.getGroup(row[2])  # Assumo che il codice della chiesa sia nella stessa colonna
-                    artifact_data = data.getData(ck_id_list)
-                    for artifact in artifact_data:
-                        parsed_data = data.seperator(artifact)
-                        reperti.append(parsed_data)
-                        immagini.append(parsed_data['url'])
-                        ids.append(parsed_data['id'])
-                        scritte.append(parsed_data['inscription'])
+                if len(row) > 2 and query in row[2]:
+                    artifact_info = row[-1]
                     break
-            if not found:
-                return render_template("index.html", message="Nessun risultato trovato per: " + query)
 
-        return render_template("result.html", chiesa=query, reperti=ids, scritte=scritte, immagini=immagini, query=query)
+        if artifact_info is None:
+            # Nessun risultato trovato nel CSV
+            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
+
+        artifact_code = sub(artifact_info)
+        ck_id_list = data.getGroup(artifact_code)
+        artifact_url = data.getData(ck_id_list)
+        for artifact in artifact_url:
+            reperti.append(artifact)
+
+        cleanData = [seperator(value) for value in reperti]
+
+        for item in cleanData:
+            immagini.append(item['url'])
+            id.append(item['id'])
+            scritte.append(item['inscription'])
+
+        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini, query=query)
 
     except Exception as e:
         print(f"Error in search_church: {str(e)}")
         return render_template("index.html", message="Errore durante il processo di ricerca.")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
