@@ -49,6 +49,19 @@ h2 {
     color: #963; /* Colore testo marrone */
 }
 
+.link {
+    display: block;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #8B4513;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.link:hover {
+    color: #963;
+}
+
 .dropdown-toggle {
     background-color: #963; /* Sfondo marrone */
     color: #fff; /* Testo bianco */

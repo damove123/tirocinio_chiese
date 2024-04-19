@@ -1,6 +1,5 @@
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
-from flask_login import current_user, LoginManager, UserMixin, login_user, login_required, logout_user
 from fuzzywuzzy import fuzz
 from flask_caching import Cache
 import csv
@@ -8,8 +7,7 @@ import data
 import re
 
 app = Flask(__name__)
-app.secret_key = '123456789'
-
+app.secret_key = 'Chiese2012!'  # Imposta una chiave segreta casuale
 login_manager = LoginManager(app)
 
 
@@ -53,7 +51,7 @@ def is_match(query, target):
 
 
 # Route per il login
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -74,19 +72,6 @@ def login():
 def logout():
     logout_user()  # Effettua il logout dell'utente
     return redirect(url_for('search_church'))  # Reindirizza l'utente alla homepage dopo il logout
-
-
-# Normalizza il nome
-def normalize_name(name):
-    if not name:
-        return ""  # Restituisci una stringa vuota se il nome è None o vuoto
-    name = name.replace("S.", "San").replace("St.", "Santo")
-    return name.strip()
-
-
-# Verifica se c'è una corrispondenza tra la query e il target
-def is_match(query, target):
-    return fuzz.ratio(query, target) > 80
 
 
 def sub(string: str):
@@ -197,8 +182,9 @@ def search_reperto():
 
     except Exception as e:
         print("Errore:", e)
-        return render_template("index.html", message="Errore nel processo di ricerca. Assicurati che il codice del "
-                                                     "reperto sia valido.")
+        return render_template("index.html",
+                               message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
+                                       "valido.")
 
 
 if __name__ == "__main__":
