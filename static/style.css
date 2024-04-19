@@ -67,14 +67,35 @@ h2 {
     justify-content: center;
     gap: 20px;
 }
-.map-container{
+
+.map-container {
     width: 100%;
     max-width: 1200px;
     margin: auto;
     padding: 0 2rem;
 }
 
-#viewDiv{
+#viewDiv {
     height: 700px;
     width: 100%;
+}
+
+.modal-content {
+    background-color: #ffe; /* Sfondo beige per mantenere il tema */
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15); /* Ombra per enfasi */
+}
+
+.modal-title, .close {
+    color: #963; /* Colorazione coerente con gli altri titoli */
+}
+
+.modal-header, .modal-body {
+    padding: 20px;
+    border-bottom: 1px solid #963; /* Aggiungi un bordo per coerenza stilistica */
+}
+
+#modalImage {
+    width: 100%; /* Assicurati che l'immagine usi tutto lo spazio disponibile */
+    height: auto; /* Mantieni il rapporto d'aspetto originale */
 }
