@@ -24,11 +24,6 @@ def password_valida(password):
     # Controlla se la password ha almeno 8 caratteri
     return len(password) >= 8
 
-cred = credentials.Certificate("credentials.json")
-firebase_admin.initialize_app(cred, {
-    "databaseURL": "https://floor-tiles-vpc-default-rtdb.europe-west1.firebasedatabase.app/"
-})
-
 # Definizione del modello utente
 class User(UserMixin):
     def __init__(self, id):
