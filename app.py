@@ -184,5 +184,7 @@ def search_reperto():
         print("Errore:", e)
         return render_template("index.html", message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia valido.")
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
