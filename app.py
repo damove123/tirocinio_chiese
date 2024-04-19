@@ -79,6 +79,7 @@ def search_church():
             for artifact in artifact_url:
                 reperti.append(artifact)
 
+            print(reperti)
             cleanData = [seperator(value) for value in reperti]
 
             for item in cleanData:

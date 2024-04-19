@@ -49,7 +49,7 @@ def is_match(query, target):
 
 
 # Route per il login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/loginb    hvvv v bv vvn', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
