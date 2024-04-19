@@ -1,3 +1,4 @@
+
 from firebase import firebase
 import pandas as pd
 from tqdm import tqdm
@@ -65,6 +66,7 @@ def JtoCSV(dataList, filepath):
             writer.writerow(row)
 
     print("finished writing to file: " + filepath)
+
 
 
 
