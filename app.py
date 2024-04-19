@@ -91,7 +91,7 @@ def search_church():
         for item in cleanData:
             immagini.append(item['url'])
             id.append(item['id'])
-            scritte.append(item['inscription'])
+            scritte.append(item['trascription'])
 
         return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini, query=query)
 
