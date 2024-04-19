@@ -67,22 +67,6 @@ def JtoCSV(dataList, filepath):
     print("finished writing to file: " + filepath)
 
 
-"""
-group_name = "MARB%20Artifacts"
-ck_id_list = getGroup(group_name)
-data = getData(ck_id_list)
-for artifact in data:
-    try:
-        print(artifact["media0_medium"])
-    except:
-        continue
-print(data[0].keys())
-
-csvfile = pd.read_csv("Churches_B12_Complete_Gathered_Church_Information - CSV sheet.csv")
-print(csvfile.head(5))
-
-"""
-
 
 def sub(string: str):
     return string.replace(' ', '%20')
