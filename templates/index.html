@@ -13,13 +13,8 @@
             "esri/Map",
             "esri/views/MapView",
             "esri/WebMap",
-            "esri/Graphic",
-            "esri/config",
-            "esri/layers/GraphicsLayer",
-            "esri/geometry/Point",
-            "esri/widgets/Search"// Aggiungi il modulo 'esri/config' per configurare la chiave API
-        ], function(Map, MapView, WebMap, GraphicsLayer, Point, esriConfig) {
-            // Configura la tua chiave API
+            "esri/config"
+        ], function(Map, MapView, WebMap, esriConfig) {
             esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
 
             var webMap = new WebMap({
@@ -31,18 +26,34 @@
             var view = new MapView({
                 container: "viewDiv",
                 map: webMap,
-                zoom: 12, // Imposta un livello di zoom che ti permetta di visualizzare chiaramente la chiesa
-                center: [12.3331, 45.4376] // Centra la mappa sulle coordinate della Chiesa di S. Agnese
+                zoom: 12,
+                center: [12.3331, 45.4376]
+            });
+
+            // Ascolta il click sulla popup
+            view.popup.watch("selectedFeature", function(graphic) {
+                if (graphic && graphic.attributes && graphic.attributes.Codice_Rep) {
+                    var codiceRep = graphic.attributes.Codice_Rep;
+                    document.getElementById('reperto_input').value = codiceRep;
+                    document.getElementById('search_button_reperto').disabled = false;
+                }
             });
         });
     </script>
+
 </head>
 <body>
 <h1>Ricerca Chiesa</h1>
-<form id="search_form" action="/" method="GET">
-    <label for="search_input">Inserisci il nome della chiesa:</label><br>
-    <input type="text" id="search_input" name="query" class="search-input"><br>
-    <button type="submit" id="search_button" class="search-button">Cerca</button>
+<form id="search_form_chiesa" action="/" method="GET">
+    <label for="chiesa_input">Inserisci il nome della chiesa:</label><br>
+    <input type="text" id="chiesa_input" name="query"><br>
+    <button type="submit" class="search-button">Cerca Chiesa</button>
+</form>
+
+<form id="search_form_reperto" action="/search" method="GET">
+    <label for="reperto_input">Codice Reperto:</label><br>
+    <input type="text" id="reperto_input" name="query"><br>
+    <button type="submit" id="search_button_reperto" class="search-button" disabled>Cerca Reperto</button>
 </form>
 
 <div class="map-container">
