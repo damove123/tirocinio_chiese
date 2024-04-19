@@ -128,11 +128,8 @@ def search_church():
                 return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
             artifact_code = sub(artifact_info)
-            ck_id_list = data.getGroup(artifact_code)
-            artifact_url = data.getData(ck_id_list)
-            for artifact in artifact_url:
-                reperti.append(artifact)
-
+            c
+            print(reperti)
             cleanData = [seperator(value) for value in reperti]
 
             for item in cleanData:
@@ -148,5 +145,46 @@ def search_church():
     else:
         return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
 
+
+def formatta_nome(codice_reperto):
+    uppercase_letters = codice_reperto.split('_')[0]
+    # Aggiunge "%20Artifacts" alla stringa di lettere maiuscole
+    result_string = uppercase_letters + "%20Artifacts"
+    return result_string
+
+
+@app.route("/search_reperto", methods=["GET"])
+def search_reperto():
+    query = request.args.get('query')
+    if not query:
+        return render_template("index.html", message="Inserisci il codice del reperto.")
+
+    reperto_url = None
+    reperto_scritte = None
+    try:
+        codice_reperto = normalize_name(query)
+        artifact_group = formatta_nome(codice_reperto)
+        ck_id_list = data.getGroup(artifact_group)
+        dati_reperti = data.getData(ck_id_list)
+        for reperto in dati_reperti:
+            if reperto["data_Artifact Code"] == codice_reperto:
+                # Gestisce la possibilità che l'immagine non sia disponibile
+                reperto_url = reperto.get("media0_medium", None)
+                reperto_scritte = reperto.get("data_Transcription", None)
+                break  # Esce dal ciclo una volta trovato il reperto corrispondente
+
+        if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
+            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte, immagini=reperto_url, query=query)
+        else:
+            return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
+
+    except Exception as e:
+        print("Errore:", e)
+        return render_template("index.html", message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia valido.")
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+# taglia dopo le prima lettere maiuscole quando trovi _ e toglilo e metti %20Artifacts --> Codice_Rep%20Artifacts
+# deve matchare il nome del reperto con data_Artifact Code e poi cercare l'url che è sotto 'media0_medium'
+# creare altra pagina resultsReperto.html
