@@ -128,8 +128,6 @@ def search_church():
                 return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
             artifact_code = sub(artifact_info)
-            c
-            print(reperti)
             cleanData = [seperator(value) for value in reperti]
 
             for item in cleanData:
@@ -184,7 +182,3 @@ def search_reperto():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-# taglia dopo le prima lettere maiuscole quando trovi _ e toglilo e metti %20Artifacts --> Codice_Rep%20Artifacts
-# deve matchare il nome del reperto con data_Artifact Code e poi cercare l'url che è sotto 'media0_medium'
-# creare altra pagina resultsReperto.html
