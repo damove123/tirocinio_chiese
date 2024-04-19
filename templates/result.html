@@ -13,6 +13,20 @@
 <body>
 <div class="container">
     <h2>Risultati della ricerca per "{{ chiesa }}"</h2>
+
+    <!-- Menù a tendina per la vista della ricerca -->
+    <div class="dropdown">
+        <button class="dropdown-toggle button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Seleziona la Vista
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Lista</a>
+            <a class="dropdown-item" href="#">Galleria</a>
+            <a class="dropdown-item" href="#">Dettaglio</a>
+        </div>
+    </div>
+
+
     <div class="row">
         {% for i in range(reperti|length) %}
             <div class="col-md-4 mb-4">

@@ -254,5 +254,61 @@ li {
 
 }
 
+/* Stile per il dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.dropdown-menu {
+    display: none; /* Nascondi i contenuti del menù a tendina fino al click */
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9); /* Sfondo traslucido nero */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+.dropdown-item {
+    color: #00bcd4; /* Colori accesi per gli item */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #555; /* Cambia sfondo all'hover */
+    color: #fff;
+}
+
+.dropdown-toggle {
+    background: #2b5876; /* Gradients for button */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    background: #4e4376; /* Cambia sfondo del bottone all'hover */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Mostra il menù a tendina quando si passa sopra */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        width: 100%; /* Rendi il menù a tendina largo quanto il dispositivo su schermi più piccoli */
+    }
+}
 
 
