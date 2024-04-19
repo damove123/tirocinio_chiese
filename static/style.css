@@ -49,6 +49,19 @@ h2 {
     color: #963; /* Colore testo marrone */
 }
 
+.link {
+    display: block;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #8B4513;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.link:hover {
+    color: #963;
+}
+
 .dropdown-toggle {
     background-color: #963; /* Sfondo marrone */
     color: #fff; /* Testo bianco */
@@ -154,4 +167,33 @@ h2 {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Ombra leggera */
     width: 100%;
     height: 500px; /* Altezza fissa */
+}
+
+.modal-content {
+    background-color: #ffe; /* Sfondo beige per mantenere il tema */
+    color: #333; /* Testo scuro */
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15); /* Ombra per enfasi */
+}
+
+.modal-title {
+    color: #963; /* Colorazione coerente con gli altri titoli */
+}
+
+.close {
+    color: #963; /* Colorazione coerente */
+    opacity: 1; /* Assicurati che sia ben visibile */
+}
+
+.modal-header, .modal-body {
+    padding: 20px;
+}
+
+.modal-header {
+    border-bottom: 1px solid #963; /* Aggiungi un bordo per coerenza stilistica */
+}
+
+#modalImage {
+    width: 100%; /* Assicurati che l'immagine usi tutto lo spazio disponibile */
+    height: auto; /* Mantieni il rapporto d'aspetto originale */
 }
