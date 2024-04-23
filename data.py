@@ -71,7 +71,3 @@ def JtoCSV(dataList, filepath):
             writer.writerow(row)
 
     print("finished writing to file: " + filepath)
-
-
-
-

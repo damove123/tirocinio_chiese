@@ -63,22 +63,22 @@
     </div>
     <div class="row" id="repertiRow" style="display: none;">
         {% for i in range(reperti|length) %}
-            <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
-                <div class="card">
-                    {% if immagini[i] %}
-                        <img src="caricamento.jpg"
-                             data-src="{{ immagini[i] }}"
-                             alt="Immagine del reperto"
-                             class="card-img-top lazyload"
-                             loading="lazy">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ reperti[i] }}</h5>
-                        <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
-                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Dettagli</a>
-                    </div>
+        <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
+            <div class="card">
+                {% if immagini[i] %}
+                <img src="caricamento.jpg"
+                     data-src="{{ immagini[i] }}"
+                     alt="Immagine del reperto"
+                     class="card-img-top lazyload"
+                     loading="lazy">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ reperti[i] }}</h5>
+                    <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
+                    <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Dettagli</a>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
