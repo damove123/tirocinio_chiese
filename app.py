@@ -8,7 +8,13 @@ import re
 
 app = Flask(__name__)
 app.secret_key = 'Chiese2012!'  # Imposta una chiave segreta casuale
+
+# Credenziali predefinite
+USERNAME = "chiese2024@gmail.com"
+PASSWORD = "pippo2001"
+
 login_manager = LoginManager(app)
+login_manager.login_view = "login"
 
 
 # Funzione per validare l'email
@@ -22,7 +28,7 @@ def email_valido(email):
 # Funzione per validare la password
 def password_valida(password):
     # Controlla se la password ha almeno 8 caratteri
-    return password == app.secret_key
+    return len(password) >= 8
 
 
 # Definizione del modello utente
@@ -57,7 +63,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         # Esegui la logica di autenticazione qui
-        if email_valido(email) and password_valida(password):
+        if email_valido(email) and password_valida(password) and email == USERNAME and PASSWORD == password:
             user = User(id=email)  # Crea un oggetto utente
             login_user(user)  # Effettua il login dell'utente
             return redirect(url_for('search_church'))  # Reindirizza l'utente dopo il login
