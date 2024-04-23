@@ -19,29 +19,58 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        .hidden {
+            display: none;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <h1>Dettagli del Reperto</h1>
-        <a class="button" href="/translate.html?codice={{ reperto }}">Traduci</a>
+        <button class="button" onclick="toggleTranslate()">Traduci</button>
     </div>
     <div class="reperto-info">
         <h2>Codice del Reperto: {{ reperto }}</h2>
         {% if immagini %}
-        <img src="{{ immagini }}" alt="Immagine del Reperto">
+            <img src="{{ immagini }}" alt="Immagine del Reperto">
         {% else %}
-        <p>Nessuna immagine disponibile per questo reperto.</p>
+            <p>Nessuna immagine disponibile per questo reperto.</p>
         {% endif %}
         {% if scritte %}
-        <h3>Trascrizione:</h3>
-        <p>{{ scritte }}</p>
+            <h3>Trascrizione:</h3>
+            <p>{{ scritte }}</p>
         {% else %}
-        <p>Nessuna trascrizione disponibile per questo reperto.</p>
+            <p>Nessuna trascrizione disponibile per questo reperto.</p>
         {% endif %}
+    </div>
+    <div id="translateForm" class="hidden">
+        <textarea rows="4" placeholder="Inserisci qui la traduzione..."></textarea>
+        <button class="button">Invia Traduzione</button>
     </div>
     <a class="link" href="/">Torna alla ricerca</a>
 </div>
+
+<script>
+    function toggleTranslate() {
+        var form = document.getElementById('translateForm');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
