@@ -5,63 +5,138 @@
     <title>Dettaglio Reperto</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body {
+            background-color: #f4f4f2; /* Colore neutro simile alla pietra */
+            color: #333; /* Colore del testo scuro per un'atmosfera più antica */
+            font-family: 'Georgia', serif; /* Font che simula uno stile più classico e formale */
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #ccc; /* Aggiunge un tocco di separazione classica */
+            background-color: #eaeaea; /* Sfondo che richiama il marmo o la pietra chiara */
         }
+
         .button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #8a7668; /* Un color marrone chiaro che ricorda la terra */
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 0; /* Rimuovere l'arrotondamento per un look più storico */
         }
+
         .hidden {
             display: none;
         }
+
         textarea {
             width: 100%;
             padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+            border-radius: 0; /* Stile più quadrato per una sensazione più austera */
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombreggiatura interna per aggiungere profondità */
+        }
+
+        .info-block {
+            background-color: #eaeaea; /* Leggero sfondo grigio per i dettagli del blocco */
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Ombreggiatura per elevare il blocco dal contesto */
+            border-left: 5px solid #8a7668; /* Bordi spessi per enfatizzare l'importanza */
+        }
+
+        .img-container {
+            margin-bottom: 20px; /* Spazio sotto l'immagine */
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc; /* Contorno sottile per definire lo spazio dell'immagine */
+        }
+
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+        }
+
+        @media (min-width: 768px) {
+            .details-container {
+                flex-direction: row;
+            }
+            .img-container, .info-block {
+                flex: 1;
+            }
         }
     </style>
+
 </head>
 <body>
-<div class="container">
+<div class="container mt-4">
     <div class="header">
         <h1>Dettagli del Reperto</h1>
         <button class="button" onclick="toggleTranslate()">Traduci</button>
     </div>
-    <div class="reperto-info">
-        <h2>Codice del Reperto: {{ reperto }}</h2>
-        {% if immagini %}
-        <img src="{{ immagini }}" alt="Immagine del Reperto">
-        {% else %}
-        <p>Nessuna immagine disponibile per questo reperto.</p>
-        {% endif %}
-        {% if scritte %}
-        <h3>Trascrizione:</h3>
-        <p>{{ scritte }}</p>
-        {% else %}
-        <p>Nessuna trascrizione disponibile per questo reperto.</p>
-        {% endif %}
-        {% if traduzione %}
-        <h4>Traduzione</h4>
-        <p>{{ traduzione }}</p>
-        {% else %}
-        <p>Nessuna traduzione ancora disponibile per questo reperto.</p>
-        {% endif %}
-
+    <div class="details-container">
+        <div class="img-container">
+            {% if immagini %}
+            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+            {% else %}
+            <p>Nessuna immagine disponibile per questo reperto.</p>
+            {% endif %}
+        </div>
+        <div class="info-block">
+            <h2>Codice del Reperto: {{ reperto }}</h2>
+            {% if condition %}
+            <h5>Condizione</h5>
+            <p>{{ condition }}</p>
+            {% endif %}
+            {% if length %}
+            <h6>Lunghezza</h6>
+            <p>{{ length }}</p>
+            {% endif %}
+            {% if width %}
+            <h6>Larghezza</h6>
+            <p>{{ width }}</p>
+            {% endif %}
+            {% if material %}
+            <h6>Materiale</h6>
+            <p>{{ material }}</p>
+            {% endif %}
+            {% if shape %}
+            <h6>Forma</h6>
+            <p>{{ shape }}</p>
+            {% endif %}
+            {% if type %}
+            <h6>Tipo</h6>
+            <p>{{ type }}</p>
+            {% endif %}
+        </div>
     </div>
-    <div id="translateForm" class="hidden">
+    <div class="row">
+        <div class="col-12">
+            {% if scritte %}
+            <h3>Trascrizione:</h3>
+            <p>{{ scritte }}</p>
+            {% else %}
+            <p>Nessuna trascrizione disponibile per questo reperto.</p>
+            {% endif %}
+            {% if traduzione %}
+            <h4>Traduzione</h4>
+            <p>{{ traduzione }}</p>
+            {% else %}
+            <p>Nessuna traduzione disponibile per questo reperto.</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hidden" id="translateForm">
         <textarea rows="4" placeholder="Inserisci qui la traduzione..."></textarea>
         <button class="button">Invia Traduzione</button>
     </div>
-    <a class="link" href="/">Torna alla ricerca</a>
 </div>
 
 <script>
