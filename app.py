@@ -12,6 +12,7 @@ login_manager = LoginManager(app)
 
 dati_reperti = None
 
+
 # Funzione per validare l'email
 def email_valido(email):
     # Utilizza un'espressione regolare per controllare il formato dell'email Questo pattern corrisponde a un'email
@@ -38,9 +39,7 @@ def load_user(user_id):
     return User(user_id)
 
 
-
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
-
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         chiese = [row[2] for row in reader if len(row) > 2]  # Assicurati che ci siano abbastanza colonne
@@ -48,7 +47,6 @@ def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     # Usa fuzzywuzzy per trovare la miglior corrispondenza
     migliore, punteggio = fuzzywuzzy.process.extractOne(nome_chiesa, chiese)
     return migliore
-
 
 
 # Route per il login
@@ -97,9 +95,6 @@ def seperator(dataDict):
     return outputdict
 
 
-
-
-
 @app.route("/")
 def search_church():
     global dati_reperti
@@ -132,7 +127,7 @@ def search_church():
 
             artifact_code = sub(artifact_info)
             ck_id_list = data.getGroup(artifact_code)
-            dati_reperti= data.getData(ck_id_list)
+            dati_reperti = data.getData(ck_id_list)
 
             for artifact in dati_reperti:
                 reperti.append(artifact)
