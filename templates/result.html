@@ -26,7 +26,6 @@
         </div>
     </div>
 
-
     <h2>Risultati della ricerca per "{{ chiesa }}"</h2>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
@@ -36,19 +35,22 @@
             <!-- Rimuovi la visualizzazione iniziale dei reperti dal template -->
         </div>
     </div>
-    <div class="row" id="repertiRow" style="display: none;"> <!-- Aggiunto stile inline per nascondere inizialmente i reperti -->
+    <div class="row" id="repertiRow" style="display: none;">
         {% for i in range(reperti|length) %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    {% if immagini[i] %}
-                        <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ reperti[i] }}</h5>
-                        <p class="card-text">{{ scritte[i] }}</p>
-                    </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if immagini[i] %}
+                <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto" data-toggle="modal" data-target="#imageModal">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ reperti[i] }}</h5>
+                    <p class="card-text">{{ scritte[i] }}</p>
+                    <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
+                    <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Dettagli</a>
+
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
@@ -58,22 +60,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        // Mostra i reperti quando il pulsante viene cliccato
-        $(".dropdown-toggle").click(function () {
+    $(document).ready(function() {
+        // Toggle per visualizzare i reperti
+        $(".dropdown-toggle").click(function() {
             $("#repertiRow").toggle();
         });
-    });
 
-    $(document).ready(function() {
-        // Gestisce il clic sulle immagini della card
-        $('.card-img-top').click(function () {
-            var src = $(this).attr('src'); // Prende il src dell'immagine cliccata
-            $('#modalImage').attr('src', src); // Imposta il src nel modal image
-            $('#imageModal').modal('show'); // Mostra il modal
+        // Configura il modal per mostrare l'immagine ingrandita
+        $('.card-img-top').click(function() {
+            var src = $(this).attr('src');
+            $('#modalImage').attr('src', src);
+            $('#imageModal').modal('show');
         });
     });
-
 </script>
 </body>
 </html>
