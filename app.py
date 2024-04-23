@@ -160,6 +160,7 @@ def search_reperto():
     if not query:
         return render_template("index.html", message="Inserisci il codice del reperto.")
 
+    reperto_traduz = None
     reperto_url = None
     reperto_scritte = None
     try:
@@ -172,11 +173,12 @@ def search_reperto():
                 # Gestisce la possibilità che l'immagine non sia disponibile
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
+                reperto_traduz = reperto.get("data_Translation", None)
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
             return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte,
-                                   immagini=reperto_url, query=query)
+                                   immagini=reperto_url, traduzione=reperto_traduz, query=query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
 

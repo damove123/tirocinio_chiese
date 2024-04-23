@@ -49,6 +49,13 @@
         {% else %}
         <p>Nessuna trascrizione disponibile per questo reperto.</p>
         {% endif %}
+        {% if traduzione %}
+        <h4>Traduzione</h4>
+        <p>{{ traduzione }}</p>
+        {% else %}
+        <p>Nessuna traduzione ancora disponibile per questo reperto.</p>
+        {% endif %}
+
     </div>
     <div id="translateForm" class="hidden">
         <textarea rows="4" placeholder="Inserisci qui la traduzione..."></textarea>
