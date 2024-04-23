@@ -1,6 +1,7 @@
+import fuzzywuzzy
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, session
-from fuzzywuzzy import fuzz
+from fuzzywuzzy import fuzz, process
 from flask_caching import Cache
 import csv
 import data
@@ -16,6 +17,7 @@ PASSWORD = "pippo2001"
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
+dati_reperti = None
 
 # Funzione per validare l'email
 def email_valido(email):
@@ -43,20 +45,18 @@ def load_user(user_id):
     return User(user_id)
 
 
-# Normalizza il nome
-def normalize_name(name):
-    if not name:
-        return ""  # Restituisci una stringa vuota se il nome è None o vuoto
-    name = name.replace("S.", "San").replace("St.", "Santo")
-    return name.strip()
+
+def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
+
+    with open(path_file, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        chiese = [row[2] for row in reader if len(row) > 2]  # Assicurati che ci siano abbastanza colonne
+
+    # Usa fuzzywuzzy per trovare la miglior corrispondenza
+    migliore, punteggio = fuzzywuzzy.process.extractOne(nome_chiesa, chiese)
+    return migliore
 
 
-# Verifica se c'è una corrispondenza tra la query e il target
-def is_match(query, target):
-    return fuzz.ratio(query, target) > 80
-
-
-# Route per il login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     next_url = request.args.get('next') or url_for('search_reperto', query=session.get('last_search', ''))
@@ -105,48 +105,56 @@ def seperator(dataDict):
 
 @app.route("/")
 def search_church():
-    raw_query = request.args.get('query')
-    if not raw_query:
-        # Restituisce subito se non c'è una query
-        return render_template("index.html", message="Inserisci un termine di ricerca.")
+    global dati_reperti
+    dati_reperti = None
+    # Controlla se l'utente è autenticato
+    if current_user.is_authenticated:
+        raw_query = request.args.get('query')
+        if not raw_query:
+            # Restituisce subito se non c'è una query
+            return render_template("index.html", message="Inserisci un termine di ricerca.")
 
-    query = normalize_name(raw_query)
-    reperti = []
-    immagini = []
-    id = []
-    scritte = []
+        query = trova_miglior_corrispondenza(raw_query)
+        reperti = []
+        immagini = []
+        id = []
+        scritte = []
 
-    try:
-        artifact_info = None
-        with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if len(row) > 2 and query in row[2]:
-                    artifact_info = row[-1]
-                    break
+        try:
+            artifact_info = None
+            with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if len(row) > 2 and query in row[2]:
+                        artifact_info = row[-1]
+                        break
 
-        if artifact_info is None:
-            # Nessun risultato trovato nel CSV
-            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
+            if artifact_info is None:
+                # Nessun risultato trovato nel CSV
+                return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
-        artifact_code = sub(artifact_info)
-        ck_id_list = data.getGroup(artifact_code)
-        artifact_url = data.getData(ck_id_list)
-        for artifact in artifact_url:
-            reperti.append(artifact)
+            artifact_code = sub(artifact_info)
+            ck_id_list = data.getGroup(artifact_code)
+            dati_reperti= data.getData(ck_id_list)
 
-        cleanData = [seperator(value) for value in reperti]
+            for artifact in dati_reperti:
+                reperti.append(artifact)
 
-        for item in cleanData:
-            immagini.append(item['url'])
-            id.append(item['id'])
-            scritte.append(item['inscription'])
+            cleanData = [seperator(value) for value in reperti]
 
-            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini, query=query)
+            for item in cleanData:
+                immagini.append(item['url'])
+                id.append(item['id'])
+                scritte.append(item['inscription'])
 
-    except Exception as e:
-        print(f"Error in search_church: {str(e)}")
-        return render_template("index.html", message="Errore durante il processo di ricerca.")
+        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
+                               query=query)
+
+        except Exception as e:
+            print(f"Error in search_church: {str(e)}")
+            return render_template("index.html", message="Errore durante il processo di ricerca.")
+    else:
+        return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
 
 
 def formatta_nome(codice_reperto):
@@ -159,7 +167,10 @@ def formatta_nome(codice_reperto):
 @login_required
 def click_reperto():
     query = request.args.get('query')
-    # Codice per visualizzare la pagina del reperto e altre operazioni necessarie
+    if not query:
+        return render_template("index.html", message="Inserisci il codice del reperto.")
+
+    reperto_traduz = None
     reperto_url = None
     reperto_scritte = None
     try:
@@ -172,11 +183,12 @@ def click_reperto():
                 # Gestisce la possibilità che l'immagine non sia disponibile
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
+                reperto_traduz = reperto.get("data_Translation", None)
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
-            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte,
-                                   immagini=reperto_url, query=query)
+            return render_template("clickReperto.html", reperto=query, scritte=reperto_scritte,
+                                   immagini=reperto_url, traduzione=reperto_traduz, query=query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
 

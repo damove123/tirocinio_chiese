@@ -3,6 +3,7 @@ from firebase import firebase
 import pandas as pd
 from tqdm import tqdm
 import csv
+from joblib import parallel_backend, Parallel, delayed
 
 
 def getGroup(groupName):
@@ -16,6 +17,17 @@ def getGroup(groupName):
     result = fbase.get('/groups', groupName)
     return list(result['members'].keys())
 
+def parallel_callback(id):
+    firebase_url = 'https://cityknowledge.firebaseio.com'
+    fbase = firebase.FirebaseApplication(firebase_url, None)
+    result = fbase.get('/data', id)
+    try:
+        for index, key in enumerate(result['media']['images'].keys()):
+            result['media' + str(index)] = result['media']['images'][key]
+        del result['media']
+    except:
+        pass
+    return flatten_dict(result)
 
 def getData(ck_id_list):
     """
@@ -26,15 +38,8 @@ def getData(ck_id_list):
     firebase_url = 'https://cityknowledge.firebaseio.com'
     fbase = firebase.FirebaseApplication(firebase_url, None)
     allData = []
-    for ck_id in tqdm(ck_id_list):
-        result = fbase.get('/data', ck_id)
-        try:
-            for index, key in enumerate(result['media']['images'].keys()):
-                result['media' + str(index)] = result['media']['images'][key]
-            del result['media']
-        except:
-            pass
-        allData.append(flatten_dict(result))
+    with parallel_backend(backend='threading', n_jobs=30):
+        allData = Parallel()(delayed(parallel_callback)(ck_id) for ck_id in tqdm(ck_id_list))
     return allData
 
 
