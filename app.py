@@ -19,6 +19,7 @@ login_manager.login_view = "login"
 
 dati_reperti = None
 
+
 # Funzione per validare l'email
 def email_valido(email):
     # Utilizza un'espressione regolare per controllare il formato dell'email Questo pattern corrisponde a un'email
@@ -45,9 +46,7 @@ def load_user(user_id):
     return User(user_id)
 
 
-
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
-
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         chiese = [row[2] for row in reader if len(row) > 2]  # Assicurati che ci siano abbastanza colonne
@@ -70,7 +69,6 @@ def login():
         else:
             flash('Email o password non valide', 'error')
     return render_template('login.html', next=next_url)
-
 
 
 # Route per il logout
@@ -135,7 +133,7 @@ def search_church():
 
             artifact_code = sub(artifact_info)
             ck_id_list = data.getGroup(artifact_code)
-            dati_reperti= data.getData(ck_id_list)
+            dati_reperti = data.getData(ck_id_list)
 
             for artifact in dati_reperti:
                 reperti.append(artifact)
@@ -147,14 +145,14 @@ def search_church():
                 id.append(item['id'])
                 scritte.append(item['inscription'])
 
-        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
-                               query=query)
+            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
+                                   query=query)
 
         except Exception as e:
             print(f"Error in search_church: {str(e)}")
             return render_template("index.html", message="Errore durante il processo di ricerca.")
-    else:
-        return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
+        else:
+            return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
 
 
 def formatta_nome(codice_reperto):
@@ -162,6 +160,7 @@ def formatta_nome(codice_reperto):
     # Aggiunge "%20Artifacts" alla stringa di lettere maiuscole
     result_string = uppercase_letters + "%20Artifacts"
     return result_string
+
 
 @app.route("/click_reperto", methods=["GET"])
 @login_required
