@@ -1,24 +1,16 @@
 import fuzzywuzzy
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, session
-from fuzzywuzzy import fuzz, process
-from flask_caching import Cache
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
+from fuzzywuzzy import process
 import csv
 import data
 import re
 
 app = Flask(__name__)
 app.secret_key = 'Chiese2012!'  # Imposta una chiave segreta casuale
-
-# Credenziali predefinite
-USERNAME = "chiese2024@gmail.com"
-PASSWORD = "pippo2001"
-
 login_manager = LoginManager(app)
-login_manager.login_view = "login"
 
 dati_reperti = None
-
 
 # Funzione per validare l'email
 def email_valido(email):
@@ -46,7 +38,9 @@ def load_user(user_id):
     return User(user_id)
 
 
+
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
+
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         chiese = [row[2] for row in reader if len(row) > 2]  # Assicurati che ci siano abbastanza colonne
@@ -56,19 +50,21 @@ def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     return migliore
 
 
+
+# Route per il login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    next_url = request.args.get('next') or url_for('search_reperto', query=session.get('last_search', ''))
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        if email_valido(email) and password_valida(password) and email == USERNAME and PASSWORD == password:
-            user = User(id=email)
-            login_user(user, remember=False)
-            return redirect(next_url)
+        # Esegui la logica di autenticazione qui
+        if email_valido(email) and password_valida(password):
+            user = User(id=email)  # Crea un oggetto utente
+            login_user(user, remember=False)  # Effettua il login dell'utente
+            return redirect(url_for('search_church'))  # Reindirizza l'utente dopo il login
         else:
             flash('Email o password non valide', 'error')
-    return render_template('login.html', next=next_url)
+    return render_template('login.html')
 
 
 # Route per il logout
@@ -99,6 +95,9 @@ def seperator(dataDict):
             "inscription": dataDict.get("data_Transcription")
         }
     return outputdict
+
+
+
 
 
 @app.route("/")
@@ -133,7 +132,7 @@ def search_church():
 
             artifact_code = sub(artifact_info)
             ck_id_list = data.getGroup(artifact_code)
-            dati_reperti = data.getData(ck_id_list)
+            dati_reperti= data.getData(ck_id_list)
 
             for artifact in dati_reperti:
                 reperti.append(artifact)
@@ -151,8 +150,8 @@ def search_church():
         except Exception as e:
             print(f"Error in search_church: {str(e)}")
             return render_template("index.html", message="Errore durante il processo di ricerca.")
-        else:
-            return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
+    else:
+        return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
 
 
 def formatta_nome(codice_reperto):
@@ -162,9 +161,8 @@ def formatta_nome(codice_reperto):
     return result_string
 
 
-@app.route("/click_reperto", methods=["GET"])
-@login_required
-def click_reperto():
+@app.route("/search_reperto", methods=["GET"])
+def search_reperto():
     query = request.args.get('query')
     if not query:
         return render_template("index.html", message="Inserisci il codice del reperto.")
@@ -173,12 +171,14 @@ def click_reperto():
     reperto_url = None
     reperto_scritte = None
     try:
-        codice_reperto = normalize_name(query)
-        artifact_group = formatta_nome(codice_reperto)
-        ck_id_list = data.getGroup(artifact_group)
-        dati_reperti = data.getData(ck_id_list)
+        global dati_reperti
+        if dati_reperti is None:
+            artifact_code = formatta_nome(query)
+            ck_id_list = data.getGroup(artifact_code)
+            dati_reperti = data.getData(ck_id_list)
+
         for reperto in dati_reperti:
-            if reperto["data_Artifact Code"] == codice_reperto:
+            if reperto["data_Artifact Code"] == query:
                 # Gestisce la possibilità che l'immagine non sia disponibile
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
@@ -196,17 +196,6 @@ def click_reperto():
         return render_template("index.html",
                                message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
                                        "valido.")
-
-
-@app.route("/search_reperto", methods=["GET"])
-def search_reperto():
-    query = request.args.get('query')
-    session['last_search'] = query  # Salva la query nella sessione
-    next_url = url_for('click_reperto', query=query)
-    if current_user.is_authenticated:
-        return redirect(next_url)
-    else:
-        return redirect(url_for('login', next=next_url))
 
 
 if __name__ == "__main__":
