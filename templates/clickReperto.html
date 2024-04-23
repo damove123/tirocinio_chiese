@@ -84,52 +84,52 @@
     <div class="details-container">
         <div class="img-container">
             {% if immagini %}
-            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+                <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
             {% else %}
-            <p>Nessuna immagine disponibile per questo reperto.</p>
+                <p>Nessuna immagine disponibile per questo reperto.</p>
             {% endif %}
         </div>
         <div class="info-block">
             <h2>Codice del Reperto: {{ reperto }}</h2>
             {% if condition %}
-            <h5>Condizione</h5>
-            <p>{{ condition }}</p>
+                <h5>Condizione</h5>
+                <p>{{ condition }}</p>
             {% endif %}
             {% if length %}
-            <h6>Lunghezza</h6>
-            <p>{{ length }}</p>
+                <h6>Lunghezza</h6>
+                <p>{{ length }}</p>
             {% endif %}
             {% if width %}
-            <h6>Larghezza</h6>
-            <p>{{ width }}</p>
+                <h6>Larghezza</h6>
+                <p>{{ width }}</p>
             {% endif %}
             {% if material %}
-            <h6>Materiale</h6>
-            <p>{{ material }}</p>
+                <h6>Materiale</h6>
+                <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
-            <h6>Forma</h6>
-            <p>{{ shape }}</p>
+                <h6>Forma</h6>
+                <p>{{ shape }}</p>
             {% endif %}
             {% if type %}
-            <h6>Tipo</h6>
-            <p>{{ type }}</p>
+                <h6>Tipo</h6>
+                <p>{{ type }}</p>
             {% endif %}
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             {% if scritte %}
-            <h3>Trascrizione:</h3>
-            <p>{{ scritte }}</p>
+                <h3>Trascrizione:</h3>
+                <p>{{ scritte }}</p>
             {% else %}
-            <p>Nessuna trascrizione disponibile per questo reperto.</p>
+                <p>Nessuna trascrizione disponibile per questo reperto.</p>
             {% endif %}
             {% if traduzione %}
-            <h4>Traduzione</h4>
-            <p>{{ traduzione }}</p>
+                <h4>Traduzione</h4>
+                <p>{{ traduzione }}</p>
             {% else %}
-            <p>Nessuna traduzione disponibile per questo reperto.</p>
+                <p>Nessuna traduzione disponibile per questo reperto.</p>
             {% endif %}
         </div>
     </div>
@@ -153,6 +153,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
