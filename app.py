@@ -171,15 +171,14 @@ def search_reperto():
     reperto_url = None
     reperto_scritte = None
     try:
-        codice_reperto = trova_miglior_corrispondenza(query)
         global dati_reperti
         if dati_reperti is None:
-            artifact_code = formatta_nome(codice_reperto)
+            artifact_code = formatta_nome(query)
             ck_id_list = data.getGroup(artifact_code)
             dati_reperti = data.getData(ck_id_list)
 
         for reperto in dati_reperti:
-            if reperto["data_Artifact Code"] == codice_reperto:
+            if reperto["data_Artifact Code"] == query:
                 # Gestisce la possibilità che l'immagine non sia disponibile
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
@@ -187,7 +186,7 @@ def search_reperto():
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
-            return render_template("clickReperto.html", reperto=codice_reperto, scritte=reperto_scritte,
+            return render_template("clickReperto.html", reperto=query, scritte=reperto_scritte,
                                    immagini=reperto_url, traduzione=reperto_traduz, query=query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
