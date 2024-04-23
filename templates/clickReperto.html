@@ -5,10 +5,44 @@
     <title>Dettaglio Reperto</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
+    <div class="header">
         <h1>Dettagli del Reperto</h1>
+        <a class="button" href="/translate.html?codice={{ reperto }}">Traduci</a>
+    </div>
+    <div class="reperto-info">
+        <h2>Codice del Reperto: {{ reperto }}</h2>
+        {% if immagini %}
+        <img src="{{ immagini }}" alt="Immagine del Reperto">
+        {% else %}
+        <p>Nessuna immagine disponibile per questo reperto.</p>
+        {% endif %}
+        {% if scritte %}
+        <h3>Trascrizione:</h3>
+        <p>{{ scritte }}</p>
+        {% else %}
+        <p>Nessuna trascrizione disponibile per questo reperto.</p>
+        {% endif %}
+    </div>
+    <a class="link" href="/">Torna alla ricerca</a>
+</div>
         <div class="reperto-info">
             <h2>Codice del Reperto: {{ reperto }}</h2>
             {% if immagini %}
@@ -29,4 +63,4 @@
     <a href="{{ url_for('login', next=request.url) }}" class="login-button">Login</a>
 
 </body>
-
+</html>

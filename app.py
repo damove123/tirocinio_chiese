@@ -56,6 +56,7 @@ def is_match(query, target):
     return fuzz.ratio(query, target) > 80
 
 
+# Route per il login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     next_url = request.args.get('next') or url_for('search_reperto', query=session.get('last_search', ''))
@@ -141,8 +142,7 @@ def search_church():
             id.append(item['id'])
             scritte.append(item['inscription'])
 
-        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
-                               query=query)
+            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini, query=query)
 
     except Exception as e:
         print(f"Error in search_church: {str(e)}")
