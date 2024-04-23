@@ -58,7 +58,7 @@ def login():
         # Esegui la logica di autenticazione qui
         if email_valido(email) and password_valida(password):
             user = User(id=email)  # Crea un oggetto utente
-            login_user(user)  # Effettua il login dell'utente
+            login_user(user, remember=False)  # Effettua il login dell'utente
             return redirect(url_for('search_church'))  # Reindirizza l'utente dopo il login
         else:
             flash('Email o password non valide', 'error')
