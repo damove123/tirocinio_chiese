@@ -1,7 +1,7 @@
+import fuzzywuzzy
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
-from fuzzywuzzy import fuzz
-from flask_caching import Cache
+from fuzzywuzzy import process
 import csv
 import data
 import re
@@ -38,17 +38,17 @@ def load_user(user_id):
     return User(user_id)
 
 
-# Normalizza il nome
-def normalize_name(name):
-    if not name:
-        return ""  # Restituisci una stringa vuota se il nome è None o vuoto
-    name = name.replace("S.", "San").replace("St.", "Santo")
-    return name.strip()
 
+def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
 
-# Verifica se c'è una corrispondenza tra la query e il target
-def is_match(query, target):
-    return fuzz.ratio(query, target) > 80
+    with open(path_file, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        chiese = [row[2] for row in reader if len(row) > 2]  # Assicurati che ci siano abbastanza colonne
+
+    # Usa fuzzywuzzy per trovare la miglior corrispondenza
+    migliore, punteggio = fuzzywuzzy.process.extractOne(nome_chiesa, chiese)
+    return migliore
+
 
 
 # Route per il login
@@ -111,7 +111,7 @@ def search_church():
             # Restituisce subito se non c'è una query
             return render_template("index.html", message="Inserisci un termine di ricerca.")
 
-        query = normalize_name(raw_query)
+        query = trova_miglior_corrispondenza(raw_query)
         reperti = []
         immagini = []
         id = []
@@ -171,7 +171,7 @@ def search_reperto():
     reperto_url = None
     reperto_scritte = None
     try:
-        codice_reperto = normalize_name(query)
+        codice_reperto = trova_miglior_corrispondenza(query)
         global dati_reperti
         if dati_reperti is None:
             artifact_code = formatta_nome(codice_reperto)
