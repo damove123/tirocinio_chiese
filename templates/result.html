@@ -6,8 +6,29 @@
     <title>Risultati della Ricerca per "{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        #home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: #4A3427;
+            color: #FFF;
+            border: 2px solid #3E2C20;
+            box-shadow: 2px 2px 5px #2C1E15;
+            font-family: 'Times New Roman', serif;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #home-button:hover {
+            background-color: #5C4837;
+        }
+    </style>
 </head>
 <body>
+<a href="/" class="btn btn-primary" id="home-button">Torna alla Homepage</a>
 <div class="container">
     <!-- Modal per l'immagine ingrandita -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -26,7 +47,6 @@
         </div>
     </div>
 
-
     <h2>Risultati della ricerca per "{{ chiesa }}"</h2>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
@@ -36,19 +56,26 @@
             <!-- Rimuovi la visualizzazione iniziale dei reperti dal template -->
         </div>
     </div>
-    <div class="row" id="repertiRow" style="display: none;"> <!-- Aggiunto stile inline per nascondere inizialmente i reperti -->
+    <div class="row" id="repertiRow" style="display: none;">
         {% for i in range(reperti|length) %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    {% if immagini[i] %}
-                        <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ reperti[i] }}</h5>
-                        <p class="card-text">{{ scritte[i] }}</p>
-                    </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if immagini[i] %}
+                <img src="caricamento.jpg"
+                     data-src="{{ immagini[i] }}"
+                     alt="Immagine del reperto"
+                     class="card-img-top lazyload"
+                     loading="lazy">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ reperti[i] }}</h5>
+                    <p class="card-text">{{ scritte[i] }}</p>
+                    <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
+                    <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Dettagli</a>
+
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
@@ -56,24 +83,51 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async=""></script>
 
 <script>
-    $(document).ready(function () {
-        // Mostra i reperti quando il pulsante viene cliccato
-        $(".dropdown-toggle").click(function () {
+    $(document).ready(function() {
+        // Toggle per visualizzare i reperti
+        $(".dropdown-toggle").click(function() {
             $("#repertiRow").toggle();
+        });
+
+        // Configura il modal per mostrare l'immagine ingrandita
+        $('.card-img-top').click(function() {
+            var src = $(this).attr('src');
+            $('#modalImage').attr('src', src);
+            $('#imageModal').modal('show');
         });
     });
 
-    $(document).ready(function() {
-        // Gestisce il clic sulle immagini della card
-        $('.card-img-top').click(function () {
-            var src = $(this).attr('src'); // Prende il src dell'immagine cliccata
-            $('#modalImage').attr('src', src); // Imposta il src nel modal image
-            $('#imageModal').modal('show'); // Mostra il modal
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        var lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
+
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazyload");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            lazyImages.forEach(function(lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+        } else {
+            // Fallback per i browser che non supportano IntersectionObserver
+            lazyImages.forEach(function(lazyImage) {
+                lazyImage.src = lazyImage.dataset.src;
+            });
+        }
     });
 
 </script>
+
+
 </body>
 </html>
