@@ -136,7 +136,7 @@ def search_church():
 
             for artifact in dati_reperti:
                 reperti.append(artifact)
-
+            print(reperti)
             cleanData = [seperator(value) for value in reperti]
 
             for item in cleanData:
@@ -170,6 +170,14 @@ def search_reperto():
     reperto_traduz = None
     reperto_url = None
     reperto_scritte = None
+    reperto_condition = None
+    reperto_length = None
+    reperto_material = None
+    reperto_width = None
+    reperto_shape = None
+    reperto_type = None
+
+
     try:
         global dati_reperti
         if dati_reperti is None:
@@ -183,11 +191,18 @@ def search_reperto():
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
                 reperto_traduz = reperto.get("data_Translation", None)
+                reperto_condition = reperto.get("data_Condition Category", None)
+                reperto_length = reperto.get("data_Length", None)
+                reperto_width = reperto.get("data_Width", None)
+                reperto_material = reperto.get("data_Materials", None)
+                reperto_shape = reperto.get("data_Shape", None)
+                reperto_type = reperto.get("data_Type of Artifact", None)
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
             return render_template("clickReperto.html", reperto=query, scritte=reperto_scritte,
-                                   immagini=reperto_url, traduzione=reperto_traduz, query=query)
+                                   immagini=reperto_url, traduzione=reperto_traduz, condizione=reperto_condition, length=reperto_length,
+            width=reperto_width, material=reperto_material, shape=reperto_shape, type=reperto_type, query =query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
 
