@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #8B4513;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+form {
+    width: 45%;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #8B4513;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.4rem;
+    border: 2px solid #8B4513;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+.map-container {
+    width: 100%;
+    height: 500px; /* Aggiunto per garantire una dimensione definita */
+    text-align: center;
+}
+
+.custom-div {
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%; /* Aggiunto per garantire una dimensione definita */
+}
+
+#viewDiv {
+    width: 100%;
+    height: 100%;
+}
+
+.login-button {
+    width: 200px;
+    padding: 10px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    background-color: #8B4513;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+}
+
+.login-button:hover {
+    background-color: #963;
+}
+
+
+.map-container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.search-button {
+    background-color: #963; /* Sfondo marrone */
+    color: #fff; /* Testo bianco */
+    border: none;
+    border-radius: 20px; /* Bordo arrotondato */
+    padding: 10px 20px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #bba; /* Sfondo marrone chiaro al passaggio del mouse */
+}
