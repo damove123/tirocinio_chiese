@@ -6,6 +6,7 @@
     <title>Risultati della Ricerca per "{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
+
 </head>
 <body>
 <div class="container">
@@ -40,7 +41,11 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 {% if immagini[i] %}
-                <img src="{{ immagini[i] }}" class="card-img-top" alt="Immagine del reperto" data-toggle="modal" data-target="#imageModal">
+                <img src="/path/to/placeholder.jpg"
+                     data-src="{{ immagini[i] }}"
+                     alt="Immagine del reperto"
+                     class="card-img-top lazyload"
+                     loading="lazy">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ reperti[i] }}</h5>
@@ -58,6 +63,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async=""></script>
 
 <script>
     $(document).ready(function() {
@@ -73,6 +79,33 @@
             $('#imageModal').modal('show');
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
+
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazyload");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            lazyImages.forEach(function(lazyImage) {
+                lazyImageObserver.observe(lazyImage);
+            });
+        } else {
+            // Fallback per i browser che non supportano IntersectionObserver
+            lazyImages.forEach(function(lazyImage) {
+                lazyImage.src = lazyImage.dataset.src;
+            });
+        }
+    });
+
 </script>
 </body>
 </html>
