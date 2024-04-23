@@ -22,7 +22,7 @@ def email_valido(email):
 # Funzione per validare la password
 def password_valida(password):
     # Controlla se la password ha almeno 8 caratteri
-    return len(password) >= 8
+    return password == app.secret_key
 
 
 # Definizione del modello utente
