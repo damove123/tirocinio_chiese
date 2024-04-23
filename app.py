@@ -1,5 +1,5 @@
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, session
 from fuzzywuzzy import fuzz
 from flask_caching import Cache
 import csv
@@ -56,20 +56,20 @@ def is_match(query, target):
     return fuzz.ratio(query, target) > 80
 
 
-# Route per il login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    next_url = request.args.get('next') or url_for('search_reperto', query=session.get('last_search', ''))
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        # Esegui la logica di autenticazione qui
         if email_valido(email) and password_valida(password) and email == USERNAME and PASSWORD == password:
-            user = User(id=email)  # Crea un oggetto utente
-            login_user(user)  # Effettua il login dell'utente
-            return redirect(url_for('search_church'))  # Reindirizza l'utente dopo il login
+            user = User(id=email)
+            login_user(user, remember=False)
+            return redirect(next_url)
         else:
             flash('Email o password non valide', 'error')
-    return render_template('login.html')
+    return render_template('login.html', next=next_url)
+
 
 
 # Route per il logout
@@ -104,53 +104,49 @@ def seperator(dataDict):
 
 @app.route("/")
 def search_church():
-    # Controlla se l'utente è autenticato
-    if current_user.is_authenticated:
-        raw_query = request.args.get('query')
-        if not raw_query:
-            # Restituisce subito se non c'è una query
-            return render_template("index.html", message="Inserisci un termine di ricerca.")
+    raw_query = request.args.get('query')
+    if not raw_query:
+        # Restituisce subito se non c'è una query
+        return render_template("index.html", message="Inserisci un termine di ricerca.")
 
-        query = normalize_name(raw_query)
-        reperti = []
-        immagini = []
-        id = []
-        scritte = []
+    query = normalize_name(raw_query)
+    reperti = []
+    immagini = []
+    id = []
+    scritte = []
 
-        try:
-            artifact_info = None
-            with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) > 2 and query in row[2]:
-                        artifact_info = row[-1]
-                        break
+    try:
+        artifact_info = None
+        with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if len(row) > 2 and query in row[2]:
+                    artifact_info = row[-1]
+                    break
 
-            if artifact_info is None:
-                # Nessun risultato trovato nel CSV
-                return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
+        if artifact_info is None:
+            # Nessun risultato trovato nel CSV
+            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
-            artifact_code = sub(artifact_info)
-            ck_id_list = data.getGroup(artifact_code)
-            artifact_url = data.getData(ck_id_list)
-            for artifact in artifact_url:
-                reperti.append(artifact)
+        artifact_code = sub(artifact_info)
+        ck_id_list = data.getGroup(artifact_code)
+        artifact_url = data.getData(ck_id_list)
+        for artifact in artifact_url:
+            reperti.append(artifact)
 
-            cleanData = [seperator(value) for value in reperti]
+        cleanData = [seperator(value) for value in reperti]
 
-            for item in cleanData:
-                immagini.append(item['url'])
-                id.append(item['id'])
-                scritte.append(item['inscription'])
+        for item in cleanData:
+            immagini.append(item['url'])
+            id.append(item['id'])
+            scritte.append(item['inscription'])
 
-            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
-                                   query=query)
+        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
+                               query=query)
 
-        except Exception as e:
-            print(f"Error in search_church: {str(e)}")
-            return render_template("index.html", message="Errore durante il processo di ricerca.")
-    else:
-        return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
+    except Exception as e:
+        print(f"Error in search_church: {str(e)}")
+        return render_template("index.html", message="Errore durante il processo di ricerca.")
 
 
 def formatta_nome(codice_reperto):
@@ -159,13 +155,11 @@ def formatta_nome(codice_reperto):
     result_string = uppercase_letters + "%20Artifacts"
     return result_string
 
-
-@app.route("/search_reperto", methods=["GET"])
-def search_reperto():
+@app.route("/click_reperto", methods=["GET"])
+@login_required
+def click_reperto():
     query = request.args.get('query')
-    if not query:
-        return render_template("index.html", message="Inserisci il codice del reperto.")
-
+    # Codice per visualizzare la pagina del reperto e altre operazioni necessarie
     reperto_url = None
     reperto_scritte = None
     try:
@@ -191,6 +185,17 @@ def search_reperto():
         return render_template("index.html",
                                message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
                                        "valido.")
+
+
+@app.route("/search_reperto", methods=["GET"])
+def search_reperto():
+    query = request.args.get('query')
+    session['last_search'] = query  # Salva la query nella sessione
+    next_url = url_for('click_reperto', query=query)
+    if current_user.is_authenticated:
+        return redirect(next_url)
+    else:
+        return redirect(url_for('login', next=next_url))
 
 
 if __name__ == "__main__":

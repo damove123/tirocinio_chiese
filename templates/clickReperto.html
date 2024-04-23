@@ -25,5 +25,8 @@
         </div>
         <a class="link" href="/">Torna alla ricerca</a>
     </div>
+
+    <a href="{{ url_for('login', next=request.url) }}" class="login-button">Login</a>
+
 </body>
 
