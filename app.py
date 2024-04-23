@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'Chiese2012!'  # Imposta una chiave segreta casuale
 login_manager = LoginManager(app)
 
+dati_reperti = None
 
 # Funzione per validare l'email
 def email_valido(email):
@@ -96,8 +97,13 @@ def seperator(dataDict):
     return outputdict
 
 
+
+
+
 @app.route("/")
 def search_church():
+    global dati_reperti
+    dati_reperti = None
     # Controlla se l'utente è autenticato
     if current_user.is_authenticated:
         raw_query = request.args.get('query')
@@ -126,8 +132,9 @@ def search_church():
 
             artifact_code = sub(artifact_info)
             ck_id_list = data.getGroup(artifact_code)
-            artifact_url = data.getData(ck_id_list)
-            for artifact in artifact_url:
+            dati_reperti= data.getData(ck_id_list)
+
+            for artifact in dati_reperti:
                 reperti.append(artifact)
 
             cleanData = [seperator(value) for value in reperti]
@@ -165,9 +172,12 @@ def search_reperto():
     reperto_scritte = None
     try:
         codice_reperto = normalize_name(query)
-        artifact_group = formatta_nome(codice_reperto)
-        ck_id_list = data.getGroup(artifact_group)
-        dati_reperti = data.getData(ck_id_list)
+        global dati_reperti
+        if dati_reperti is None:
+            artifact_code = formatta_nome(codice_reperto)
+            ck_id_list = data.getGroup(artifact_code)
+            dati_reperti = data.getData(ck_id_list)
+
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == codice_reperto:
                 # Gestisce la possibilità che l'immagine non sia disponibile
