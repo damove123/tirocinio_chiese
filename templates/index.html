@@ -13,30 +13,70 @@
             "esri/Map",
             "esri/views/MapView",
             "esri/WebMap",
+            "esri/layers/FeatureLayer",
             "esri/config"
-        ], function(Map, MapView, WebMap, esriConfig) {
+        ], function(Map, MapView, WebMap, FeatureLayer, esriConfig) {
             esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
 
+            var layer = new FeatureLayer({
+                url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer/0",
+                outFields: ["*"], // Assicurati di includere tutti i campi che ti servono
+                popupTemplate: {
+                    title: "Informazioni Reperto",
+                    content: [{
+                        type: "fields",
+                        fieldInfos: [
+                            {
+                                fieldName: "Codice_Rep",
+                                label: "Artifact's Code",
+                                visible: true
+                            },
+                            {
+                                fieldName: "Codice_Chi",
+                                label: "Church's Code",
+                                visible: true
+                            },
+                            // Aggiungi altri campi come necessario
+                        ]
+                    }]
+                }
+            });
             var webMap = new WebMap({
                 portalItem: {
                     id: "5ae37f33f52a4eefbc098507ddd9f92d"
-                }
+                },
+                layers: [layer]
             });
 
             var view = new MapView({
                 container: "viewDiv",
                 map: webMap,
-                zoom: 12,
-                center: [12.3331, 45.4376]
+                center: [12.3331, 45.4376], // Aggiusta secondo la tua necessità
+                zoom: 12
             });
 
-            // Ascolta il click sulla popup
-            view.popup.watch("selectedFeature", function(graphic) {
-                if (graphic && graphic.attributes && graphic.attributes.Codice_Rep) {
-                    var codiceRep = graphic.attributes.Codice_Rep;
-                    document.getElementById('reperto_input').value = codiceRep;
-                    document.getElementById('search_button_reperto').disabled = false;
-                }
+            view.on("click", function(event) {
+                // Esegui il test di hit per trovare le feature al punto cliccato
+                view.hitTest(event).then(function(response) {
+                    if (response.results.length > 0) {
+                        var graphic = response.results.filter(function(result) {
+                            return result.graphic.layer === layer;
+                        })[0].graphic;
+
+                        // Apri la popup al punto cliccato
+                        view.popup.open({
+                            features: [graphic],
+                            location: event.mapPoint
+                        });
+
+                        // Aggiorna il campo di input con il codice del reperto
+                        if (graphic.attributes && graphic.attributes.Codice_Rep) {
+                            var codiceRep = graphic.attributes.Codice_Rep;
+                            document.getElementById('reperto_input').value = codiceRep;
+                            document.getElementById('search_button_reperto').disabled = false;
+                        }
+                    }
+                });
             });
         });
     </script>
@@ -89,6 +129,9 @@
             margin-bottom: 20px;
         }
 
+
+
+
         .search-button {
             width: 100%;
             padding: 10px;
@@ -129,15 +172,15 @@
 <h1>SUPER FLOOR_TILES 2012</h1>
 <div class="container">
     <form id="search_form_chiesa" action="/" method="GET">
-        <label for="chiesa_input">Cerca Chiesa:</label>
-        <input type="text" id="chiesa_input" name="query" placeholder="Inserisci il nome della chiesa...">
-        <button type="submit" class="search-button">Cerca</button>
+        <label for="chiesa_input">Search Church:</label>
+        <input type="text" id="chiesa_input" name="query" placeholder="Type church's name...">
+        <button type="submit" class="search-button">Search</button>
     </form>
 
     <form id="search_form_reperto" action="/search_reperto" method="GET">
-        <label for="reperto_input">Cerca Reperto:</label>
-        <input type="text" id="reperto_input" name="query" placeholder="Inserisci il codice del reperto...">
-        <button type="submit" class="search-button">Cerca</button>
+        <label for="reperto_input">Search Artifact:</label>
+        <input type="text" id="reperto_input" name="query" placeholder="Type artifact's code...">
+        <button type="submit" class="search-button">Search</button>
     </form>
 
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Risultati della Ricerca per "{{ chiesa }}"</title>
+    <title>Results of search for "{{ chiesa }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <style>
@@ -33,14 +33,14 @@
     </style>
 </head>
 <body>
-<a href="/" class="btn btn-primary" id="home-button">Torna alla Homepage</a>
+<a href="/" class="btn btn-primary" id="home-button">Homepage</a>
 <div class="container">
     <!-- Modal per l'immagine ingrandita -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Anteprima Immagine</h5>
+                    <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -52,10 +52,10 @@
         </div>
     </div>
 
-    <h2>Risultati della ricerca per "{{ chiesa }}"</h2>
+    <h2>Results of search for "{{ chiesa }}"</h2>
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-            Reperti
+            Artifacts
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="repertiMenu">
             <!-- Rimuovi la visualizzazione iniziale dei reperti dal template -->
@@ -75,7 +75,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ reperti[i] }}</h5>
                         <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
-                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Dettagli</a>
+                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>

@@ -76,7 +76,7 @@
 
 </head>
 <body>
-<a href="/" class="btn btn-primary" id="home-button">Torna alla Homepage</a>
+<a href="/" class="btn btn-primary" id="home-button">Homepage</a>
 <div class="container mt-4">
     <div class="header">
         <h1>Artifact's Details</h1>
@@ -85,52 +85,52 @@
     <div class="details-container">
         <div class="img-container">
             {% if immagini %}
-                <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
             {% else %}
-                <p>No image avaiable for this artifact.</p>
+            <p>No image avaiable for this artifact.</p>
             {% endif %}
         </div>
         <div class="info-block">
             <h2>Artifact Code: {{ reperto }}</h2>
             {% if condition %}
-                <h5>Condition</h5>
-                <p>{{ condition }}</p>
+            <h5>Condition</h5>
+            <p>{{ condition }}</p>
             {% endif %}
             {% if length %}
-                <h6>Length</h6>
-                <p>{{ length }}</p>
+            <h6>Length</h6>
+            <p>{{ length }}</p>
             {% endif %}
             {% if width %}
-                <h6>Width</h6>
-                <p>{{ width }}</p>
+            <h6>Width</h6>
+            <p>{{ width }}</p>
             {% endif %}
             {% if material %}
-                <h6>Material</h6>
-                <p>{{ material }}</p>
+            <h6>Material</h6>
+            <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
-                <h6>Shape</h6>
-                <p>{{ shape }}</p>
+            <h6>Shape</h6>
+            <p>{{ shape }}</p>
             {% endif %}
             {% if type %}
-                <h6>Type</h6>
-                <p>{{ type }}</p>
+            <h6>Type</h6>
+            <p>{{ type }}</p>
             {% endif %}
         </div>
     </div>
     <div class="row">
         <div class="col-12">
             {% if scritte %}
-                <h3>Trascription:</h3>
-                <p>{{ scritte }}</p>
+            <h3>Trascription:</h3>
+            <p>{{ scritte }}</p>
             {% else %}
-                <p>No trascription avaiable for this artifact.</p>
+            <p>No trascription avaiable for this artifact.</p>
             {% endif %}
             {% if traduzione %}
-                <h4>Traduction</h4>
-                <p>{{ traduzione }}</p>
+            <h4>Traduction</h4>
+            <p>{{ traduzione }}</p>
             {% else %}
-                <p>No traduction avaible for this artifacts.</p>
+            <p>No traduction avaible for this artifacts.</p>
             {% endif %}
         </div>
     </div>
@@ -157,4 +157,3 @@
 
 </body>
 </html>
-
