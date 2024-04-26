@@ -2,15 +2,16 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Artifact's Detail</title>
+    <title>Artifact's Details</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f4f4f2; /* Colore neutro simile alla pietra */
-            color: #333; /* Colore del testo scuro per un'atmosfera più antica */
-            font-family: 'Georgia', serif; /* Font che simula uno stile più classico e formale */
+            background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
+            color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
+            font-family: 'Playfair Display', serif; /* Font classico con grazie */
+            background-image: url('https://example.com/marble-texture.jpg'); /* Immagine di sfondo che imita il marmo */
         }
 
         .header {
@@ -18,17 +19,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            border-bottom: 2px solid #ccc; /* Aggiunge un tocco di separazione classica */
-            background-color: #eaeaea; /* Sfondo che richiama il marmo o la pietra chiara */
+            border-bottom: 5px solid gold; /* Bordi dorati */
+            background-color: #a47e5b; /* Sfondo che richiama il legno veneziano */
         }
 
         .button {
             padding: 10px 20px;
-            background-color: #8a7668; /* Un color marrone chiaro che ricorda la terra */
-            color: white;
+            background-color: #7c3034; /* Rosso scuro */
+            color: #fff;
             font-weight: bold;
             border: none;
-            border-radius: 0; /* Rimuovere l'arrotondamento per un look più storico */
+            border-radius: 0;
         }
 
         .hidden {
@@ -38,24 +39,23 @@
         textarea {
             width: 100%;
             padding: 10px;
-            border: 2px solid #ccc;
+            border: 2px solid gold; /* Dorato */
             background-color: #fff;
-            border-radius: 0; /* Stile più quadrato per una sensazione più austera */
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombreggiatura interna per aggiungere profondità */
+            border-radius: 0;
         }
 
         .info-block {
-            background-color: #eaeaea; /* Leggero sfondo grigio per i dettagli del blocco */
+            background-color: #f8f0e0; /* Sfondo marmorizzato */
             padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Ombreggiatura per elevare il blocco dal contesto */
-            border-left: 5px solid #8a7668; /* Bordi spessi per enfatizzare l'importanza */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-left: 10px solid #7c3034; /* Bordo rosso scuro */
         }
 
         .img-container {
-            margin-bottom: 20px; /* Spazio sotto l'immagine */
+            margin-bottom: 20px;
             padding: 20px;
             background-color: #fff;
-            border: 1px solid #ccc; /* Contorno sottile per definire lo spazio dell'immagine */
+            border: 1px solid gold; /* Dorato */
         }
 
         .details-container {
@@ -93,27 +93,27 @@
         <div class="info-block">
             <h2>Artifact Code: {{ reperto }}</h2>
             {% if condition %}
-            <h5>Condition</h5>
+            <h5><strong>Condition</strong></h5>
             <p>{{ condition }}</p>
             {% endif %}
             {% if length %}
-            <h6>Length</h6>
+            <h6><strong>Length</strong></h6>
             <p>{{ length }}</p>
             {% endif %}
             {% if width %}
-            <h6>Width</h6>
+            <h6><strong>Width</strong></h6>
             <p>{{ width }}</p>
             {% endif %}
             {% if material %}
-            <h6>Material</h6>
+            <h6><strong>Material</strong></h6>
             <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
-            <h6>Shape</h6>
+            <h6><strong>Shape</strong></h6>
             <p>{{ shape }}</p>
             {% endif %}
             {% if type %}
-            <h6>Type</h6>
+            <h6><strong>Type</strong></h6>
             <p>{{ type }}</p>
             {% endif %}
         </div>
@@ -121,13 +121,13 @@
     <div class="row">
         <div class="col-12">
             {% if scritte %}
-            <h3>Trascription:</h3>
+            <h3><strong>Transcription:</strong>:</h3>
             <p>{{ scritte }}</p>
             {% else %}
             <p>No trascription avaiable for this artifact.</p>
             {% endif %}
             {% if traduzione %}
-            <h4>Traduction</h4>
+            <h4><strong>Traduction</strong></h4>
             <p>{{ traduzione }}</p>
             {% else %}
             <p>No traduction avaible for this artifacts.</p>
