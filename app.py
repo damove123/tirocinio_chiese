@@ -5,7 +5,15 @@ import csv
 import data
 import re
 
+
+
 app = Flask(__name__)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
 
 dati_reperti = None
 

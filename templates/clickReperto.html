@@ -81,6 +81,9 @@
     <div class="header">
         <h1>Artifact's Details</h1>
         <button class="button" onclick="toggleTranslate()">Translate</button>
+        <!-- Bottone per il login -->
+        <button class="btn btn-secondary" onclick="window.location.href='/login'">Accedi</button>
+
     </div>
     <div class="details-container">
         <div class="img-container">
@@ -150,21 +153,7 @@
         }
     }
 </script>
-<script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-         const firebaseConfig = {
-            apiKey: 'AIzaSyC6NAfPU1NV6QJcqL4sg4VJGa9S7nVXP4Q',
-            authDomain: 'cityknowledge.firebaseapp.com',
-            databaseURL: 'https://cityknowledge.firebaseio.com',
-            projectId: 'firebase-cityknowledge',
-            storageBucket: 'firebase-cityknowledge.appspot.com',
-            messagingSenderId: '445655714967',
-            appId: '1:445655714967:web:874499fae4679e61aeadd2',
-    };
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
 
-</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
