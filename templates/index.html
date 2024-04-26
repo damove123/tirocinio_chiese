@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+    <link rel="icon" href="/static/icon.ico" type="image/x-icon">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://js.arcgis.com/4.23/"></script>
     <script>
@@ -174,7 +176,9 @@
 </head>
 <body>
 <h1>SUPER CHURCH-FLOORS</h1>
-<div class="container">
+<div class="container" style="max-width: 600px; margin: 0 auto;">
+    <!-- Bottone che attiva il modal -->
+    <!-- Bottone che attiva il modal -->
     <!-- Bottone che attiva il modal -->
     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
         Info
@@ -193,16 +197,62 @@
 
                     Questa mappa è progettata per mostrarti la posizione delle chiese e i reperti storici conservati all'interno di queste. Puoi esplorare il contenuto della mappa in due modi:<br><br>
 
-                    Ricerca per Nome della Chiesa: Utilizza il campo di ricerca per inserire il nome della chiesa che ti interessa. Questo ti permetterà di visualizzare direttamente tutti i reperti associati a quella specifica chiesa.<br>
-                    Cliccando Direttamente sui Reperti sulla Mappa: Naviga liberamente sulla mappa e clicca sui marker dei reperti per ottenere informazioni dettagliate su ciascuno di essi. Una volta cliccato un reperto, apparirà una finestra popup con ulteriori dettagli riguardanti il reperto selezionato, inclusi il codice del reperto e il codice della chiesa di appartenenza.<br><br>
+                    <strong>Ricerca per Nome della Chiesa</strong>: Utilizza il campo di ricerca per inserire il nome della chiesa che ti interessa. Questo ti permetterà di visualizzare direttamente tutti i reperti associati a quella specifica chiesa.<br>
+                    <strong>Direttamente sui Reperti sulla Mappa</strong>: Naviga liberamente sulla mappa e clicca sui marker dei reperti per ottenere informazioni dettagliate su ciascuno di essi. Una volta cliccato un reperto, apparirà una finestra popup con ulteriori dettagli riguardanti il reperto selezionato, inclusi il codice del reperto e il codice della chiesa di appartenenza.<br><br>
                     Questa piattaforma è stata creata per facilitare l'accesso alle informazioni storiche e culturali delle nostre chiese e per promuovere la conoscenza del patrimonio conservato all'interno di esse.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <!-- Bottone per cambiare lingua -->
+                    <button type="button" class="btn btn-primary" id="switchLanguageBtn">Switch to English</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+    // Funzione per cambiare la lingua e tradurre il testo del modal
+    function switchLanguage() {
+        // Controlla la lingua attuale
+        var currentLanguage = document.documentElement.lang;
+
+        // Se la lingua attuale è l'italiano, cambiala in inglese e traduci il testo del modal
+        if (currentLanguage === 'it') {
+            document.documentElement.lang = 'en';
+
+            // Traduzione del testo del modal in inglese
+            document.getElementById('infoModalLabel').innerText = 'Application Information';
+            document.querySelector('.modal-body').innerHTML = `
+                <strong>Welcome to the interactive view of our map!</strong><br><br>
+                This map is designed to show you the location of churches and historical artifacts preserved within them. You can explore the map content in two ways:<br><br>
+                <strong>Search by Church Name</strong>: Use the search field to enter the name of the church you're interested in. This will allow you to directly view all artifacts associated with that specific church.<br>
+                <strong>Directly on the Artifacts on the Map</strong>: Navigate freely on the map and click on the artifact markers to get detailed information about each of them. Once you click on an artifact, a popup window will appear with further details regarding the selected artifact, including the artifact code and the church code it belongs to.<br><br>
+                This platform has been created to facilitate access to the historical and cultural information of our churches and to promote awareness of the heritage preserved within them.
+            `;
+            document.querySelector('.modal-footer .btn-secondary').innerText = 'Close';
+            document.getElementById('switchLanguageBtn').innerText = 'Cambia in italiano';
+        } else {
+            // Se la lingua attuale è l'inglese, cambiala in italiano e traduci il testo del modal
+            document.documentElement.lang = 'it';
+
+            // Traduzione del testo del modal in italiano
+            document.getElementById('infoModalLabel').innerText = 'Informazioni sull\'Applicazione';
+            document.querySelector('.modal-body').innerHTML = `
+                <strong>Benvenuto nella visualizzazione interattiva della nostra mappa!</strong><br><br>
+                Questa mappa è progettata per mostrarti la posizione delle chiese e i reperti storici conservati all'interno di queste. Puoi esplorare il contenuto della mappa in due modi:<br><br>
+                <strong>Ricerca per Nome della Chiesa</strong>: Utilizza il campo di ricerca per inserire il nome della chiesa che ti interessa. Questo ti permetterà di visualizzare direttamente tutti i reperti associati a quella specifica chiesa.<br>
+                <strong>Direttamente sui Reperti sulla Mappa</strong>: Naviga liberamente sulla mappa e clicca sui marker dei reperti per ottenere informazioni dettagliate su ciascuno di essi. Una volta cliccato un reperto, apparirà una finestra popup con ulteriori dettagli riguardanti il reperto selezionato, inclusi il codice del reperto e il codice della chiesa di appartenenza.<br><br>
+                Questa piattaforma è stata creata per facilitare l'accesso alle informazioni storiche e culturali delle nostre chiese e per promuovere la conoscenza del patrimonio conservato all'interno di esse.
+            `;
+            document.querySelector('.modal-footer .btn-secondary').innerText = 'Chiudi';
+            document.getElementById('switchLanguageBtn').innerText = 'Switch to English';
+        }
+    }
+
+    // Aggiungi un gestore di eventi al bottone per cambiare lingua
+    document.getElementById('switchLanguageBtn').addEventListener('click', switchLanguage);
+</script>
 
 <div class="container">
     <form id="search_form_chiesa" action="/" method="GET">
