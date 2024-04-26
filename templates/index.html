@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://js.arcgis.com/4.23/"></script>
     <script>
         require([
@@ -100,12 +101,15 @@
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #8B4513;
+            font-size: 3.5rem; /* Aumenta la dimensione del font per maggiore impatto */
+            color: #8B4513; /* Un marrone scuro, ma puoi scegliere un colore che preferisci */
             text-align: center;
-            width: 100%;
-            margin-bottom: 40px;
+            margin: 20px 0; /* Spazio sopra e sotto il titolo */
+            font-weight: bold; /* Grassetto per enfatizzare il testo */
+            text-shadow: 1px 1px 2px black, 0 0 25px darkred, 0 0 5px darkred; /* Effetto ombra per un look 3D */
+            letter-spacing: 1px; /* Spaziatura tra le lettere per un effetto più drammatico */
         }
+
 
         form {
             width: 45%;
@@ -169,7 +173,37 @@
     </style>
 </head>
 <body>
-<h1>SUPER FLOOR_TILES 2012</h1>
+<h1>SUPER CHURCH-FLOORS</h1>
+<div class="container">
+    <!-- Bottone che attiva il modal -->
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
+        Info
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Informazioni sull'Applicazione</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>Benvenuto nella visualizzazione interattiva della nostra mappa!</strong><br><br>
+
+                    Questa mappa è progettata per mostrarti la posizione delle chiese e i reperti storici conservati all'interno di queste. Puoi esplorare il contenuto della mappa in due modi:<br><br>
+
+                    Ricerca per Nome della Chiesa: Utilizza il campo di ricerca per inserire il nome della chiesa che ti interessa. Questo ti permetterà di visualizzare direttamente tutti i reperti associati a quella specifica chiesa.<br>
+                    Cliccando Direttamente sui Reperti sulla Mappa: Naviga liberamente sulla mappa e clicca sui marker dei reperti per ottenere informazioni dettagliate su ciascuno di essi. Una volta cliccato un reperto, apparirà una finestra popup con ulteriori dettagli riguardanti il reperto selezionato, inclusi il codice del reperto e il codice della chiesa di appartenenza.<br><br>
+                    Questa piattaforma è stata creata per facilitare l'accesso alle informazioni storiche e culturali delle nostre chiese e per promuovere la conoscenza del patrimonio conservato all'interno di esse.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="container">
     <form id="search_form_chiesa" action="/" method="GET">
         <label for="chiesa_input">Search Church:</label>
