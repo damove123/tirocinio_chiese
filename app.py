@@ -4,6 +4,9 @@ from fuzzywuzzy import process
 import csv
 import data
 import re
+import pandas as pd
+from difflib import SequenceMatcher
+
 
 
 
@@ -61,21 +64,29 @@ def seperator(dataDict):
 
 @app.route("/")
 def search_church():
-    global dati_reperti
-    dati_reperti = None
-    # Controlla se l'utente è autenticato
     raw_query = request.args.get('query')
     if not raw_query:
-        # Restituisce subito se non c'è una query
         return render_template("index.html", message="Inserisci un termine di ricerca.")
 
-    query = trova_miglior_corrispondenza(raw_query)
-    reperti = []
-    immagini = []
-    id = []
-    scritte = []
+    query = trova_miglior_corrispondenza(raw_query, 'Churches.csv')
 
     try:
+        # Legge il file CSV e cerca la chiesa con il nome più simile alla query
+        churches = pd.read_csv('Churches.csv')
+        closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
+        church_info = churches.iloc[closest_match]
+
+        # Prepara i dati specifici da passare al template
+        church_data = {
+            'local_name': church_info['Local Name'],
+            'full_name': church_info['Full Name'],
+            'year_founded': church_info['Year Founded'],
+            'intro_sentence': church_info['Intro sentence'],
+            'history_blurb': church_info['History Blurb']
+        }
+
+
+        # Estrae i dati necessari dai reperti correlati alla chiesa trovata
         artifact_info = None
         with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
             reader = csv.reader(file)
@@ -85,29 +96,22 @@ def search_church():
                     break
 
         if artifact_info is None:
-            # Nessun risultato trovato nel CSV
             return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
         artifact_code = sub(artifact_info)
         ck_id_list = data.getGroup(artifact_code)
         dati_reperti = data.getData(ck_id_list)
 
-        for artifact in dati_reperti:
-            reperti.append(artifact)
-        cleanData = [seperator(value) for value in reperti]
+        cleanData = [seperator(value) for value in dati_reperti]
+        immagini = [item['url'] for item in cleanData]
+        id = [item['id'] for item in cleanData]
+        scritte = [item['inscription'] for item in cleanData]
 
-        for item in cleanData:
-            immagini.append(item['url'])
-            id.append(item['id'])
-            scritte.append(item['inscription'])
-
-        return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
-                               query=query)
-
+        # Passa le informazioni della chiesa e i dati dei reperti al template
+        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini, query=query)
     except Exception as e:
         print(f"Error in search_church: {str(e)}")
         return render_template("index.html", message="Errore durante il processo di ricerca.")
-
 
 def formatta_nome(codice_reperto):
     uppercase_letters = codice_reperto.split('_')[0]
@@ -169,6 +173,14 @@ def search_reperto():
                                message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
                                        "valido.")
 
+@app.route('/search')
+def search():
+    church_name = request.args.get('chiesa', '')
+    churches = pd.read_csv('Churches.csv')
+    # Utilizza SequenceMatcher per trovare il nome più simile
+    closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, church_name).ratio()).idxmax()
+    church_info = churches.iloc[closest_match]
+    return render_template('results.html', church_info=church_info)
 
 if __name__ == "__main__":
     app.run(debug=True)

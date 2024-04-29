@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>SUPER FLOOR_TILES 2012</title>
+    <title>FLOOR_TILES</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,13 +82,6 @@
                 position: "top-left"
             });
 
-            // Aggiungi il widget dello zoom
-            var zoomWidget = new Zoom({
-                view: view
-            });
-            view.ui.add(zoomWidget, {
-                position: "top-left"
-            });
 
             // Aggiungi il widget della scala
             var scaleBar = new ScaleBar({
@@ -136,7 +129,7 @@
     </script>
     <style>
         body {
-            background-image: url('/static/sfondo1 .jpg');
+            background-image: url('/static/sfondoArchitettonico.jpg');
             background-size: cover;  /* Copre l'intera finestra di visualizzazione */
             background-position: center; /* Centra l'immagine sullo schermo */
             background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
@@ -159,7 +152,6 @@
             text-align: center;
             margin: 20px 0; /* Spazio sopra e sotto il titolo */
             font-weight: bold; /* Grassetto per enfatizzare il testo */
-            text-shadow: 1px 1px 2px black, 0 0 25px darkred, 0 0 5px darkred; /* Effetto ombra per un look 3D */
             letter-spacing: 1px; /* Spaziatura tra le lettere per un effetto più drammatico */
         }
 
@@ -248,7 +240,7 @@
     </style>
 </head>
 <body>
-<h1>SUPER CHURCH-FLOORS</h1>
+<h1>FLOOR-TILES</h1>
 <div class="container">
     <!-- Bottone che attiva il modal -->
     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
