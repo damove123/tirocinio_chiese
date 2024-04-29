@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results of search for "{{ chiesa }}"</title>
+    <title>Results of search for "{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <style>
@@ -35,6 +35,17 @@
 <body>
 <a href="/" class="btn btn-primary" id="home-button">Homepage</a>
 <div class="container">
+    <h2>Results of search for "{{ query }}"</h2>
+    <div class="church-info">
+        <p><strong>Local Name:</strong> {{ church_data.local_name }}</p>
+        <p><strong>Full Name:</strong> {{ church_data.full_name }}</p>
+        <p><strong>Year Founded:</strong> {{ church_data.year_founded }}</p>
+        <p><strong>Intro:</strong> {{ church_data.intro_sentence }}</p>
+        <p><strong>History:</strong> {{ church_data.history_blurb }}</p>
+    </div>
+</div>
+
+<div class="container">
     <!-- Modal per l'immagine ingrandita -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -52,7 +63,7 @@
         </div>
     </div>
 
-    <h2>Results of search for "{{ chiesa }}"</h2>
+
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
             Artifacts

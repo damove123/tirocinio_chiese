@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>SUPER FLOOR_TILES 2012</title>
+    <title>FLOOR_TILES</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,15 @@
             "esri/views/MapView",
             "esri/WebMap",
             "esri/layers/FeatureLayer",
-            "esri/config"
-        ], function(Map, MapView, WebMap, FeatureLayer, esriConfig) {
+            "esri/config",
+            "esri/widgets/Search",
+            "esri/widgets/LayerList",
+            "esri/widgets/Compass",
+            "esri/widgets/Zoom",
+            "esri/widgets/ScaleBar",
+            "esri/widgets/BasemapToggle",
+            "esri/widgets/Attribution"
+        ], function(Map, MapView, WebMap, FeatureLayer, esriConfig, Search, LayerList, Compass, Zoom, ScaleBar, BasemapToggle) {
             esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
 
             var layer = new FeatureLayer({
@@ -58,6 +65,43 @@
                 zoom: 12
             });
 
+            var searchWidget = new Search({
+                view: view
+            });
+            view.ui.add(searchWidget, {
+                position: "top-right"
+            });
+
+
+
+            // Aggiungi il widget del compasso
+            var compassWidget = new Compass({
+                view: view
+            });
+            view.ui.add(compassWidget, {
+                position: "top-left"
+            });
+
+
+            // Aggiungi il widget della scala
+            var scaleBar = new ScaleBar({
+                view: view
+            });
+            view.ui.add(scaleBar, {
+                position: "bottom-left"
+            });
+
+            // Aggiungi il widget di cambio basemap
+            var basemapToggle = new BasemapToggle({
+                view: view,
+                nextBasemap: "satellite"
+            });
+            view.ui.add(basemapToggle, {
+                position: "bottom-right"
+            });
+
+
+
             view.on("click", function(event) {
                 // Esegui il test di hit per trovare le feature al punto cliccato
                 view.hitTest(event).then(function(response) {
@@ -85,7 +129,7 @@
     </script>
     <style>
         body {
-            background-image: url('/static/sfondo1 .jpg');
+            background-image: url('/static/sfondoArchitettonico.jpg');
             background-size: cover;  /* Copre l'intera finestra di visualizzazione */
             background-position: center; /* Centra l'immagine sullo schermo */
             background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
@@ -108,7 +152,6 @@
             text-align: center;
             margin: 20px 0; /* Spazio sopra e sotto il titolo */
             font-weight: bold; /* Grassetto per enfatizzare il testo */
-            text-shadow: 1px 1px 2px black, 0 0 25px darkred, 0 0 5px darkred; /* Effetto ombra per un look 3D */
             letter-spacing: 1px; /* Spaziatura tra le lettere per un effetto più drammatico */
         }
 
@@ -197,7 +240,7 @@
     </style>
 </head>
 <body>
-<h1>SUPER CHURCH-FLOORS</h1>
+<h1>FLOOR-TILES</h1>
 <div class="container">
     <!-- Bottone che attiva il modal -->
     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">

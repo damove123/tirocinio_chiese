@@ -186,13 +186,22 @@
 <script>
     // Toggle the translation form
     function toggleTranslate() {
-        var form = document.getElementById('translateForm');
-        if (form.style.display === 'none' || form.style.display === '') {
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
-        }
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // L'utente è autenticato, mostra il form
+                var form = document.getElementById('translateForm');
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            } else {
+                // L'utente non è autenticato, mostra un popup di avviso
+                alert("Devi autenticarti per poter tradurre.");
+            }
+        });
     }
+
 
     // Show the login modal
     function showLogin() {
