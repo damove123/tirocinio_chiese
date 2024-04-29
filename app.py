@@ -10,7 +10,6 @@ import re
 app = Flask(__name__)
 
 
-
 dati_reperti = None
 
 
@@ -139,6 +138,7 @@ def search_reperto():
             artifact_code = formatta_nome(query)
             ck_id_list = data.getGroup(artifact_code)
             dati_reperti = data.getData(ck_id_list)
+        print(dati_reperti)
 
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == query:
