@@ -11,10 +11,14 @@
 
     <style>
         body {
+            background-image: url('/static/sfondoArchitettonico.jpg');
+            background-size: cover;  /* Copre l'intera finestra di visualizzazione */
+            background-position: center; /* Centra l'immagine sullo schermo */
+            background-repeat: no-repeat;
             background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
             color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
             font-family: 'Playfair Display', serif; /* Font classico con grazie */
-            background-image: url('https://example.com/marble-texture.jpg'); /* Immagine di sfondo che imita il marmo */
+
         }
         .header {
             display: flex;
@@ -162,7 +166,6 @@
             {% endif %}
             {% if material %}
             <h6><strong>Material</strong></h6>
-
             <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
@@ -212,22 +215,16 @@
 <script>
     // Toggle the translation form
     function toggleTranslate() {
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // L'utente è autenticato, mostra il form
-                var form = document.getElementById('translateForm');
-                if (form.style.display === 'none' || form.style.display === '') {
-                    form.style.display = 'block';
-                } else {
-                    form.style.display = 'none';
-                }
-            } else {
-                // L'utente non è autenticato, mostra un popup di avviso
-                alert("Devi autenticarti per poter tradurre.");
-            }
-        });
+        const user = firebase.auth().currentUser;
+        const form = document.getElementById('translateForm');
+        if (user) {
+            // L'utente è autenticato, cambia la visibilità del form
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        } else {
+            // L'utente non è autenticato, mostra un avviso
+            alert("Devi autenticarti per poter tradurre.");
+        }
     }
-
 
     // Show the login modal
     function showLogin() {
