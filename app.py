@@ -12,20 +12,6 @@ app = Flask(__name__)
 dati_reperti = None
 
 
-# Funzione per validare l'email
-def email_valido(email):
-    # Utilizza un'espressione regolare per controllare il formato dell'email Questo pattern corrisponde a un'email
-    # standard, ma potrebbe essere necessario adattarlo alle tue esigenze specifiche
-    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    return re.match(pattern, email) is not None
-
-
-# Funzione per validare la password
-def password_valida(password):
-    # Controlla se la password ha almeno 8 caratteri
-    return len(password) >= 8
-
-
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -73,17 +59,15 @@ def search_church():
         church_info = churches.iloc[closest_match]
 
 
-        if pd.notnull(church_info['Longitude Coordinate']) and pd.notnull(church_info['Latitude Coordinate']) and pd.notnull(church_info['Local Name']):
-            # Prepara i dati specifici da passare al template
-            church_data = {
-                'local_name': church_info['Local Name'],
-                'full_name': church_info['Full Name'],
-                'year_founded': church_info['Year Founded'],
-                'intro_sentence': church_info['Intro sentence'],
-                'history_blurb': church_info['History Blurb'],
-                'longitude': church_info['Longitude Coordinate'],
-                'latitude': church_info['Latitude Coordinate'],
-            }
+        church_data = {
+            'local_name': church_info['Local Name'],
+             'full_name': church_info['Full Name'],
+             'year_founded': church_info['Year Founded'],
+             'intro_sentence': church_info['Intro sentence'],
+             'history_blurb': church_info['History Blurb'],
+             'longitude': church_info['Longitude Coordinate'],
+             'latitude': church_info['Latitude Coordinate'],
+        }
 
         # Estrae i dati necessari dai reperti correlati alla chiesa trovata
         artifact_info = None
@@ -136,7 +120,6 @@ def search_reperto():
     reperto_width = None
     reperto_shape = None
     reperto_type = None
-
 
     try:
         global dati_reperti
