@@ -72,7 +72,6 @@ def search_church():
         closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
         church_info = churches.iloc[closest_match]
 
-
         if pd.notnull(church_info['Longitude Coordinate']) and pd.notnull(church_info['Latitude Coordinate']) and pd.notnull(church_info['Local Name']):
             # Prepara i dati specifici da passare al template
             church_data = {
@@ -94,21 +93,22 @@ def search_church():
                     artifact_info = row[-1]
                     break
 
-        if artifact_info is None:
-            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
+        immagini = []
+        id = []
+        scritte = []
 
-        artifact_code = sub(artifact_info)
-        ck_id_list = data.getGroup(artifact_code)
-        dati_reperti = data.getData(ck_id_list)
+        if artifact_info:
+            artifact_code = sub(artifact_info)
+            ck_id_list = data.getGroup(artifact_code)
+            dati_reperti = data.getData(ck_id_list)
 
-        cleanData = [seperator(value) for value in dati_reperti]
-        immagini = [item['url'] for item in cleanData]
-        id = [item['id'] for item in cleanData]
-        scritte = [item['inscription'] for item in cleanData]
+            cleanData = [seperator(value) for value in dati_reperti]
+            immagini = [item['url'] for item in cleanData]
+            id = [item['id'] for item in cleanData]
+            scritte = [item['inscription'] for item in cleanData]
 
         # Passa le informazioni della chiesa e i dati dei reperti al template
-        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini,
-                               query=query)
+        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini, query=query)
     except Exception as e:
         print(f"Error in search_church: {str(e)}")
         return render_template("index.html", message="Errore durante il processo di ricerca.")
