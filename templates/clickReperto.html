@@ -11,10 +11,14 @@
 
     <style>
         body {
+            background-image: url('/static/sfondoArchitettonico.jpg');
+            background-size: cover;  /* Copre l'intera finestra di visualizzazione */
+            background-position: center; /* Centra l'immagine sullo schermo */
+            background-repeat: no-repeat;
             background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
             color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
             font-family: 'Playfair Display', serif; /* Font classico con grazie */
-            background-image: url('https://example.com/marble-texture.jpg'); /* Immagine di sfondo che imita il marmo */
+
         }
         .header {
             display: flex;
@@ -67,8 +71,8 @@
                 flex: 1;
             }
         }
-        /* Modal Styles */
 
+        /* Modal Styles */
         .modal-dialog {
             margin: 30px auto; /* Centra il modal verticalmente e orizzontalmente */
         }
@@ -105,6 +109,12 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        .transcription-container {
+            background-color: #f8f0e0; /* Colore di sfondo grigio chiaro */
+            padding: 20px; /* Aggiungi spaziatura interna per migliorare la leggibilità */
+            border-radius: 10px; /* Bordo arrotondato */
         }
     </style>
 </head>
@@ -162,7 +172,6 @@
             {% endif %}
             {% if material %}
             <h6><strong>Material</strong></h6>
-
             <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
@@ -177,23 +186,25 @@
     </div>
     <div class="row">
         <div class="col-12">
-            {% if scritte %}
-            <h3><strong>Transcription:</strong></h3>
-            <p>{{ scritte }}</p>
-            {% else %}
-            <p>No transcription available for this artifact.</p>
-            {% endif %}
-            {% if traduzione %}
-            <h4><strong>Translation</strong></h4>
-            <p>{{ traduzione }}</p>
-            {% else %}
-            <p>No translation available for this artifacts.</p>
-            {% endif %}
+            <div class="transcription-container">
+                {% if scritte %}
+                <h3><strong><span class="ancient-font">Transcription:</span></strong></h3>
+                <p class="latin-text">{{ scritte }}</p>
+                {% else %}
+                <p>No transcription available for this artifact.</p>
+                {% endif %}
+                {% if traduzione %}
+                <h4><strong>Translation</strong></h4>
+                <p>{{ traduzione }}</p>
+                {% else %}
+                <p>No translation available for this artifacts.</p>
+                {% endif %}
+                <div class="hidden" id="translateForm">
+                    <textarea rows="4" placeholder="Type here your translation..."></textarea>
+                    <button class="button">Send Translation</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="hidden" id="translateForm">
-        <textarea rows="4" id="translationInput" placeholder="Type here your translation..."></textarea>
-        <button class="button" onclick="sendTranslationForm()">Send Translation</button>
     </div>
 </div>
 
@@ -210,72 +221,17 @@
 </div>
 
 <script>
-/*
-    db.collection("Artifacts").doc(artifactCode).update({
-        translation: translation
-    })
-        .then(() => {
-            alert("Traduzione salvata con successo su Firebase!");
-        })
-        .catch((error) => {
-            console.error("Errore nel salvataggio della traduzione:", error);
-            alert("Si è verificato un errore durante il salvataggio della traduzione.");
-        });
-
-
-    function splitArtifactCode() {
-        // Ottieni l'elemento div con classe "info-block"
-        var infoBlock = document.querySelector('.info-block');
-
-        // Ottieni il testo all'interno dell'elemento h2
-        var artifactCodeText = infoBlock.querySelector('h2').textContent;
-
-        // Dividi il testo del codice dell'artefatto utilizzando il trattino basso '_'
-        var artifactCodeParts = artifactCodeText.split('_');
-
-        var uppercasePart = artifactCodeParts[0].toUpperCase();
-
-        const myArray = uppercasePart.split(" ");
-
-        return myArray[myArray.length - 1];
-
-    }
-
-
-    function sendTranslation(artifactCode, translation) {
-        const db = getDatabase();
-        const codiceChiesa = splitArtifactCode();
-
-        db.collection()
-
-
-
-    }
-
-        function sendTranslationForm() {
-        const artifactCode = "{{ reperto }}"; // Aggiungi qui il codice univoco del reperto
-        const translation = document.getElementById('translationInput').value;
-        sendTranslation(artifactCode, translation);
-    }
-
- */
-
     // Toggle the translation form
     function toggleTranslate() {
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // L'utente è autenticato, mostra il form
-                var form = document.getElementById('translateForm');
-                if (form.style.display === 'none' || form.style.display === '') {
-                    form.style.display = 'block';
-                } else {
-                    form.style.display = 'none';
-                }
-            } else {
-                // L'utente non è autenticato, mostra un popup di avviso
-                alert("Devi autenticarti per poter tradurre.");
-            }
-        });
+        const user = firebase.auth().currentUser;
+        const form = document.getElementById('translateForm');
+        if (user) {
+            // L'utente è autenticato, cambia la visibilità del form
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        } else {
+            // L'utente non è autenticato, mostra un avviso
+            alert("Devi autenticarti per poter tradurre.");
+        }
     }
 
     // Show the login modal
