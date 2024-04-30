@@ -6,6 +6,8 @@
     <title>Results of search for "{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -76,17 +78,79 @@
         <p><strong>Intro:</strong> {{ church_data.intro_sentence }}</p>
         <p><strong>History:</strong> {{ church_data.history_blurb }}</p>
     </div>
-</div>
+    <div class="container">
+        <div id="mapView" style="height: 400px;"></div> <!-- Div per la mappa -->
+    </div>
 
-<div class="container">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script>
+        requirejs.config({
+            paths: {
+                esri: 'https://js.arcgis.com/4.23/esri'
+            }
+        });
+
+        require([
+            'esri/config',
+            'esri/Map',
+            'esri/views/MapView',
+            'esri/WebMap',
+            'esri/layers/FeatureLayer'
+        ], function(esriConfig, Map, MapView, WebMap, FeatureLayer) {
+
+            esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
+
+            var layer = new FeatureLayer({
+                url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer/0",
+                outFields: ["*"],
+                popupTemplate: {
+                    title: "Informazioni Reperto",
+                    content: [{
+                        type: "fields",
+                        fieldInfos: [
+                            {
+                                fieldName: "Codice_Rep",
+                                label: "Artifact's Code",
+                                visible: true
+                            },
+                            {
+                                fieldName: "Codice_Chi",
+                                label: "Church's Code",
+                                visible: true
+                            }
+                        ]
+                    }]
+                }
+            });
+
+
+            var map = new Map({
+                basemap: "streets-vector",
+                layers: [layer]
+            });
+
+            var view = new MapView({
+                container: "mapView",
+                map: map,
+                center: [parseFloat('{{ church_data.longitude }}'), parseFloat('{{ church_data.latitude }}')],
+                zoom: 18
+            });
+        });
+    </script>
+
+
+
+
+
     <!-- Modal per l'immagine ingrandita -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -107,22 +171,22 @@
     </div>
     <div class="row" id="repertiRow" style="display: none;">
         {% for i in range(reperti|length) %}
-            <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
-                <div class="card">
-                    {% if immagini[i] %}
-                        <img src="caricamento.jpg"
-                             data-src="{{ immagini[i] }}"
-                             alt="Immagine del reperto"
-                             class="card-img-top lazyload"
-                             loading="lazy">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ reperti[i] }}</h5>
-                        <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
-                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
-                    </div>
+        <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
+            <div class="card">
+                {% if immagini[i] %}
+                <img src="caricamento.jpg"
+                     data-src="{{ immagini[i] }}"
+                     alt="Immagine del reperto"
+                     class="card-img-top lazyload"
+                     loading="lazy">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ reperti[i] }}</h5>
+                    <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
+                    <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>
