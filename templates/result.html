@@ -140,36 +140,40 @@
             });
         });
     </script>
-
     <div class="dropdown">
+        {% if immagini %}
+        <!-- Se ci sono immagini, mostra il bottone dropdown e i reperti -->
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
             Artifacts
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="repertiMenu">
-            <!-- Rimuovi la visualizzazione iniziale dei reperti dal template -->
+            <!-- Qui puoi inserire altri elementi che appaiono nel menu dropdown se necessario -->
         </div>
-    </div>
-    <div class="row" id="repertiRow" style="display: none;">
-        {% for i in range(reperti|length) %}
-        <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
-            <div class="card">
-                {% if immagini[i] %}
-                <img src="caricamento.jpg"
-                     data-src="{{ immagini[i] }}"
-                     alt="Immagine del reperto"
-                     class="card-img-top lazyload"
-                     loading="lazy">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ reperti[i] }}</h5>
-                    <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
-                    <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
+        <div class="row" id="repertiRow">
+            {% for i in range(reperti|length) %}
+            <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
+                <div class="card">
+                    {% if immagini[i] %}
+                    <img src="caricamento.jpg"
+                         data-src="{{ immagini[i] }}"
+                         alt="Immagine del reperto"
+                         class="card-img-top lazyload"
+                         loading="lazy">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ reperti[i] }}</h5>
+                        <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
+                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        {% else %}
+        <!-- Se non ci sono immagini, mostra un messaggio -->
+        <p><strong>Non ci sono reperti disponibili in questa chiesa.</strong></p>
+        {% endif %}
     </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
