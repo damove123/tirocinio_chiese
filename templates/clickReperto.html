@@ -192,8 +192,8 @@
         </div>
     </div>
     <div class="hidden" id="translateForm">
-        <textarea rows="4" placeholder="Type here your translation..."></textarea>
-        <button class="button">Send Translation</button>
+        <textarea rows="4" id="translationInput" placeholder="Type here your translation..."></textarea>
+        <button class="button" onclick="sendTranslationForm()">Send Translation</button>
     </div>
 </div>
 
@@ -210,6 +210,56 @@
 </div>
 
 <script>
+/*
+    db.collection("Artifacts").doc(artifactCode).update({
+        translation: translation
+    })
+        .then(() => {
+            alert("Traduzione salvata con successo su Firebase!");
+        })
+        .catch((error) => {
+            console.error("Errore nel salvataggio della traduzione:", error);
+            alert("Si è verificato un errore durante il salvataggio della traduzione.");
+        });
+
+
+    function splitArtifactCode() {
+        // Ottieni l'elemento div con classe "info-block"
+        var infoBlock = document.querySelector('.info-block');
+
+        // Ottieni il testo all'interno dell'elemento h2
+        var artifactCodeText = infoBlock.querySelector('h2').textContent;
+
+        // Dividi il testo del codice dell'artefatto utilizzando il trattino basso '_'
+        var artifactCodeParts = artifactCodeText.split('_');
+
+        var uppercasePart = artifactCodeParts[0].toUpperCase();
+
+        const myArray = uppercasePart.split(" ");
+
+        return myArray[myArray.length - 1];
+
+    }
+
+
+    function sendTranslation(artifactCode, translation) {
+        const db = getDatabase();
+        const codiceChiesa = splitArtifactCode();
+
+        db.collection()
+
+
+
+    }
+
+        function sendTranslationForm() {
+        const artifactCode = "{{ reperto }}"; // Aggiungi qui il codice univoco del reperto
+        const translation = document.getElementById('translationInput').value;
+        sendTranslation(artifactCode, translation);
+    }
+
+ */
+
     // Toggle the translation form
     function toggleTranslate() {
         firebase.auth().onAuthStateChanged(function(user) {
@@ -227,7 +277,6 @@
             }
         });
     }
-
 
     // Show the login modal
     function showLogin() {
