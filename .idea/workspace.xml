@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/clickReperto.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/clickReperto.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -543,7 +544,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714483752451</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="update">
+      <option name="closed" value="true" />
+      <created>1714483888110</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1714483888110</updated>
+    </task>
+    <task id="LOCAL-00041" summary="update">
+      <option name="closed" value="true" />
+      <created>1714484122054</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1714484122054</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

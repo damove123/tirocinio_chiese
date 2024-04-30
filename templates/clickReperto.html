@@ -175,6 +175,69 @@
             cursor: pointer;
         }
 
+        .button-translate {
+            padding: 10px 20px;
+            background-color: #336699; /* Blu scuro */
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px; /* Bordo arrotondato */
+            font-size: 16px;
+            text-transform: uppercase; /* Testo in maiuscolo */
+            letter-spacing: 1px; /* Spaziatura tra le lettere */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transizione fluida del colore di sfondo */
+            /* Effetto ombra */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-translate:hover {
+            background-color: #4e8ccc; /* Cambia colore al passaggio del mouse */
+        }
+
+        .button-translate::before {
+            content: '\f135'; /* Unicode per l'icona futuristica */
+            font-family: 'Font Awesome 5 Free'; /* Famiglia di icone */
+            margin-right: 10px; /* Spazio tra l'icona e il testo */
+            transition: transform 0.3s ease; /* Transizione fluida per l'icona */
+        }
+
+        .button-translate:hover::before {
+            transform: rotateY(180deg); /* Effetto di rotazione al passaggio del mouse */
+        }
+
+        #login-button, #logout-button {
+            padding: 10px 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px; /* Bordo arrotondato */
+            font-size: 16px;
+            text-transform: uppercase; /* Testo in maiuscolo */
+            letter-spacing: 1px; /* Spaziatura tra le lettere */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transizione fluida del colore di sfondo */
+        }
+
+        #login-button {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+        }
+
+        #login-button:hover {
+            background-color: #45a049; /* Cambia colore al passaggio del mouse */
+        }
+
+        #logout-button {
+            background-color: #FF5733; /* Rosso */
+            color: white;
+        }
+
+        #logout-button:hover {
+            background-color: #e74c3c; /* Cambia colore al passaggio del mouse */
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -182,7 +245,7 @@
 <div class="container mt-4">
     <div class="header">
         <h1>Dettagli del Reperto</h1>
-        <button class="button" onclick="toggleTranslate()">Translate</button>
+        <button class="button button-translate" onclick="toggleTranslate()">Translate</button>
         <p id="status">Controllando lo stato...</p>
         <button id="login-button" class="btn btn-secondary" onclick="showLogin()">Accedi</button>
         <button id="logout-button" class="btn btn-secondary" onclick="logoutUser()" style="display:none;">Esci</button>
