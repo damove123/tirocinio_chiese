@@ -244,25 +244,27 @@
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            {% if scritte %}
-            <h3><strong>Transcription:</strong></h3>
-            <p>{{ scritte }}</p>
-            {% else %}
-            <p>No transcription available for this artifact.</p>
-            {% endif %}
-            {% if traduzione %}
-            <h4><strong>Translation</strong></h4>
-            <p>{{ traduzione }}</p>
-            {% else %}
-            <p>No translation available for this artifacts.</p>
-            {% endif %}
+    <div class="container mt-4" style="background-color: #f8f0e0; padding: 20px;">
+        <div class="row">
+            <div class="col-12">
+                {% if scritte %}
+                <h3><strong>Transcription:</strong></h3>
+                <p>{{ scritte }}</p>
+                {% else %}
+                <p>No transcription available for this artifact.</p>
+                {% endif %}
+                {% if traduzione %}
+                <h4><strong>Translation</strong></h4>
+                <p>{{ traduzione }}</p>
+                {% else %}
+                <p>No translation available for this artifacts.</p>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    <div class="hidden" id="translateForm">
-        <textarea rows="4" placeholder="Type here your translation..."></textarea>
-        <button class="button">Send Translation</button>
+        <div class="hidden" id="translateForm">
+            <textarea rows="4" placeholder="Type here your translation..."></textarea>
+            <button class="button">Send Translation</button>
+        </div>
     </div>
 </div>
 
