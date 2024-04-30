@@ -67,6 +67,8 @@ def search_church():
     query = trova_miglior_corrispondenza(raw_query, 'Churches.csv')
 
     try:
+        global dati_reperti
+        dati_reperti = None
         # Legge il file CSV e cerca la chiesa con il nome più simile alla query
         churches = pd.read_csv('Churches.csv')
         closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
@@ -120,7 +122,7 @@ def formatta_nome(codice_reperto):
     return result_string
 
 
-@app.route("/search_reperto", methods=["GET"])
+@app.route("/search_reperto", methods=["GET", "POST"])
 def search_reperto():
     query = request.args.get('query')
     if not query:
@@ -143,7 +145,6 @@ def search_reperto():
             artifact_code = formatta_nome(query)
             ck_id_list = data.getGroup(artifact_code)
             dati_reperti = data.getData(ck_id_list)
-        print(dati_reperti)
 
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == query:
