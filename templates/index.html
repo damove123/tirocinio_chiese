@@ -79,31 +79,31 @@
             view.ui.add(scaleBar, { position: "bottom-left" });
             var basemapToggle = new BasemapToggle({ view: view, nextBasemap: "satellite" });
             view.ui.add(basemapToggle, { position: "bottom-right" });
-        });
 
-    view.on("click", function(event) {
-                // Esegui il test di hit per trovare le feature al punto cliccato
-                view.hitTest(event).then(function(response) {
-                    if (response.results.length > 0) {
-                        var graphic = response.results.filter(function(result) {
-                            return result.graphic.layer === layer;
-                        })[0].graphic;
 
-                        // Apri la popup al punto cliccato
-                        view.popup.open({
-                            features: [graphic],
-                            location: event.mapPoint
-                        });
+        view.on("click", function(event) {
+            // Esegui il test di hit per trovare le feature al punto cliccato
+            view.hitTest(event).then(function (response) {
+                if (response.results.length > 0) {
+                    var graphic = response.results.filter(function (result) {
+                        return result.graphic.layer === layer;
+                    })[0].graphic;
 
-                        // Aggiorna il campo di input con il codice del reperto
-                        if (graphic.attributes && graphic.attributes.Codice_Rep) {
-                            var codiceRep = graphic.attributes.Codice_Rep;
-                            document.getElementById('reperto_input').value = codiceRep;
-                            document.getElementById('search_button_reperto').disabled = false;
-                        }
+                    // Apri la popup al punto cliccato
+                    view.popup.open({
+                        features: [graphic],
+                        location: event.mapPoint
+                    });
+
+                    // Aggiorna il campo di input con il codice del reperto
+                    if (graphic.attributes && graphic.attributes.Codice_Rep) {
+                        var codiceRep = graphic.attributes.Codice_Rep;
+                        document.getElementById('reperto_input').value = codiceRep;
+                        document.getElementById('search_button_reperto').disabled = false;
                     }
-                });
-
+                }
+            });
+        });
     });
     </script>
     <style>
