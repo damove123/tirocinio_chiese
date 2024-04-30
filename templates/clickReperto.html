@@ -234,22 +234,19 @@
 
 <script>
     // Toggle the translation form
+    // Mostra o nasconde il form di traduzione basato sullo stato di autenticazione
     function toggleTranslate() {
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // L'utente è autenticato, mostra il form
-                var form = document.getElementById('translateForm');
-                if (form.style.display === 'none' || form.style.display === '') {
-                    form.style.display = 'block';
-                } else {
-                    form.style.display = 'none';
-                }
-            } else {
-                // L'utente non è autenticato, mostra un popup di avviso
-                alert("Devi autenticarti per poter tradurre.");
-            }
-        });
+        const user = firebase.auth().currentUser;
+        const form = document.getElementById('translateForm');
+        if (user) {
+            // L'utente è autenticato, cambia la visibilità del form
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        } else {
+            // L'utente non è autenticato, mostra un avviso
+            alert("Devi autenticarti per poter tradurre.");
+        }
     }
+
 
 
     // Show the login modal
