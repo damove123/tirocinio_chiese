@@ -12,6 +12,20 @@ app = Flask(__name__)
 dati_reperti = None
 
 
+# Funzione per validare l'email
+def email_valido(email):
+    # Utilizza un'espressione regolare per controllare il formato dell'email Questo pattern corrisponde a un'email
+    # standard, ma potrebbe essere necessario adattarlo alle tue esigenze specifiche
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+
+# Funzione per validare la password
+def password_valida(password):
+    # Controlla se la password ha almeno 8 caratteri
+    return len(password) >= 8
+
+
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -78,21 +92,22 @@ def search_church():
                     artifact_info = row[-1]
                     break
 
-        if artifact_info is None:
-            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
+        immagini = []
+        id = []
+        scritte = []
 
-        artifact_code = sub(artifact_info)
-        ck_id_list = data.getGroup(artifact_code)
-        dati_reperti = data.getData(ck_id_list)
+        if artifact_info:
+            artifact_code = sub(artifact_info)
+            ck_id_list = data.getGroup(artifact_code)
+            dati_reperti = data.getData(ck_id_list)
 
-        cleanData = [seperator(value) for value in dati_reperti]
-        immagini = [item['url'] for item in cleanData]
-        id = [item['id'] for item in cleanData]
-        scritte = [item['inscription'] for item in cleanData]
+            cleanData = [seperator(value) for value in dati_reperti]
+            immagini = [item['url'] for item in cleanData]
+            id = [item['id'] for item in cleanData]
+            scritte = [item['inscription'] for item in cleanData]
 
         # Passa le informazioni della chiesa e i dati dei reperti al template
-        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini,
-                               query=query)
+        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini, query=query)
     except Exception as e:
         print(f"Error in search_church: {str(e)}")
         return render_template("index.html", message="Errore durante il processo di ricerca.")
@@ -120,6 +135,7 @@ def search_reperto():
     reperto_width = None
     reperto_shape = None
     reperto_type = None
+
 
     try:
         global dati_reperti
