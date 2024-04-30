@@ -200,8 +200,11 @@
                 <p>No translation available for this artifacts.</p>
                 {% endif %}
                 <div class="hidden" id="translateForm">
-                    <textarea rows="4" placeholder="Type here your translation..."></textarea>
-                    <button class="button">Send Translation</button>
+                    <form id="translation-form" method="POST" action="/save_translation">
+                        <input type="hidden" name="reperto_code" value="{{ reperto }}">
+                        <textarea name="translation" rows="4" placeholder="Type here your translation..."></textarea>
+                        <button type="submit" class="button">Send Translation</button>
+                    </form>
                 </div>
             </div>
         </div>

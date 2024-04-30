@@ -58,6 +58,25 @@ def seperator(dataDict):
     return outputdict
 
 
+@app.route("/save_translation", methods=["POST"])
+def save_translation():
+    try:
+        reperto_code = request.form.get('reperto_code')
+        translation = request.form.get('translation')
+
+        if reperto_code and translation:
+            arr = reperto_code.split('_')
+            chiesa_code = arr[0]
+
+
+
+            return jsonify(success=True, message="Traduzione salvata con successo")
+        else:
+            return jsonify(success=False, message="TDati incompleti per salvare la traduzione.")
+    except Exception as e:
+        return jsonify(success=False, message=str(e))
+
+
 @app.route("/")
 def search_church():
     raw_query = request.args.get('query')
@@ -72,8 +91,8 @@ def search_church():
         closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
         church_info = churches.iloc[closest_match]
 
-
-        if pd.notnull(church_info['Longitude Coordinate']) and pd.notnull(church_info['Latitude Coordinate']) and pd.notnull(church_info['Local Name']):
+        if pd.notnull(church_info['Longitude Coordinate']) and pd.notnull(
+                church_info['Latitude Coordinate']) and pd.notnull(church_info['Local Name']):
             # Prepara i dati specifici da passare al template
             church_data = {
                 'local_name': church_info['Local Name'],
@@ -136,7 +155,6 @@ def search_reperto():
     reperto_width = None
     reperto_shape = None
     reperto_type = None
-
 
     try:
         global dati_reperti
