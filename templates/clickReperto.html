@@ -358,6 +358,17 @@
         };
     });
 
+
+    window.addEventListener('unload', function() {
+        firebase.auth().signOut().then(function() {
+            // Disconnessione avvenuta con successo.
+        }).catch(function(error) {
+            // Gestione degli errori.
+            console.error("Errore durante la disconnessione:", error);
+        });
+    });
+
+
     // Close the modal if clicked outside of it
     window.onclick = function(event) {
         var modal = document.getElementById('loginModal');
@@ -365,6 +376,7 @@
             modal.style.display = 'none';
         }
     }
+
 
 </script>
 
