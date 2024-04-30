@@ -11,14 +11,13 @@
 
     <style>
         body {
+            background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
+            color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
+            font-family: 'Playfair Display', serif; /* Font classico con grazie */
             background-image: url('/static/sfondoArchitettonico.jpg');
             background-size: cover;  /* Copre l'intera finestra di visualizzazione */
             background-position: center; /* Centra l'immagine sullo schermo */
             background-repeat: no-repeat;
-            background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
-            color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
-            font-family: 'Playfair Display', serif; /* Font classico con grazie */
-
         }
         .header {
             display: flex;
@@ -71,8 +70,8 @@
                 flex: 1;
             }
         }
-
         /* Modal Styles */
+
         .modal-dialog {
             margin: 30px auto; /* Centra il modal verticalmente e orizzontalmente */
         }
@@ -111,139 +110,69 @@
             cursor: pointer;
         }
 
-        .transcription-container {
-            background-color: #f8f0e0; /* Colore di sfondo grigio chiaro */
-            padding: 20px; /* Aggiungi spaziatura interna per migliorare la leggibilità */
-            border-radius: 10px; /* Bordo arrotondato */
-        }
+        /* Login Modal Styles */
 
-
-        /* Stile per il modal */
-        .modal {
-            display: none; /* Nasconde il modal di default */
-            position: fixed; /* Posiziona il modal in modo fisso rispetto alla finestra del browser */
-            z-index: 1; /* Imposta l'indice z in modo che il modal sia sopra gli altri elementi della pagina */
+        #loginModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
             left: 0;
             top: 0;
-            width: 100%; /* Imposta la larghezza al 100% */
-            height: 100%; /* Imposta l'altezza al 100% */
-            overflow: auto; /* Abilita lo scrolling se il contenuto è più grande della finestra */
-            background-color: rgba(0,0,0,0.4); /* Sfondo semitrasparente */
-            padding-top: 60px; /* Spazio sopra il modal */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Trasparenza sullo sfondo */
         }
 
-        /* Stile per il contenuto del modal */
-        /* Stile per il modal di login */
         #loginModal .modal-content {
-            background-color: #fff; /* Colore di sfondo per il contenuto del modal di login */
-            border: 2px solid #7c3034; /* Bordo rosso scuro */
-            overflow: hidden; /* Previene il fuoriuscire dei contenuti quando zoommi */
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            max-width: 400px;
         }
 
-        #loginModal .modal-body input[type=email], #loginModal .modal-body input[type=password] {
-            width: 100%; /* Imposta la larghezza al 100% */
-            padding: 12px 20px; /* Aggiunge spaziatura interna agli input */
-            margin: 8px 0; /* Aggiunge spaziatura esterna agli input */
-            display: inline-block;
+        #loginModal h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #loginModal input[type="email"],
+        #loginModal input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px; /* Bordo arrotondato */
-            box-sizing: border-box;
+            border-radius: 5px;
         }
 
-        #loginModal .modal-body button {
-            width: 100%; /* Imposta la larghezza al 100% per il pulsante di login */
-            padding: 10px 20px; /* Aggiunge spaziatura interna al pulsante */
-            background-color: #7c3034; /* Rosso scuro */
-            color: #fff;
-            font-weight: bold;
+        #loginModal button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            border-radius: 0;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        #loginModal .modal-body button:hover {
-            background-color: #a47e5b; /* Rosso scuro più chiaro al passaggio del mouse */
+        #loginModal button:hover {
+            background-color: #45a049;
         }
 
-        #loginModal .modal-body #error-message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        /* Stile per il contenuto del modal dell'immagine ingrandita */
-        #imageModal .modal-content {
-            background-color: #fff; /* Colore di sfondo per il contenuto del modal dell'immagine ingrandita */
-            border: 2px solid gold; /* Bordo dorato per il modal */
-            overflow: hidden; /* Previene il fuoriuscire dei contenuti quando zoommi */
-        }
-
-        #imageModal .modal-body img {
-            transition: transform 0.5s ease; /* Effetto di transizione fluido per lo zoom */
-            display: block; /* Assicura che l'immagine non abbia spazi intorno */
-            width: 100%; /* L'immagine copre tutta la larghezza del modal-body */
-            height: auto; /* Mantiene l'aspect ratio dell'immagine */
-        }
-
-        #imageModal .modal-body img:hover {
-            transform: scale(1.5); /* Scala l'immagine del 10% quando l'utente passa il mouse sopra */
-        }
-
-        #imageModal .modal-header, #imageModal .modal-footer {
-            border-color: gold; /* Colore del bordo dorato per l'header e il footer */
-        }
-
-        #imageModal .modal-header .modal-title {
-            color: #7c3034; /* Colore del titolo del modal */
-        }
-
-        #imageModal .modal-header .close {
-            color: #7c3034; /* Colore del pulsante di chiusura */
-        }
-
-        #imageModal .modal-header .close:hover, #imageModal .modal-header .close:focus {
-            color: #5c2c2e; /* Colore più scuro del pulsante di chiusura al passaggio del mouse */
-        }
-
-        /* Stile per il pulsante di chiusura */
-        .close {
+        #loginModal .close {
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
 
-        .close:hover,
-        .close:focus {
+        #loginModal .close:hover,
+        #loginModal .close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
-        }
-
-        /* Stile per gli input */
-        input[type=email], input[type=password] {
-            width: 100%; /* Imposta la larghezza al 100% */
-            padding: 12px 20px; /* Aggiunge spaziatura interna agli input */
-            margin: 8px 0; /* Aggiunge spaziatura esterna agli input */
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px; /* Bordo arrotondato */
-            box-sizing: border-box;
-        }
-
-        /* Stile per il pulsante di login */
-
-
-        /* Stile per il messaggio di errore */
-        #error-message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        /* Media query per schermi più piccoli */
-        @media screen and (max-width: 600px) {
-            .modal-content {
-                width: 100%; /* Imposta la larghezza al 100% su schermi più piccoli */
-            }
         }
 
     </style>
@@ -302,6 +231,7 @@
             {% endif %}
             {% if material %}
             <h6><strong>Material</strong></h6>
+
             <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
@@ -316,25 +246,23 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="transcription-container">
-                {% if scritte %}
-                <h3><strong><span class="ancient-font">Transcription:</span></strong></h3>
-                <p class="latin-text">{{ scritte }}</p>
-                {% else %}
-                <p>No transcription available for this artifact.</p>
-                {% endif %}
-                {% if traduzione %}
-                <h4><strong>Translation</strong></h4>
-                <p>{{ traduzione }}</p>
-                {% else %}
-                <p>No translation available for this artifacts.</p>
-                {% endif %}
-                <div class="hidden" id="translateForm">
-                    <textarea rows="4" placeholder="Type here your translation..."></textarea>
-                    <button class="button">Send Translation</button>
-                </div>
-            </div>
+            {% if scritte %}
+            <h3><strong>Transcription:</strong></h3>
+            <p>{{ scritte }}</p>
+            {% else %}
+            <p>No transcription available for this artifact.</p>
+            {% endif %}
+            {% if traduzione %}
+            <h4><strong>Translation</strong></h4>
+            <p>{{ traduzione }}</p>
+            {% else %}
+            <p>No translation available for this artifacts.</p>
+            {% endif %}
         </div>
+    </div>
+    <div class="hidden" id="translateForm">
+        <textarea rows="4" placeholder="Type here your translation..."></textarea>
+        <button class="button">Send Translation</button>
     </div>
 </div>
 
@@ -353,16 +281,22 @@
 <script>
     // Toggle the translation form
     function toggleTranslate() {
-        const user = firebase.auth().currentUser;
-        const form = document.getElementById('translateForm');
-        if (user) {
-            // L'utente è autenticato, cambia la visibilità del form
-            form.style.display = form.style.display === 'block' ? 'none' : 'block';
-        } else {
-            // L'utente non è autenticato, mostra un avviso
-            alert("Devi autenticarti per poter tradurre.");
-        }
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // L'utente è autenticato, mostra il form
+                var form = document.getElementById('translateForm');
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            } else {
+                // L'utente non è autenticato, mostra un popup di avviso
+                alert("Devi autenticarti per poter tradurre.");
+            }
+        });
     }
+
 
     // Show the login modal
     function showLogin() {
@@ -418,17 +352,6 @@
         };
     });
 
-
-    window.addEventListener('unload', function() {
-        firebase.auth().signOut().then(function() {
-            // Disconnessione avvenuta con successo.
-        }).catch(function(error) {
-            // Gestione degli errori.
-            console.error("Errore durante la disconnessione:", error);
-        });
-    });
-
-
     // Close the modal if clicked outside of it
     window.onclick = function(event) {
         var modal = document.getElementById('loginModal');
@@ -436,7 +359,6 @@
             modal.style.display = 'none';
         }
     }
-
 
 </script>
 
