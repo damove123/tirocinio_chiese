@@ -296,22 +296,22 @@
     // Aggiungi un gestore di eventi al bottone per cambiare lingua
     document.getElementById('switchLanguageBtn').addEventListener('click', switchLanguage);
 
+
 </script>
 
 <div class="container">
-    <form id="search_form_chiesa" action="/" method="GET">
+    <form id="search_form_chiesa" action="/" method="GET" onsubmit="return disableButton(this);">
         <label for="chiesa_input">Search Church:</label>
         <input type="text" id="chiesa_input" name="query" placeholder="Type church's name...">
         <ul id="chiesa_suggestions" class="suggestions"></ul>
         <button type="submit" class="search-button">Search</button>
     </form>
 
-    <form id="search_form_reperto" action="/search_reperto" method="GET">
+    <form id="search_form_reperto" action="/search_reperto" method="GET" onsubmit="return disableButton(this);">
         <label for="reperto_input">Search Artifact:</label>
         <input type="text" id="reperto_input" name="query" placeholder="Type artifact's code...">
         <button type="submit" class="search-button">Search</button>
     </form>
-
 
 </div>
 
@@ -319,6 +319,17 @@
     <div class="custom-div" id="viewDiv"></div>
 </div>
 
+
+
 </body>
+
+<script>
+
+    function disableButton(form) {
+        var button = form.querySelector('.search-button');
+        button.disabled = true;
+        return true; // Allow form submission
+    }
+</script>
 </html>
 
