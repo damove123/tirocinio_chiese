@@ -133,12 +133,75 @@
         }
 
         /* Stile per il contenuto del modal */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto; /* Centra il modal verticalmente e orizzontalmente */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Imposta la larghezza del contenuto del modal */
+        /* Stile per il modal di login */
+        #loginModal .modal-content {
+            background-color: #fff; /* Colore di sfondo per il contenuto del modal di login */
+            border: 2px solid #7c3034; /* Bordo rosso scuro */
+            overflow: hidden; /* Previene il fuoriuscire dei contenuti quando zoommi */
+        }
+
+        #loginModal .modal-body input[type=email], #loginModal .modal-body input[type=password] {
+            width: 100%; /* Imposta la larghezza al 100% */
+            padding: 12px 20px; /* Aggiunge spaziatura interna agli input */
+            margin: 8px 0; /* Aggiunge spaziatura esterna agli input */
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Bordo arrotondato */
+            box-sizing: border-box;
+        }
+
+        #loginModal .modal-body button {
+            width: 100%; /* Imposta la larghezza al 100% per il pulsante di login */
+            padding: 10px 20px; /* Aggiunge spaziatura interna al pulsante */
+            background-color: #7c3034; /* Rosso scuro */
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        #loginModal .modal-body button:hover {
+            background-color: #a47e5b; /* Rosso scuro più chiaro al passaggio del mouse */
+        }
+
+        #loginModal .modal-body #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Stile per il contenuto del modal dell'immagine ingrandita */
+        #imageModal .modal-content {
+            background-color: #fff; /* Colore di sfondo per il contenuto del modal dell'immagine ingrandita */
+            border: 2px solid gold; /* Bordo dorato per il modal */
+            overflow: hidden; /* Previene il fuoriuscire dei contenuti quando zoommi */
+        }
+
+        #imageModal .modal-body img {
+            transition: transform 0.5s ease; /* Effetto di transizione fluido per lo zoom */
+            display: block; /* Assicura che l'immagine non abbia spazi intorno */
+            width: 100%; /* L'immagine copre tutta la larghezza del modal-body */
+            height: auto; /* Mantiene l'aspect ratio dell'immagine */
+        }
+
+        #imageModal .modal-body img:hover {
+            transform: scale(1.5); /* Scala l'immagine del 10% quando l'utente passa il mouse sopra */
+        }
+
+        #imageModal .modal-header, #imageModal .modal-footer {
+            border-color: gold; /* Colore del bordo dorato per l'header e il footer */
+        }
+
+        #imageModal .modal-header .modal-title {
+            color: #7c3034; /* Colore del titolo del modal */
+        }
+
+        #imageModal .modal-header .close {
+            color: #7c3034; /* Colore del pulsante di chiusura */
+        }
+
+        #imageModal .modal-header .close:hover, #imageModal .modal-header .close:focus {
+            color: #5c2c2e; /* Colore più scuro del pulsante di chiusura al passaggio del mouse */
         }
 
         /* Stile per il pulsante di chiusura */
