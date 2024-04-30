@@ -2,68 +2,63 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Dettaglio Reperto</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Dettagli del Reperto</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
     <style>
         body {
-            background-color: #f4f4f2; /* Colore neutro simile alla pietra */
-            color: #333; /* Colore del testo scuro per un'atmosfera più antica */
-            font-family: 'Georgia', serif; /* Font che simula uno stile più classico e formale */
+            background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
+            color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
+            font-family: 'Playfair Display', serif; /* Font classico con grazie */
+            background-image: url('https://example.com/marble-texture.jpg'); /* Immagine di sfondo che imita il marmo */
         }
-
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            border-bottom: 2px solid #ccc; /* Aggiunge un tocco di separazione classica */
-            background-color: #eaeaea; /* Sfondo che richiama il marmo o la pietra chiara */
+            border-bottom: 5px solid gold; /* Bordi dorati */
+            background-color: #a47e5b; /* Sfondo che richiama il legno veneziano */
         }
-
         .button {
             padding: 10px 20px;
-            background-color: #8a7668; /* Un color marrone chiaro che ricorda la terra */
-            color: white;
+            background-color: #7c3034; /* Rosso scuro */
+            color: #fff;
             font-weight: bold;
             border: none;
-            border-radius: 0; /* Rimuovere l'arrotondamento per un look più storico */
+            border-radius: 0;
         }
-
         .hidden {
             display: none;
         }
-
         textarea {
             width: 100%;
             padding: 10px;
-            border: 2px solid #ccc;
+            border: 2px solid gold; /* Dorato */
             background-color: #fff;
-            border-radius: 0; /* Stile più quadrato per una sensazione più austera */
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); /* Leggera ombreggiatura interna per aggiungere profondità */
+            border-radius: 0;
         }
-
         .info-block {
-            background-color: #eaeaea; /* Leggero sfondo grigio per i dettagli del blocco */
+            background-color: #f8f0e0; /* Sfondo marmorizzato */
             padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Ombreggiatura per elevare il blocco dal contesto */
-            border-left: 5px solid #8a7668; /* Bordi spessi per enfatizzare l'importanza */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-left: 10px solid #7c3034; /* Bordo rosso scuro */
         }
-
         .img-container {
-            margin-bottom: 20px; /* Spazio sotto l'immagine */
+            margin-bottom: 20px;
             padding: 20px;
             background-color: #fff;
-            border: 1px solid #ccc; /* Contorno sottile per definire lo spazio dell'immagine */
+            border: 1px solid gold; /* Dorato */
         }
-
         .details-container {
             display: flex;
             flex-direction: column;
             justify-content: start;
         }
-
         @media (min-width: 768px) {
             .details-container {
                 flex-direction: row;
@@ -72,47 +67,110 @@
                 flex: 1;
             }
         }
-    </style>
+        /* Modal Styles */
 
+        .modal-dialog {
+            margin: 30px auto; /* Centra il modal verticalmente e orizzontalmente */
+        }
+
+        .modal-content {
+            background-color: #fff; /* Colore di sfondo per il contenuto del modal */
+            border: 2px solid gold; /* Bordo dorato per il modal */
+            overflow: hidden; /* Previene il fuoriuscire dei contenuti quando zoommi */
+        }
+
+        .modal-body {
+            padding: 5px; /* Rimuovi il padding per far aderire l'immagine ai bordi del modal */
+        }
+
+        .modal-body img {
+            transition: transform 0.5s ease; /* Effetto di transizione fluido per lo zoom */
+            display: block; /* Assicura che l'immagine non abbia spazi intorno */
+            width: 100%; /* L'immagine copre tutta la larghezza del modal-body */
+            height: auto; /* Mantiene l'aspect ratio dell'immagine */
+        }
+
+        .modal-body img:hover {
+            transform: scale(1.5); /* Scala l'immagine del 10% quando l'utente passa il mouse sopra */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+<a href="/" class="btn btn-primary" id="home-button">Torna alla Homepage</a>
 <div class="container mt-4">
     <div class="header">
         <h1>Dettagli del Reperto</h1>
-        <button class="button" onclick="toggleTranslate()">Traduci</button>
+        <button class="button" onclick="toggleTranslate()">Translate</button>
+        <p id="status">Controllando lo stato...</p>
+        <button id="login-button" class="btn btn-secondary" onclick="showLogin()">Accedi</button>
+        <button id="logout-button" class="btn btn-secondary" onclick="logoutUser()" style="display:none;">Esci</button>
     </div>
     <div class="details-container">
         <div class="img-container">
             {% if immagini %}
-            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid" data-toggle="modal" data-target="#imageModal">
             {% else %}
-            <p>Nessuna immagine disponibile per questo reperto.</p>
+            <p>No image available for this artifact.</p>
             {% endif %}
         </div>
+        <!-- Modal per ingrandire l'immagine -->
+        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Immagine del Reperto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if immagini %}
+                        <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+                        {% else %}
+                        <p>No image available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="info-block">
-            <h2>Codice del Reperto: {{ reperto }}</h2>
+            <h2>Artifact Code: {{ reperto }}</h2>
             {% if condition %}
-            <h5>Condizione</h5>
+            <h5><strong>Condition</strong></h5>
             <p>{{ condition }}</p>
             {% endif %}
             {% if length %}
-            <h6>Lunghezza</h6>
+            <h6><strong>Length</strong></h6>
             <p>{{ length }}</p>
             {% endif %}
             {% if width %}
-            <h6>Larghezza</h6>
+            <h6><strong>Width</strong></h6>
             <p>{{ width }}</p>
             {% endif %}
             {% if material %}
-            <h6>Materiale</h6>
+            <h6><strong>Material</strong></h6>
+
             <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
-            <h6>Forma</h6>
+            <h6><strong>Shape</strong></h6>
             <p>{{ shape }}</p>
             {% endif %}
             {% if type %}
-            <h6>Tipo</h6>
+            <h6><strong>Type</strong></h6>
             <p>{{ type }}</p>
             {% endif %}
         </div>
@@ -120,39 +178,123 @@
     <div class="row">
         <div class="col-12">
             {% if scritte %}
-            <h3>Trascrizione:</h3>
+            <h3><strong>Transcription:</strong></h3>
             <p>{{ scritte }}</p>
             {% else %}
-            <p>Nessuna trascrizione disponibile per questo reperto.</p>
+            <p>No transcription available for this artifact.</p>
             {% endif %}
             {% if traduzione %}
-            <h4>Traduzione</h4>
+            <h4><strong>Translation</strong></h4>
             <p>{{ traduzione }}</p>
             {% else %}
-            <p>Nessuna traduzione disponibile per questo reperto.</p>
+            <p>No translation available for this artifacts.</p>
             {% endif %}
         </div>
     </div>
     <div class="hidden" id="translateForm">
-        <textarea rows="4" placeholder="Inserisci qui la traduzione..."></textarea>
-        <button class="button">Invia Traduzione</button>
+        <textarea rows="4" placeholder="Type here your translation..."></textarea>
+        <button class="button">Send Translation</button>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Enter your email">
+        <input type="password" id="password" placeholder="Enter your password">
+        <button onclick="loginUser()">Login</button>
+        <p id="error-message"></p>
     </div>
 </div>
 
 <script>
+    // Toggle the translation form
     function toggleTranslate() {
-        var form = document.getElementById('translateForm');
-        if (form.style.display === 'none' || form.style.display === '') {
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // L'utente è autenticato, mostra il form
+                var form = document.getElementById('translateForm');
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            } else {
+                // L'utente non è autenticato, mostra un popup di avviso
+                alert("Devi autenticarti per poter tradurre.");
+            }
+        });
+    }
+
+
+    // Show the login modal
+    function showLogin() {
+        var modal = document.getElementById('loginModal');
+        modal.style.display = 'block';
+    }
+
+    // Close the login modal
+    function closeModal() {
+        var modal = document.getElementById('loginModal');
+        modal.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const firebaseConfig = {
+            apiKey: 'AIzaSyC6NAfPU1NV6QJcqL4sg4VJGa9S7nVXP4Q',
+            authDomain: 'cityknowledge.firebaseapp.com',
+            databaseURL: 'https://cityknowledge.firebaseio.com',
+            projectId: 'firebase-cityknowledge',
+            storageBucket: 'firebase-cityknowledge.appspot.com',
+            messagingSenderId: '445655714967',
+            appId: '1:445655714967:web:874499fae4679e61aeadd2',
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById('status').innerHTML = `Logged in as: ${user.email}`;
+                document.getElementById('login-button').style.display = 'none';
+                document.getElementById('logout-button').style.display = 'inline-block';
+            } else {
+                document.getElementById('status').innerHTML = 'You are not logged in.';
+                document.getElementById('login-button').style.display = 'inline-block';
+                document.getElementById('logout-button').style.display = 'none';
+            }
+        });
+
+        window.loginUser = function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    closeModal();
+                })
+                .catch((error) => {
+                    document.getElementById('error-message').innerHTML = "Error: " + error.message;
+                });
+        };
+
+        window.logoutUser = function() {
+            auth.signOut();
+        };
+    });
+
+    // Close the modal if clicked outside of it
+    window.onclick = function(event) {
+        var modal = document.getElementById('loginModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
         }
     }
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

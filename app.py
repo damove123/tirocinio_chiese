@@ -1,14 +1,13 @@
 import fuzzywuzzy
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 from fuzzywuzzy import process
 import csv
 import data
 import re
+import pandas as pd
+from difflib import SequenceMatcher
 
 app = Flask(__name__)
-app.secret_key = 'Chiese2012!'  # Imposta una chiave segreta casuale
-login_manager = LoginManager(app)
 
 dati_reperti = None
 
@@ -27,18 +26,6 @@ def password_valida(password):
     return len(password) >= 8
 
 
-# Definizione del modello utente
-class User(UserMixin):
-    def __init__(self, id):
-        self.id = id
-
-
-# Funzione per recuperare un utente dall'ID
-@login_manager.user_loader
-def load_user(user_id):
-    return User(user_id)
-
-
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -47,30 +34,6 @@ def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     # Usa fuzzywuzzy per trovare la miglior corrispondenza
     migliore, punteggio = fuzzywuzzy.process.extractOne(nome_chiesa, chiese)
     return migliore
-
-
-# Route per il login
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        # Esegui la logica di autenticazione qui
-        if email_valido(email) and password_valida(password):
-            user = User(id=email)  # Crea un oggetto utente
-            login_user(user)  # Effettua il login dell'utente
-            return redirect(url_for('search_church'))  # Reindirizza l'utente dopo il login
-        else:
-            flash('Email o password non valide', 'error')
-    return render_template('login.html')
-
-
-# Route per il logout
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()  # Effettua il logout dell'utente
-    return redirect(url_for('search_church'))  # Reindirizza l'utente alla homepage dopo il logout
 
 
 def sub(string: str):
@@ -97,56 +60,54 @@ def seperator(dataDict):
 
 @app.route("/")
 def search_church():
-    global dati_reperti
-    dati_reperti = None
-    # Controlla se l'utente è autenticato
-    if current_user.is_authenticated:
-        raw_query = request.args.get('query')
-        if not raw_query:
-            # Restituisce subito se non c'è una query
-            return render_template("index.html", message="Inserisci un termine di ricerca.")
+    raw_query = request.args.get('query')
+    if not raw_query:
+        return render_template("index.html", message="Inserisci un termine di ricerca.")
 
-        query = trova_miglior_corrispondenza(raw_query)
-        reperti = []
-        immagini = []
-        id = []
-        scritte = []
+    query = trova_miglior_corrispondenza(raw_query, 'Churches.csv')
 
-        try:
-            artifact_info = None
-            with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    if len(row) > 2 and query in row[2]:
-                        artifact_info = row[-1]
-                        break
+    try:
+        # Legge il file CSV e cerca la chiesa con il nome più simile alla query
+        churches = pd.read_csv('Churches.csv')
+        closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
+        church_info = churches.iloc[closest_match]
 
-            if artifact_info is None:
-                # Nessun risultato trovato nel CSV
-                return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
+        # Prepara i dati specifici da passare al template
+        church_data = {
+            'local_name': church_info['Local Name'],
+            'full_name': church_info['Full Name'],
+            'year_founded': church_info['Year Founded'],
+            'intro_sentence': church_info['Intro sentence'],
+            'history_blurb': church_info['History Blurb']
+        }
 
-            artifact_code = sub(artifact_info)
-            ck_id_list = data.getGroup(artifact_code)
-            dati_reperti = data.getData(ck_id_list)
+        # Estrae i dati necessari dai reperti correlati alla chiesa trovata
+        artifact_info = None
+        with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if len(row) > 2 and query in row[2]:
+                    artifact_info = row[-1]
+                    break
 
-            for artifact in dati_reperti:
-                reperti.append(artifact)
-            print(reperti)
-            cleanData = [seperator(value) for value in reperti]
+        if artifact_info is None:
+            return render_template("index.html", message=f"Nessun risultato trovato per: {query}")
 
-            for item in cleanData:
-                immagini.append(item['url'])
-                id.append(item['id'])
-                scritte.append(item['inscription'])
+        artifact_code = sub(artifact_info)
+        ck_id_list = data.getGroup(artifact_code)
+        dati_reperti = data.getData(ck_id_list)
 
-            return render_template("result.html", chiesa=query, reperti=id, scritte=scritte, immagini=immagini,
-                                   query=query)
+        cleanData = [seperator(value) for value in dati_reperti]
+        immagini = [item['url'] for item in cleanData]
+        id = [item['id'] for item in cleanData]
+        scritte = [item['inscription'] for item in cleanData]
 
-        except Exception as e:
-            print(f"Error in search_church: {str(e)}")
-            return render_template("index.html", message="Errore durante il processo di ricerca.")
-    else:
-        return redirect(url_for('login'))  # Reindirizza l'utente alla pagina di login se non è autenticato
+        # Passa le informazioni della chiesa e i dati dei reperti al template
+        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini,
+                               query=query)
+    except Exception as e:
+        print(f"Error in search_church: {str(e)}")
+        return render_template("index.html", message="Errore durante il processo di ricerca.")
 
 
 def formatta_nome(codice_reperto):
@@ -172,13 +133,13 @@ def search_reperto():
     reperto_shape = None
     reperto_type = None
 
-
     try:
         global dati_reperti
         if dati_reperti is None:
             artifact_code = formatta_nome(query)
             ck_id_list = data.getGroup(artifact_code)
             dati_reperti = data.getData(ck_id_list)
+        print(dati_reperti)
 
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == query:
@@ -196,8 +157,10 @@ def search_reperto():
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
             return render_template("clickReperto.html", reperto=query, scritte=reperto_scritte,
-                                   immagini=reperto_url, traduzione=reperto_traduz, condizione=reperto_condition, length=reperto_length,
-                                   width=reperto_width, material=reperto_material, shape=reperto_shape, type=reperto_type, query =query)
+                                   immagini=reperto_url, traduzione=reperto_traduz, condizione=reperto_condition,
+                                   length=reperto_length,
+                                   width=reperto_width, material=reperto_material, shape=reperto_shape,
+                                   type=reperto_type, query=query)
         else:
             return render_template("index.html", message="Nessun dato disponibile per il codice inserito.")
 
@@ -206,6 +169,16 @@ def search_reperto():
         return render_template("index.html",
                                message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
                                        "valido.")
+
+
+@app.route('/search')
+def search():
+    church_name = request.args.get('chiesa', '')
+    churches = pd.read_csv('Churches.csv')
+    # Utilizza SequenceMatcher per trovare il nome più simile
+    closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, church_name).ratio()).idxmax()
+    church_info = churches.iloc[closest_match]
+    return render_template('results.html', church_info=church_info)
 
 
 if __name__ == "__main__":

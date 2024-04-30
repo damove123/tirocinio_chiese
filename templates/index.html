@@ -2,51 +2,138 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>SUPER FLOOR_TILES 2012</title>
+    <title>FLOOR_TILES</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+    <link rel="icon" href="/static/icon.ico" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://js.arcgis.com/4.23/"></script>
     <script>
         require([
             "esri/Map",
             "esri/views/MapView",
             "esri/WebMap",
-            "esri/config"
-        ], function(Map, MapView, WebMap, esriConfig) {
+            "esri/layers/FeatureLayer",
+            "esri/config",
+            "esri/widgets/Search",
+            "esri/widgets/LayerList",
+            "esri/widgets/Compass",
+            "esri/widgets/Zoom",
+            "esri/widgets/ScaleBar",
+            "esri/widgets/BasemapToggle",
+            "esri/widgets/Attribution"
+        ], function(Map, MapView, WebMap, FeatureLayer, esriConfig, Search, LayerList, Compass, Zoom, ScaleBar, BasemapToggle) {
             esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
 
+            var layer = new FeatureLayer({
+                url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer/0",
+                outFields: ["*"], // Assicurati di includere tutti i campi che ti servono
+                popupTemplate: {
+                    title: "Informazioni Reperto",
+                    content: [{
+                        type: "fields",
+                        fieldInfos: [
+                            {
+                                fieldName: "Codice_Rep",
+                                label: "Artifact's Code",
+                                visible: true
+                            },
+                            {
+                                fieldName: "Codice_Chi",
+                                label: "Church's Code",
+                                visible: true
+                            },
+                            // Aggiungi altri campi come necessario
+                        ]
+                    }]
+                }
+            });
             var webMap = new WebMap({
                 portalItem: {
                     id: "5ae37f33f52a4eefbc098507ddd9f92d"
-                }
+                },
+                layers: [layer]
             });
 
             var view = new MapView({
                 container: "viewDiv",
                 map: webMap,
-                zoom: 12,
-                center: [12.3331, 45.4376]
+                center: [12.3331, 45.4376], // Aggiusta secondo la tua necessità
+                zoom: 12
             });
 
-            // Ascolta il click sulla popup
-            view.popup.watch("selectedFeature", function(graphic) {
-                if (graphic && graphic.attributes && graphic.attributes.Codice_Rep) {
-                    var codiceRep = graphic.attributes.Codice_Rep;
-                    document.getElementById('reperto_input').value = codiceRep;
-                    document.getElementById('search_button_reperto').disabled = false;
-                }
+            var searchWidget = new Search({
+                view: view
+            });
+            view.ui.add(searchWidget, {
+                position: "top-right"
+            });
+
+
+
+            // Aggiungi il widget del compasso
+            var compassWidget = new Compass({
+                view: view
+            });
+            view.ui.add(compassWidget, {
+                position: "top-left"
+            });
+
+
+            // Aggiungi il widget della scala
+            var scaleBar = new ScaleBar({
+                view: view
+            });
+            view.ui.add(scaleBar, {
+                position: "bottom-left"
+            });
+
+            // Aggiungi il widget di cambio basemap
+            var basemapToggle = new BasemapToggle({
+                view: view,
+                nextBasemap: "satellite"
+            });
+            view.ui.add(basemapToggle, {
+                position: "bottom-right"
+            });
+
+
+
+            view.on("click", function(event) {
+                // Esegui il test di hit per trovare le feature al punto cliccato
+                view.hitTest(event).then(function(response) {
+                    if (response.results.length > 0) {
+                        var graphic = response.results.filter(function(result) {
+                            return result.graphic.layer === layer;
+                        })[0].graphic;
+
+                        // Apri la popup al punto cliccato
+                        view.popup.open({
+                            features: [graphic],
+                            location: event.mapPoint
+                        });
+
+                        // Aggiorna il campo di input con il codice del reperto
+                        if (graphic.attributes && graphic.attributes.Codice_Rep) {
+                            var codiceRep = graphic.attributes.Codice_Rep;
+                            document.getElementById('reperto_input').value = codiceRep;
+                            document.getElementById('search_button_reperto').disabled = false;
+                        }
+                    }
+                });
             });
         });
     </script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
+            background-image: url('/static/sfondoArchitettonico.jpg');
+            background-size: cover;  /* Copre l'intera finestra di visualizzazione */
+            background-position: center; /* Centra l'immagine sullo schermo */
+            background-repeat: no-repeat; /* Impedisce la ripetizione dell'immagine */
+
         }
 
         .container {
@@ -60,12 +147,14 @@
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #8B4513;
+            font-size: 3.5rem; /* Aumenta la dimensione del font per maggiore impatto */
+            color: #8B4513; /* Un marrone scuro, ma puoi scegliere un colore che preferisci */
             text-align: center;
-            width: 100%;
-            margin-bottom: 40px;
+            margin: 20px 0; /* Spazio sopra e sotto il titolo */
+            font-weight: bold; /* Grassetto per enfatizzare il testo */
+            letter-spacing: 1px; /* Spaziatura tra le lettere per un effetto più drammatico */
         }
+
 
         form {
             width: 45%;
@@ -88,6 +177,9 @@
             border-radius: 5px;
             margin-bottom: 20px;
         }
+
+
+
 
         .search-button {
             width: 100%;
@@ -148,18 +240,96 @@
     </style>
 </head>
 <body>
-<h1>SUPER FLOOR_TILES 2012</h1>
+<h1>FLOOR-TILES</h1>
+<div class="container">
+    <!-- Bottone che attiva il modal -->
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
+        Info
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Informazioni sull'Applicazione</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>Benvenuto nella visualizzazione interattiva della nostra mappa!</strong><br><br>
+
+                    Questa mappa è progettata per mostrarti la posizione delle chiese e i reperti storici conservati all'interno di queste. Puoi esplorare il contenuto della mappa in due modi:<br><br>
+
+                    <strong>Ricerca per Nome della Chiesa</strong>: Utilizza il campo di ricerca per inserire il nome della chiesa che ti interessa. Questo ti permetterà di visualizzare direttamente tutti i reperti associati a quella specifica chiesa.<br>
+                    <strong>Direttamente sui Reperti sulla Mappa</strong>: Naviga liberamente sulla mappa e clicca sui marker dei reperti per ottenere informazioni dettagliate su ciascuno di essi. Una volta cliccato un reperto, apparirà una finestra popup con ulteriori dettagli riguardanti il reperto selezionato, inclusi il codice del reperto e il codice della chiesa di appartenenza.<br><br>
+                    Questa piattaforma è stata creata per facilitare l'accesso alle informazioni storiche e culturali delle nostre chiese e per promuovere la conoscenza del patrimonio conservato all'interno di esse.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <!-- Bottone per cambiare lingua -->
+                    <button type="button" class="btn btn-primary" id="switchLanguageBtn">Switch to English</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Funzione per cambiare la lingua e tradurre il testo del modal
+    function switchLanguage() {
+        // Controlla la lingua attuale
+        var currentLanguage = document.documentElement.lang;
+
+        // Se la lingua attuale è l'italiano, cambiala in inglese e traduci il testo del modal
+        if (currentLanguage === 'it') {
+            document.documentElement.lang = 'en';
+
+            // Traduzione del testo del modal in inglese
+            document.getElementById('infoModalLabel').innerText = 'Application Information';
+            document.querySelector('.modal-body').innerHTML = `
+                <strong>Welcome to the interactive view of our map!</strong><br><br>
+                This map is designed to show you the location of churches and historical artifacts preserved within them. You can explore the map content in two ways:<br><br>
+                <strong>Search by Church Name</strong>: Use the search field to enter the name of the church you're interested in. This will allow you to directly view all artifacts associated with that specific church.<br>
+                <strong>Directly on the Artifacts on the Map</strong>: Navigate freely on the map and click on the artifact markers to get detailed information about each of them. Once you click on an artifact, a popup window will appear with further details regarding the selected artifact, including the artifact code and the church code it belongs to.<br><br>
+                This platform has been created to facilitate access to the historical and cultural information of our churches and to promote awareness of the heritage preserved within them.
+            `;
+            document.querySelector('.modal-footer .btn-secondary').innerText = 'Close';
+            document.getElementById('switchLanguageBtn').innerText = 'Cambia in italiano';
+        } else {
+            // Se la lingua attuale è l'inglese, cambiala in italiano e traduci il testo del modal
+            document.documentElement.lang = 'it';
+
+            // Traduzione del testo del modal in italiano
+            document.getElementById('infoModalLabel').innerText = 'Informazioni sull\'Applicazione';
+            document.querySelector('.modal-body').innerHTML = `
+                <strong>Benvenuto nella visualizzazione interattiva della nostra mappa!</strong><br><br>
+                Questa mappa è progettata per mostrarti la posizione delle chiese e i reperti storici conservati all'interno di queste. Puoi esplorare il contenuto della mappa in due modi:<br><br>
+                <strong>Ricerca per Nome della Chiesa</strong>: Utilizza il campo di ricerca per inserire il nome della chiesa che ti interessa. Questo ti permetterà di visualizzare direttamente tutti i reperti associati a quella specifica chiesa.<br>
+                <strong>Direttamente sui Reperti sulla Mappa</strong>: Naviga liberamente sulla mappa e clicca sui marker dei reperti per ottenere informazioni dettagliate su ciascuno di essi. Una volta cliccato un reperto, apparirà una finestra popup con ulteriori dettagli riguardanti il reperto selezionato, inclusi il codice del reperto e il codice della chiesa di appartenenza.<br><br>
+                Questa piattaforma è stata creata per facilitare l'accesso alle informazioni storiche e culturali delle nostre chiese e per promuovere la conoscenza del patrimonio conservato all'interno di esse.
+            `;
+            document.querySelector('.modal-footer .btn-secondary').innerText = 'Chiudi';
+            document.getElementById('switchLanguageBtn').innerText = 'Switch to English';
+        }
+    }
+
+    // Aggiungi un gestore di eventi al bottone per cambiare lingua
+    document.getElementById('switchLanguageBtn').addEventListener('click', switchLanguage);
+
+</script>
+
 <div class="container">
     <form id="search_form_chiesa" action="/" method="GET">
-        <label for="chiesa_input">Cerca Chiesa:</label>
-        <input type="text" id="chiesa_input" name="query" placeholder="Inserisci il nome della chiesa...">
-        <button type="submit" class="search-button">Cerca</button>
+        <label for="chiesa_input">Search Church:</label>
+        <input type="text" id="chiesa_input" name="query" placeholder="Type church's name...">
+        <ul id="chiesa_suggestions" class="suggestions"></ul>
+        <button type="submit" class="search-button">Search</button>
     </form>
 
     <form id="search_form_reperto" action="/search_reperto" method="GET">
-        <label for="reperto_input">Cerca Reperto:</label>
-        <input type="text" id="reperto_input" name="query" placeholder="Inserisci il codice del reperto...">
-        <button type="submit" class="search-button">Cerca</button>
+        <label for="reperto_input">Search Artifact:</label>
+        <input type="text" id="reperto_input" name="query" placeholder="Type artifact's code...">
+        <button type="submit" class="search-button">Search</button>
     </form>
 
 
@@ -171,3 +341,4 @@
 
 </body>
 </html>
+
