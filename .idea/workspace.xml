@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/clickReperto.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/clickReperto.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package.json" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Polli0&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/damove123/tirocinio_chiese.git&quot;,
+    &quot;accountId&quot;: &quot;0456c017-d83d-4977-a8f4-1969be32c737&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/templates/result.html" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2efjzECD2DOaqYamdL7wBtWzytU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Node.js.app.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.firebase.js.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data.executor&quot;: &quot;Coverage&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Pietro&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pietro/Scrivania2/tirocinio_chiese&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/static/css" />
+      <recent name="$PROJECT_DIR$/css" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/template" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.app (1)">
+    <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="tirocinio_chiese" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="tirocinio_chiese" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ProgettoLocale" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ProgettoLocale/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="tirocinio_chiese" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.app (1)" />
+        <item itemvalue="Python.data" />
+        <item itemvalue="Python.app" />
+        <item itemvalue="Python.app (1)" />
+        <item itemvalue="Python.app" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="" />
+      <created>1712302787981</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712302787981</updated>
+      <workItem from="1712302788549" duration="7919000" />
+      <workItem from="1712312016135" duration="47000" />
+      <workItem from="1712312071894" duration="173000" />
+      <workItem from="1712312257370" duration="1651000" />
+      <workItem from="1712319002485" duration="910000" />
+      <workItem from="1712319926205" duration="4130000" />
+      <workItem from="1712325306116" duration="4147000" />
+      <workItem from="1712648184006" duration="1363000" />
+      <workItem from="1712649549868" duration="3054000" />
+      <workItem from="1712652614775" duration="962000" />
+      <workItem from="1712658333114" duration="1091000" />
+      <workItem from="1712660140982" duration="522000" />
+      <workItem from="1712660666695" duration="9911000" />
+      <workItem from="1713252249097" duration="12294000" />
+      <workItem from="1713270132851" duration="8432000" />
+      <workItem from="1713343076955" duration="6496000" />
+      <workItem from="1713354712656" duration="1530000" />
+      <workItem from="1713356284893" duration="11293000" />
+      <workItem from="1713514040360" duration="10159000" />
+      <workItem from="1713530166397" duration="5631000" />
+      <workItem from="1713535812753" duration="1638000" />
+      <workItem from="1713857447079" duration="10541000" />
+      <workItem from="1713874344188" duration="7948000" />
+      <workItem from="1714395578073" duration="14000" />
+      <workItem from="1714462429287" duration="6521000" />
+      <workItem from="1714469683592" duration="3806000" />
+      <workItem from="1714479710374" duration="1642000" />
+    </task>
+    <task id="LOCAL-00001" summary="aggiunto connessione al database">
+      <option name="closed" value="true" />
+      <created>1712310072116</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712310072116</updated>
+    </task>
+    <task id="LOCAL-00002" summary="aggiunto connessione al database con js">
+      <option name="closed" value="true" />
+      <created>1712311901722</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712311901722</updated>
+    </task>
+    <task id="LOCAL-00003" summary="stampa chiese su web app">
+      <option name="closed" value="true" />
+      <created>1712321503830</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712321503830</updated>
+    </task>
+    <task id="LOCAL-00004" summary="stampa chiese su web app">
+      <option name="closed" value="true" />
+      <created>1712325961124</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712325961124</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Barra di ricerca">
+      <option name="closed" value="true" />
+      <created>1712329366167</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712329366167</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update">
+      <option name="closed" value="true" />
+      <created>1713252308383</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713252308383</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update css">
+      <option name="closed" value="true" />
+      <created>1713260061604</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713260061604</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ricerche con margine di errore">
+      <option name="closed" value="true" />
+      <created>1713261859644</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1713261859644</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Reindirizzamento pagina">
+      <option name="closed" value="true" />
+      <created>1713263174374</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1713263174374</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Reindirizzamento pagina">
+      <option name="closed" value="true" />
+      <created>1713263485803</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1713263485803</updated>
+    </task>
+    <task id="LOCAL-00011" summary="aggiornamento css">
+      <option name="closed" value="true" />
+      <created>1713270615556</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1713270615556</updated>
+    </task>
+    <task id="LOCAL-00012" summary="aggiornamento css">
+      <option name="closed" value="true" />
+      <created>1713271224262</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1713271224262</updated>
+    </task>
+    <task id="LOCAL-00013" summary="aggiornamento css">
+      <option name="closed" value="true" />
+      <created>1713271794989</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713271794989</updated>
+    </task>
+    <task id="LOCAL-00014" summary="aggiornamento css">
+      <option name="closed" value="true" />
+      <created>1713272555959</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1713272555959</updated>
+    </task>
+    <task id="LOCAL-00015" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713276108210</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713276108210</updated>
+    </task>
+    <task id="LOCAL-00016" summary="aggiornamento">
+      <option name="closed" value="true" />
+      <created>1713277948397</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713277948397</updated>
+    </task>
+    <task id="LOCAL-00017" summary="aggiunta ricerca dei pavimenti per le chiese">
+      <option name="closed" value="true" />
+      <created>1713346870937</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713346870937</updated>
+    </task>
+    <task id="LOCAL-00018" summary="aggiunta ricerca foto generali delle chiese">
+      <option name="closed" value="true" />
+      <created>1713347834337</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1713347834337</updated>
+    </task>
+    <task id="LOCAL-00019" summary="aggiunta file nuovi">
+      <option name="closed" value="true" />
+      <created>1713356805484</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713356805484</updated>
+    </task>
+    <task id="LOCAL-00020" summary="aggiunta file nuovi">
+      <option name="closed" value="true" />
+      <created>1713357730335</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1713357730335</updated>
+    </task>
+    <task id="LOCAL-00021" summary="aggiunta file nuovi">
+      <option name="closed" value="true" />
+      <created>1713361194975</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1713361194976</updated>
+    </task>
+    <task id="LOCAL-00022" summary="aggiunta file nuovi">
+      <option name="closed" value="true" />
+      <created>1713361768021</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1713361768021</updated>
+    </task>
+    <task id="LOCAL-00023" summary="aggiunta file nuovi">
+      <option name="closed" value="true" />
+      <created>1713365821775</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1713365821775</updated>
+    </task>
+    <task id="LOCAL-00024" summary="aggiunta file nuovi">
+      <option name="closed" value="true" />
+      <created>1713516324557</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1713516324557</updated>
+    </task>
+    <task id="LOCAL-00025" summary="aggiunta ingrandimento foto">
+      <option name="closed" value="true" />
+      <created>1713516858480</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1713516858480</updated>
+    </task>
+    <task id="LOCAL-00026" summary="aggiunta ingrandimento foto">
+      <option name="closed" value="true" />
+      <created>1713523288413</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1713523288413</updated>
+    </task>
+    <task id="LOCAL-00027" summary="modifica stile login">
+      <option name="closed" value="true" />
+      <created>1713525155018</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1713525155018</updated>
+    </task>
+    <task id="LOCAL-00028" summary="modifica stile login">
+      <option name="closed" value="true" />
+      <created>1713533208470</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1713533208470</updated>
+    </task>
+    <task id="LOCAL-00029" summary="modifica stile login">
+      <option name="closed" value="true" />
+      <created>1713536608743</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1713536608743</updated>
+    </task>
+    <task id="LOCAL-00030" summary="update">
+      <option name="closed" value="true" />
+      <created>1713536976316</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1713536976316</updated>
+    </task>
+    <task id="LOCAL-00031" summary="aggiunta login con utente">
+      <option name="closed" value="true" />
+      <created>1713858747550</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1713858747550</updated>
+    </task>
+    <task id="LOCAL-00032" summary="mantenimento login in sessione">
+      <option name="closed" value="true" />
+      <created>1713876858480</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1713876858480</updated>
+    </task>
+    <task id="LOCAL-00033" summary="mantenimento login in sessione">
+      <option name="closed" value="true" />
+      <created>1713879916840</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1713879916840</updated>
+    </task>
+    <task id="LOCAL-00034" summary="mantenimento login in sessione">
+      <option name="closed" value="true" />
+      <created>1713881732645</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1713881732645</updated>
+    </task>
+    <task id="LOCAL-00035" summary="update">
+      <option name="closed" value="true" />
+      <created>1713882737816</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1713882737816</updated>
+    </task>
+    <task id="LOCAL-00036" summary="update">
+      <option name="closed" value="true" />
+      <created>1714463422524</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1714463422524</updated>
+    </task>
+    <task id="LOCAL-00037" summary="update">
+      <option name="closed" value="true" />
+      <created>1714469748712</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1714469748712</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="aggiunto connessione al database" />
+    <MESSAGE value="aggiunto connessione al database con js" />
+    <MESSAGE value="stampa chiese su web app" />
+    <MESSAGE value="Barra di ricerca" />
+    <MESSAGE value="update css" />
+    <MESSAGE value="ricerche con margine di errore" />
+    <MESSAGE value="Reindirizzamento pagina" />
+    <MESSAGE value="aggiornamento css" />
+    <MESSAGE value="aggiornamento" />
+    <MESSAGE value="aggiunta ricerca dei pavimenti per le chiese" />
+    <MESSAGE value="aggiunta ricerca foto generali delle chiese" />
+    <MESSAGE value="aggiunta file nuovi" />
+    <MESSAGE value="aggiunta ingrandimento foto" />
+    <MESSAGE value="modifica stile login" />
+    <MESSAGE value="aggiunta login con utente" />
+    <MESSAGE value="mantenimento login in sessione" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$app.coverage" NAME="app Coverage Results" MODIFIED="1713272797723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714481099505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
