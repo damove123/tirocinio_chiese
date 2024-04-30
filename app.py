@@ -76,14 +76,18 @@ def search_church():
         closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
         church_info = churches.iloc[closest_match]
 
-        # Prepara i dati specifici da passare al template
-        church_data = {
-            'local_name': church_info['Local Name'],
-            'full_name': church_info['Full Name'],
-            'year_founded': church_info['Year Founded'],
-            'intro_sentence': church_info['Intro sentence'],
-            'history_blurb': church_info['History Blurb']
-        }
+
+        if pd.notnull(church_info['Longitude Coordinate']) and pd.notnull(church_info['Latitude Coordinate']) and pd.notnull(church_info['Local Name']):
+            # Prepara i dati specifici da passare al template
+            church_data = {
+                'local_name': church_info['Local Name'],
+                'full_name': church_info['Full Name'],
+                'year_founded': church_info['Year Founded'],
+                'intro_sentence': church_info['Intro sentence'],
+                'history_blurb': church_info['History Blurb'],
+                'longitude': church_info['Longitude Coordinate'],
+                'latitude': church_info['Latitude Coordinate']
+            }
 
 
         # Estrae i dati necessari dai reperti correlati alla chiesa trovata
