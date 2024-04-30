@@ -91,27 +91,18 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <script>
-        var webMap = null;
-        var view = null;
+
 
         require([
-            "esri/config",
-            "esri/Map",
-            "esri/views/MapView",
-            "esri/WebMap",
-            "esri/layers/FeatureLayer",
-            "esri/widgets/Search",
-            "esri/widgets/LayerList",
-            "esri/widgets/Compass",
-            "esri/widgets/Zoom",
-            "esri/widgets/ScaleBar",
-            "esri/widgets/BasemapToggle",
-            "esri/widgets/Attribution"
+            'esri/config',
+            'esri/Map',
+            'esri/views/MapView',
+            'esri/WebMap',
+            'esri/layers/FeatureLayer',
+
         ], function(esriConfig, Map, MapView, WebMap, FeatureLayer) {
-            if (!window.arcGISConfigured) {
-                esriConfig.apiKey = "AAPK28024a6180ac48739d279d7a90c08c37z2nA-K4du-xQN6XMFh2rgWo6uM53XTVwJg3XJ8OIXlN5y3i9uyRJh3S6dHbZdzn9";
-                window.arcGISConfigured = true;
-            }
+
+            esriConfig.apiKey = "AAPK2a2526a359db46e6b10ce18c8a226987idLBw7Pho1Go5z1MIYijwT9tZkICRaulgZW5wDcny32ZuHOJRfOiuo6CmPwlqKc8";
 
             var layer = new FeatureLayer({
                 url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer/0",
@@ -136,21 +127,24 @@
                 }
             });
 
-            webMap = new WebMap({
+
+            var map = new Map({
+                basemap: "streets-vector",
                 portalItem: {
-                    id: "5ae37f33f52a4eefbc098507ddd9f92d"
+                    id : "cb45f698056b42c88f62bdbc4cbf199f"
                 },
                 layers: [layer]
             });
 
-            view = new MapView({
-                container: "viewDiv",
-                map: webMap,
+            var view = new MapView({
+                container: "mapView",
+                map: map,
                 center: [parseFloat('{{ church_data.longitude }}'), parseFloat('{{ church_data.latitude }}')],
-                zoom: 17
+                zoom: 18
             });
         });
     </script>
+
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
             Artifacts
