@@ -11,14 +11,13 @@
 
     <style>
         body {
+            background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
+            color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
+            font-family: 'Playfair Display', serif; /* Font classico con grazie */
             background-image: url('/static/sfondoArchitettonico.jpg');
             background-size: cover;  /* Copre l'intera finestra di visualizzazione */
             background-position: center; /* Centra l'immagine sullo schermo */
             background-repeat: no-repeat;
-            background-color: #f8f0e0; /* Sfondo chiaro simile al marmo */
-            color: #5c2c2e; /* Tonalità intensa di rosso per il testo */
-            font-family: 'Playfair Display', serif; /* Font classico con grazie */
-
         }
         .header {
             display: flex;
@@ -110,6 +109,24 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        .ancient-font {
+            font-family: 'Garamond', serif; /* Font antico */
+            font-size: 24px; /* Dimensione del font */
+            color: #7c3034; /* Colore del testo */
+            text-transform: uppercase; /* Trasforma il testo in maiuscolo */
+        }
+
+        .latin-text {
+            font-family: 'Arial', sans-serif; /* Specifica il tipo di carattere (Arial) */
+            /* Aggiungi altri stili desiderati, come dimensione del carattere, colore, ecc. */
+        }
+
+        .transcription-container {
+            background-color: #f8f0e0; /* Colore di sfondo grigio chiaro */
+            padding: 20px; /* Aggiungi spaziatura interna per migliorare la leggibilità */
+            border-radius: 10px; /* Bordo arrotondato */
+        }
     </style>
 </head>
 <body>
@@ -166,6 +183,7 @@
             {% endif %}
             {% if material %}
             <h6><strong>Material</strong></h6>
+
             <p>{{ material }}</p>
             {% endif %}
             {% if shape %}
@@ -180,23 +198,25 @@
     </div>
     <div class="row">
         <div class="col-12">
-            {% if scritte %}
-            <h3><strong>Transcription:</strong></h3>
-            <p>{{ scritte }}</p>
-            {% else %}
-            <p>No transcription available for this artifact.</p>
-            {% endif %}
-            {% if traduzione %}
-            <h4><strong>Translation</strong></h4>
-            <p>{{ traduzione }}</p>
-            {% else %}
-            <p>No translation available for this artifacts.</p>
-            {% endif %}
+            <div class="transcription-container">
+                {% if scritte %}
+                <h3><strong><span class="ancient-font">Transcription:</span></strong></h3>
+                <p class="latin-text">{{ scritte }}</p>
+                {% else %}
+                <p>No transcription available for this artifact.</p>
+                {% endif %}
+                {% if traduzione %}
+                <h4><strong>Translation</strong></h4>
+                <p>{{ traduzione }}</p>
+                {% else %}
+                <p>No translation available for this artifacts.</p>
+                {% endif %}
+                <div class="hidden" id="translateForm">
+                    <textarea rows="4" placeholder="Type here your translation..."></textarea>
+                    <button class="button">Send Translation</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="hidden" id="translateForm">
-        <textarea rows="4" placeholder="Type here your translation..."></textarea>
-        <button class="button">Send Translation</button>
     </div>
 </div>
 
@@ -215,16 +235,22 @@
 <script>
     // Toggle the translation form
     function toggleTranslate() {
-        const user = firebase.auth().currentUser;
-        const form = document.getElementById('translateForm');
-        if (user) {
-            // L'utente è autenticato, cambia la visibilità del form
-            form.style.display = form.style.display === 'block' ? 'none' : 'block';
-        } else {
-            // L'utente non è autenticato, mostra un avviso
-            alert("Devi autenticarti per poter tradurre.");
-        }
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // L'utente è autenticato, mostra il form
+                var form = document.getElementById('translateForm');
+                if (form.style.display === 'none' || form.style.display === '') {
+                    form.style.display = 'block';
+                } else {
+                    form.style.display = 'none';
+                }
+            } else {
+                // L'utente non è autenticato, mostra un popup di avviso
+                alert("Devi autenticarti per poter tradurre.");
+            }
+        });
     }
+
 
     // Show the login modal
     function showLogin() {
