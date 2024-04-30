@@ -82,7 +82,7 @@ def search_church():
                 'intro_sentence': church_info['Intro sentence'],
                 'history_blurb': church_info['History Blurb'],
                 'longitude': church_info['Longitude Coordinate'],
-                'latitude': church_info['Latitude Coordinate']
+                'latitude': church_info['Latitude Coordinate'],
             }
 
         # Estrae i dati necessari dai reperti correlati alla chiesa trovata
@@ -136,6 +136,7 @@ def search_reperto():
     reperto_width = None
     reperto_shape = None
     reperto_type = None
+
 
     try:
         global dati_reperti
