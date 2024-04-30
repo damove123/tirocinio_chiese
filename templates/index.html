@@ -294,12 +294,14 @@
 
     // Aggiungi un gestore di eventi al bottone per cambiare lingua
     document.getElementById('switchLanguageBtn').addEventListener('click', switchLanguage);
+
 </script>
 
 <div class="container">
     <form id="search_form_chiesa" action="/" method="GET">
         <label for="chiesa_input">Search Church:</label>
         <input type="text" id="chiesa_input" name="query" placeholder="Type church's name...">
+        <ul id="chiesa_suggestions" class="suggestions"></ul>
         <button type="submit" class="search-button">Search</button>
     </form>
 
@@ -318,3 +320,4 @@
 
 </body>
 </html>
+

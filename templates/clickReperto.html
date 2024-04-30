@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettagli del Reperto</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -69,25 +68,32 @@
             }
         }
         /* Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+        .modal-dialog {
+            margin: 30px auto; /* Centra il modal verticalmente e orizzontalmente */
         }
+
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+            background-color: #fff; /* Colore di sfondo per il contenuto del modal */
+            border: 2px solid gold; /* Bordo dorato per il modal */
+            overflow: hidden; /* Previene il fuoriuscire dei contenuti quando zoommi */
         }
+
+        .modal-body {
+            padding: 5px; /* Rimuovi il padding per far aderire l'immagine ai bordi del modal */
+        }
+
+        .modal-body img {
+            transition: transform 0.5s ease; /* Effetto di transizione fluido per lo zoom */
+            display: block; /* Assicura che l'immagine non abbia spazi intorno */
+            width: 100%; /* L'immagine copre tutta la larghezza del modal-body */
+            height: auto; /* Mantiene l'aspect ratio dell'immagine */
+        }
+
+        .modal-body img:hover {
+            transform: scale(1.5); /* Scala l'immagine del 10% quando l'utente passa il mouse sopra */
+        }
+
         .close {
             color: #aaa;
             float: right;
@@ -115,10 +121,30 @@
     <div class="details-container">
         <div class="img-container">
             {% if immagini %}
-            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+            <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid" data-toggle="modal" data-target="#imageModal">
             {% else %}
             <p>No image available for this artifact.</p>
             {% endif %}
+        </div>
+        <!-- Modal per ingrandire l'immagine -->
+        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Immagine del Reperto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% if immagini %}
+                        <img src="{{ immagini }}" alt="Immagine del Reperto" class="img-fluid">
+                        {% else %}
+                        <p>No image available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="info-block">
             <h2>Artifact Code: {{ reperto }}</h2>
@@ -264,6 +290,7 @@
             modal.style.display = 'none';
         }
     }
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

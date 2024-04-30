@@ -7,11 +7,7 @@ import re
 import pandas as pd
 from difflib import SequenceMatcher
 
-
-
-
 app = Flask(__name__)
-
 
 dati_reperti = None
 
@@ -89,7 +85,6 @@ def search_church():
                 'latitude': church_info['Latitude Coordinate']
             }
 
-
         # Estrae i dati necessari dai reperti correlati alla chiesa trovata
         artifact_info = None
         with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
@@ -112,10 +107,12 @@ def search_church():
         scritte = [item['inscription'] for item in cleanData]
 
         # Passa le informazioni della chiesa e i dati dei reperti al template
-        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini, query=query)
+        return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini,
+                               query=query)
     except Exception as e:
         print(f"Error in search_church: {str(e)}")
         return render_template("index.html", message="Errore durante il processo di ricerca.")
+
 
 def formatta_nome(codice_reperto):
     uppercase_letters = codice_reperto.split('_')[0]
@@ -177,6 +174,7 @@ def search_reperto():
                                message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
                                        "valido.")
 
+
 @app.route('/search')
 def search():
     church_name = request.args.get('chiesa', '')
@@ -185,6 +183,7 @@ def search():
     closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, church_name).ratio()).idxmax()
     church_info = churches.iloc[closest_match]
     return render_template('results.html', church_info=church_info)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
