@@ -267,7 +267,7 @@
                 <p>No translation available for this artifacts.</p>
                 {% endif %}
                 <div class="hidden" id="translateForm">
-                    <form id="translation-form" method="POST" action="/save_translation">
+                    <form id="translation-form" method="POST">
                         <input type="hidden" name="reperto_code" value="{{ reperto }}">
                         <textarea name="translation" rows="4" placeholder="Type here your translation..."></textarea>
                         <button type="submit" class="button">Send Translation</button>
@@ -357,6 +357,16 @@
             auth.signOut();
         };
     });
+
+    window.addEventListener('unload', function() {
+        firebase.auth().signOut().then(function() {
+            // Disconnessione avvenuta con successo.
+        }).catch(function(error) {
+            // Gestione degli errori.
+            console.error("Errore durante la disconnessione:", error);
+        });
+    });
+
 
     // Close the modal if clicked outside of it
     window.onclick = function(event) {
