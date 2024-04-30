@@ -116,6 +116,73 @@
             padding: 20px; /* Aggiungi spaziatura interna per migliorare la leggibilità */
             border-radius: 10px; /* Bordo arrotondato */
         }
+
+
+        /* Stile per il modal */
+        .modal {
+            display: none; /* Nasconde il modal di default */
+            position: fixed; /* Posiziona il modal in modo fisso rispetto alla finestra del browser */
+            z-index: 1; /* Imposta l'indice z in modo che il modal sia sopra gli altri elementi della pagina */
+            left: 0;
+            top: 0;
+            width: 100%; /* Imposta la larghezza al 100% */
+            height: 100%; /* Imposta l'altezza al 100% */
+            overflow: auto; /* Abilita lo scrolling se il contenuto è più grande della finestra */
+            background-color: rgba(0,0,0,0.4); /* Sfondo semitrasparente */
+            padding-top: 60px; /* Spazio sopra il modal */
+        }
+
+        /* Stile per il contenuto del modal */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* Centra il modal verticalmente e orizzontalmente */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Imposta la larghezza del contenuto del modal */
+        }
+
+        /* Stile per il pulsante di chiusura */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Stile per gli input */
+        input[type=email], input[type=password] {
+            width: 100%; /* Imposta la larghezza al 100% */
+            padding: 12px 20px; /* Aggiunge spaziatura interna agli input */
+            margin: 8px 0; /* Aggiunge spaziatura esterna agli input */
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Bordo arrotondato */
+            box-sizing: border-box;
+        }
+
+        /* Stile per il pulsante di login */
+
+
+        /* Stile per il messaggio di errore */
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Media query per schermi più piccoli */
+        @media screen and (max-width: 600px) {
+            .modal-content {
+                width: 100%; /* Imposta la larghezza al 100% su schermi più piccoli */
+            }
+        }
+
     </style>
 </head>
 <body>
