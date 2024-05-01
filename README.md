@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Floor Tiles project! This project aims to showcase and document various types of floor tiles found in churches, especially focusing on those in the Venice area. 
+Welcome to the Floor Tiles project! This project aims to showcase and document various types of floor tiles found in churches, specifically focusing on those in the Venice area. 
 
 ## Purpose
 
