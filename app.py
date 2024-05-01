@@ -129,6 +129,7 @@ def search_reperto():
         return render_template("index.html", message="Inserisci il codice del reperto.")
 
     reperto_traduz = None
+    reperto_id = None
     reperto_url = None
     reperto_scritte = None
     reperto_condition = None
@@ -137,7 +138,6 @@ def search_reperto():
     reperto_width = None
     reperto_shape = None
     reperto_type = None
-
 
     try:
         global dati_reperti
@@ -149,6 +149,7 @@ def search_reperto():
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == query:
                 # Gestisce la possibilità che l'immagine non sia disponibile
+                reperto_id = reperto.get("birth_certificate_ckID", None)
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
                 reperto_traduz = reperto.get("data_Translation", None)
@@ -159,6 +160,12 @@ def search_reperto():
                 reperto_shape = reperto.get("data_Shape", None)
                 reperto_type = reperto.get("data_Type of Artifact", None)
                 break  # Esce dal ciclo una volta trovato il reperto corrispondente
+
+        if request.method == "POST":
+                    reperto_traduz = request.form['NEWtranslation']
+                    email = request.form['emailTK']
+                    uid = request.form['uidTK']
+                    data.update_translation(reperto_id, reperto_traduz,email,uid)
 
         if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
             return render_template("clickReperto.html", reperto=query, scritte=reperto_scritte,
