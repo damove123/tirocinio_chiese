@@ -84,7 +84,7 @@ def JtoCSV(dataList, filepath):
 def update_translation(id, translation,email,uid):
     # Initialize Firebase Admin SDK
     if not firebase_admin._apps:
-        cred = credentials.Certificate(json.loads(os.environ['FirebaseKeySDK']))
+        cred = credentials.Certificate(json.loads(os.getenv('FirebaseKeySDK')))
         firebase_admin.initialize_app(cred, {
             'databaseURL': 'https://cityknowledge.firebaseio.com'
         })
