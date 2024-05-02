@@ -9,6 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="main" level="application" />
+    <orderEntry type="library" name="lazysizes" level="application" />
+    <orderEntry type="library" name="firebase-app-compat" level="application" />
+    <orderEntry type="library" name="firebase-auth-compat" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
