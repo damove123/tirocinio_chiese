@@ -73,9 +73,14 @@
         #home-button:hover {
             background-color: #2980b9;
         }
+
         .card-img-top {
-            max-height: 150px; /* Imposta l'altezza massima dell'icona */
+            max-height: 100px; /* Imposta l'altezza massima dell'icona */
             object-fit: cover; /* Assicura che l'icona mantenga le proporzioni */
+        }
+
+        .card-title {
+            font-size: 16px; /* Imposta la dimensione del carattere desiderata */
         }
     </style>
 </head>
@@ -141,8 +146,7 @@
                 container: "mapView",
                 map: map,
                 center: [parseFloat('{{ church_data.longitude }}'), parseFloat('{{ church_data.latitude }}')],
-                zoom: 18,
-                rotation: 0
+                zoom: 17
             });
         });
     </script>
@@ -155,9 +159,9 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="repertiMenu">
             <!-- Qui puoi inserire altri elementi che appaiono nel menu dropdown se necessario -->
         </div>
-        <div class="row" id="repertiRow">
+        <div class="row" id="repertiRow" style="display: none;">
             {% for i in range(reperti|length) %}
-            <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
                 <div class="card">
                     {% if immagini[i] %}
                     <img src="/static/caricamento.jpg"
