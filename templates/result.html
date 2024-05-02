@@ -89,55 +89,48 @@
         <div id="mapView" style="height: 400px;"></div> <!-- Div per la mappa -->
     </div>
     <script>
+        // Impostazione della chiave dell'API
+        esriConfig.apiKey = "AAPK2a2526a359db46e6b10ce18c8a226987idLBw7Pho1Go5z1MIYijwT9tZkICRaulgZW5wDcny32ZuHOJRfOiuo6CmPwlqKc8";
 
-        require([
-            'esri/config',
-            'esri/Map',
-            'esri/views/MapView',
-            'esri/WebMap',
-            'esri/layers/FeatureLayer',
+        // Creazione del layer di feature
+        var layer = new FeatureLayer({
+            url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer",
+            outFields: ["*"],
+            popupTemplate: {
+                title: "Informazioni Reperto",
+                content: [{
+                    type: "fields",
+                    fieldInfos: [
+                        {
+                            fieldName: "Codice_Rep",
+                            label: "Artifact's Code",
+                            visible: true
+                        },
+                        {
+                            fieldName: "Codice_Chi",
+                            label: "Church's Code",
+                            visible: true
+                        }
+                    ]
+                }]
+            }
+        });
 
-        ], function(esriConfig, Map, MapView, WebMap, FeatureLayer) {
+        // Creazione della mappa
+        var map = new Map({
+            basemap: "streets-vector",
+            portalItem: {
+                id: "cb45f698056b42c88f62bdbc4cbf199f"
+            },
+            layers: [layer]
+        });
 
-            esriConfig.apiKey = "AAPK2a2526a359db46e6b10ce18c8a226987idLBw7Pho1Go5z1MIYijwT9tZkICRaulgZW5wDcny32ZuHOJRfOiuo6CmPwlqKc8";
-
-            var layer = new FeatureLayer({
-                url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer",
-                outFields: ["*"],
-                popupTemplate: {
-                    title: "Informazioni Reperto",
-                    content: [{
-                        type: "fields",
-                        fieldInfos: [
-                            {
-                                fieldName: "Codice_Rep",
-                                label: "Artifact's Code",
-                                visible: true
-                            },
-                            {
-                                fieldName: "Codice_Chi",
-                                label: "Church's Code",
-                                visible: true
-                            }
-                        ]
-                    }]
-                }
-            });
-
-            var map = new Map({
-                basemap: "streets-vector",
-                portalItem: {
-                    id : "cb45f698056b42c88f62bdbc4cbf199f"
-                },
-                layers: [layer]
-            });
-
-            var view = new MapView({
-                container: "mapView",
-                map: map,
-                center: [parseFloat('{{ church_data.longitude }}'), parseFloat('{{ church_data.latitude }}')],
-                zoom: 18
-            });
+        // Creazione della vista della mappa
+        var view = new MapView({
+            container: "mapView",
+            map: map,
+            center: [parseFloat('{{ church_data.longitude }}'), parseFloat('{{ church_data.latitude }}')],
+            zoom: 18
         });
     </script>
     <div class="dropdown">
