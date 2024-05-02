@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3be9a384-2746-4fbd-8335-8285a80cb70d" name="Changes" comment="commit" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;matteoMobi99&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Polli0/tirocinio_chiese.git&quot;,
+    &quot;accountId&quot;: &quot;c7b46bad-346f-4f5f-8ba4-1309069faa5f&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2efzlb2GnKjnAq6KV2XsTKP4o4U" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.clickReperto.html.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.firebase.js.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.map.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Matteo&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/matte/OneDrive/Documenti/tirocinio_chiese&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;aws.tools&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\matte\OneDrive\Documenti\tirocinio_chiese\static" />
+      <recent name="C:\Users\matte\OneDrive\Documenti\tirocinio_chiese\templates" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.app">
+    <configuration name="clickReperto.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/tirocinio_chiese/templates/clickReperto.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="tirocinio_chiese" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (base)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.PythonAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="map" type="PythonConfigurationType" factoryName="Python">
+      <module name="tirocinio_chiese" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11 (base)" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\matte\OneDrive\Documenti\tirocinio_chiese" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.PythonAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/map.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.clickReperto.html" />
+      <item itemvalue="Python.map" />
+      <item itemvalue="Python.app" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.app" />
+        <item itemvalue="JavaScript Debug.clickReperto.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3be9a384-2746-4fbd-8335-8285a80cb70d" name="Changes" comment="" />
+      <created>1712310574826</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1712310574826</updated>
+      <workItem from="1712310576722" duration="673000" />
+      <workItem from="1712311273658" duration="543000" />
+      <workItem from="1712311836918" duration="111000" />
+      <workItem from="1712311959439" duration="286000" />
+      <workItem from="1712312266339" duration="2690000" />
+      <workItem from="1712318764170" duration="235000" />
+      <workItem from="1712321592460" duration="7652000" />
+      <workItem from="1712334236692" duration="91000" />
+      <workItem from="1712647549558" duration="12516000" />
+      <workItem from="1712666389921" duration="6314000" />
+      <workItem from="1712735696219" duration="712000" />
+      <workItem from="1712750665253" duration="1195000" />
+      <workItem from="1712850428624" duration="179000" />
+      <workItem from="1712912300606" duration="15648000" />
+      <workItem from="1713252185526" duration="10133000" />
+      <workItem from="1713295370681" duration="7190000" />
+      <workItem from="1713511066448" duration="10271000" />
+      <workItem from="1713522868301" duration="9810000" />
+      <workItem from="1713556795600" duration="272000" />
+      <workItem from="1713856813052" duration="21436000" />
+      <workItem from="1713962559484" duration="13445000" />
+      <workItem from="1714115890829" duration="15676000" />
+      <workItem from="1714382672743" duration="40071000" />
+    </task>
+    <task id="LOCAL-00015" summary="aggiornato">
+      <option name="closed" value="true" />
+      <created>1713531598029</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1713531598029</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Corretto e aggiornato">
+      <option name="closed" value="true" />
+      <created>1713532032720</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1713532032720</updated>
+    </task>
+    <task id="LOCAL-00017" summary="file inutili cancellati">
+      <option name="closed" value="true" />
+      <created>1713533300963</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713533300963</updated>
+    </task>
+    <task id="LOCAL-00018" summary="super floor tiles 2012">
+      <option name="closed" value="true" />
+      <created>1713534436252</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1713534436252</updated>
+    </task>
+    <task id="LOCAL-00019" summary="modifiche">
+      <option name="closed" value="true" />
+      <created>1713537051424</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713537051425</updated>
+    </task>
+    <task id="LOCAL-00020" summary="modifiche a click reperto e ora si vede la casella di testo se vuoi tradurre">
+      <option name="closed" value="true" />
+      <created>1713859888693</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1713859888693</updated>
+    </task>
+    <task id="LOCAL-00021" summary="modifiche a app.py e clickReperto.html per cui passa la traduzione del reperto">
+      <option name="closed" value="true" />
+      <created>1713861312839</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1713861312839</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Modifiche a result.html per cui se clicco su dettagli di un reperto mi apre clickReperto">
+      <option name="closed" value="true" />
+      <created>1713863361087</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1713863361087</updated>
+    </task>
+    <task id="LOCAL-00023" summary="aggiunta lazy">
+      <option name="closed" value="true" />
+      <created>1713866580226</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1713866580226</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Ora si ricorda i dati caricati se sono della stessa chiesa. Aggiunto &quot;torna alla homepage&quot; che resetta la var globale">
+      <option name="closed" value="true" />
+      <created>1713869330629</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1713869330629</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Funzione trova_miglior_corrispondenza aggiornata e funzionante">
+      <option name="closed" value="true" />
+      <created>1713876732292</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1713876732293</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Corretta la funzione per cercare i reperti">
+      <option name="closed" value="true" />
+      <created>1713876857901</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1713876857901</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Commit corretto">
+      <option name="closed" value="true" />
+      <created>1713877675814</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1713877675814</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Pagina clickReperto con più dati e fatto romanico">
+      <option name="closed" value="true" />
+      <created>1713881489459</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1713881489460</updated>
+    </task>
+    <task id="LOCAL-00029" summary="eliminato cose inutili">
+      <option name="closed" value="true" />
+      <created>1713881718480</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1713881718480</updated>
+    </task>
+    <task id="LOCAL-00030" summary="click reperto in inglese">
+      <option name="closed" value="true" />
+      <created>1713883005006</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1713883005007</updated>
+    </task>
+    <task id="LOCAL-00031" summary="sistemato bug reperti">
+      <option name="closed" value="true" />
+      <created>1713883360296</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1713883360296</updated>
+    </task>
+    <task id="LOCAL-00032" summary="cambiate le scritte in inglese">
+      <option name="closed" value="true" />
+      <created>1713962971116</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1713962971116</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Migliorata funzione click della mappa. Ora si vedono solo 2 dati e puoi cambiare reperto senza che si impalli">
+      <option name="closed" value="true" />
+      <created>1713970025959</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1713970025959</updated>
+    </task>
+    <task id="LOCAL-00034" summary="aggiunta info e super church">
+      <option name="closed" value="true" />
+      <created>1713972302783</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1713972302783</updated>
+    </task>
+    <task id="LOCAL-00035" summary="icona">
+      <option name="closed" value="true" />
+      <created>1713972508453</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1713972508453</updated>
+    </task>
+    <task id="LOCAL-00036" summary="icona">
+      <option name="closed" value="true" />
+      <created>1713972715835</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1713972715835</updated>
+    </task>
+    <task id="LOCAL-00037" summary="icona si vede">
+      <option name="closed" value="true" />
+      <created>1713973196042</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1713973196042</updated>
+    </task>
+    <task id="LOCAL-00038" summary="icona si vede">
+      <option name="closed" value="true" />
+      <created>1713973511485</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1713973511485</updated>
+    </task>
+    <task id="LOCAL-00039" summary="aggiunto bottone e funzionalità multilingua sulle info">
+      <option name="closed" value="true" />
+      <created>1713977982227</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1713977982227</updated>
+    </task>
+    <task id="LOCAL-00040" summary="stavo per fare casini ora tutto ok">
+      <option name="closed" value="true" />
+      <created>1713980810440</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1713980810441</updated>
+    </task>
+    <task id="LOCAL-00041" summary="cambiati stili su clickReperto">
+      <option name="closed" value="true" />
+      <created>1714116821386</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1714116821386</updated>
+    </task>
+    <task id="LOCAL-00042" summary="boh">
+      <option name="closed" value="true" />
+      <created>1714117372960</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1714117372960</updated>
+    </task>
+    <task id="LOCAL-00043" summary="login attivato">
+      <option name="closed" value="true" />
+      <created>1714118881026</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1714118881026</updated>
+    </task>
+    <task id="LOCAL-00044" summary="login attivato come popup">
+      <option name="closed" value="true" />
+      <created>1714121693548</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1714121693548</updated>
+    </task>
+    <task id="LOCAL-00045" summary="aggiunto sfondo">
+      <option name="closed" value="true" />
+      <created>1714128779683</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1714128779684</updated>
+    </task>
+    <task id="LOCAL-00046" summary="aggiunto sfondo">
+      <option name="closed" value="true" />
+      <created>1714128829777</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1714128829777</updated>
+    </task>
+    <task id="LOCAL-00047" summary="visione mappa">
+      <option name="closed" value="true" />
+      <created>1714131865139</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1714131865139</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Result ora mostra info chiese. Dovrei anche aver messo a posto l'autenticazione con la traduzione facendo uscire una popup">
+      <option name="closed" value="true" />
+      <created>1714387163470</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1714387163470</updated>
+    </task>
+    <task id="LOCAL-00049" summary="stile">
+      <option name="closed" value="true" />
+      <created>1714393131133</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1714393131133</updated>
+    </task>
+    <task id="LOCAL-00050" summary="funziona la mappa su result.html. &gt;Vi prego non toccate sto codice">
+      <option name="closed" value="true" />
+      <created>1714465343136</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1714465343139</updated>
+    </task>
+    <task id="LOCAL-00051" summary="intestato bene">
+      <option name="closed" value="true" />
+      <created>1714466296757</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1714466296758</updated>
+    </task>
+    <task id="LOCAL-00052" summary="popup autenticazione e traduzione sistemata">
+      <option name="closed" value="true" />
+      <created>1714468418581</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1714468418581</updated>
+    </task>
+    <task id="LOCAL-00053" summary="popup autenticazione e traduzione sistemata">
+      <option name="closed" value="true" />
+      <created>1714468557523</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1714468557524</updated>
+    </task>
+    <task id="LOCAL-00054" summary="tentativo">
+      <option name="closed" value="true" />
+      <created>1714470331474</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1714470331474</updated>
+    </task>
+    <task id="LOCAL-00055" summary="cambiata mappa inserita nuova">
+      <option name="closed" value="true" />
+      <created>1714471564593</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1714471564593</updated>
+    </task>
+    <task id="LOCAL-00056" summary="tentativo url layer">
+      <option name="closed" value="true" />
+      <created>1714472317617</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1714472317617</updated>
+    </task>
+    <task id="LOCAL-00057" summary="stile login">
+      <option name="closed" value="true" />
+      <created>1714473095783</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1714473095783</updated>
+    </task>
+    <task id="LOCAL-00058" summary="risolto bug ricerca chiese e chiesa a Burano inesistente">
+      <option name="closed" value="true" />
+      <created>1714480485865</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1714480485866</updated>
+    </task>
+    <task id="LOCAL-00059" summary="visualizzazione reperti e non reperti">
+      <option name="closed" value="true" />
+      <created>1714481011831</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1714481011831</updated>
+    </task>
+    <task id="LOCAL-00060" summary="funziona">
+      <option name="closed" value="true" />
+      <created>1714482154844</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1714482154845</updated>
+    </task>
+    <task id="LOCAL-00061" summary="login che si stacca se esci">
+      <option name="closed" value="true" />
+      <created>1714482507643</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1714482507643</updated>
+    </task>
+    <task id="LOCAL-00062" summary="sbagliato, devo prendere dal mater per clickreperto">
+      <option name="closed" value="true" />
+      <created>1714483797106</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1714483797106</updated>
+    </task>
+    <task id="LOCAL-00063" summary="commit">
+      <option name="closed" value="true" />
+      <created>1714487284255</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1714487284255</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="icona" />
+    <MESSAGE value="icona si vede" />
+    <MESSAGE value="aggiunto bottone e funzionalità multilingua sulle info" />
+    <MESSAGE value="stavo per fare casini ora tutto ok" />
+    <MESSAGE value="cambiati stili su clickReperto" />
+    <MESSAGE value="boh" />
+    <MESSAGE value="login attivato" />
+    <MESSAGE value="login attivato come popup" />
+    <MESSAGE value="aggiunto sfondo" />
+    <MESSAGE value="visione mappa" />
+    <MESSAGE value="Result ora mostra info chiese. Dovrei anche aver messo a posto l'autenticazione con la traduzione facendo uscire una popup" />
+    <MESSAGE value="stile" />
+    <MESSAGE value="funziona la mappa su result.html. &gt;Vi prego non toccate sto codice" />
+    <MESSAGE value="intestato bene" />
+    <MESSAGE value="popup autenticazione e traduzione sistemata" />
+    <MESSAGE value="tentativo" />
+    <MESSAGE value="cambiata mappa inserita nuova" />
+    <MESSAGE value="tentativo url layer" />
+    <MESSAGE value="stile login" />
+    <MESSAGE value="risolto bug ricerca chiese e chiesa a Burano inesistente" />
+    <MESSAGE value="visualizzazione reperti e non reperti" />
+    <MESSAGE value="funziona" />
+    <MESSAGE value="login che si stacca se esci" />
+    <MESSAGE value="sbagliato, devo prendere dal mater per clickreperto" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$map.coverage" NAME="map Coverage Results" MODIFIED="1712670547882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\matte\OneDrive\Documenti\tirocinio_chiese" />
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$clickReperto_html.dat" NAME="clickReperto.html Coverage Results" MODIFIED="1714120830131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="WipCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$app.coverage" NAME="app Coverage Results" MODIFIED="1714486806375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
