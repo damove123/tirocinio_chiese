@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="un po' di commenti">
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
-    </list>
+    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="un po' di commenti" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,7 +105,10 @@
       <recent name="$PROJECT_DIR$/template" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.app (1)">
+  <component name="RunManager" selected="JavaScript Debug.result.html">
+    <configuration name="result.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/tirocinio_chiese/templates/result.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="tirocinio_chiese" />
       <option name="ENV_FILES" value="" />
@@ -179,17 +179,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JavaScript Debug.result.html" />
       <item itemvalue="Python.app (1)" />
       <item itemvalue="Python.data" />
       <item itemvalue="Python.app" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.result.html" />
         <item itemvalue="Python.app (1)" />
         <item itemvalue="Python.data" />
         <item itemvalue="Python.app" />
         <item itemvalue="Python.app (1)" />
-        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -236,14 +237,6 @@
       <workItem from="1714462429287" duration="6521000" />
       <workItem from="1714469683592" duration="3806000" />
       <workItem from="1714479710374" duration="1642000" />
-    </task>
-    <task id="LOCAL-00004" summary="stampa chiese su web app">
-      <option name="closed" value="true" />
-      <created>1712325961124</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1712325961124</updated>
     </task>
     <task id="LOCAL-00005" summary="Barra di ricerca">
       <option name="closed" value="true" />
@@ -629,7 +622,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714654250876</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="un po' di commenti">
+      <option name="closed" value="true" />
+      <created>1714655011858</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1714655011858</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
