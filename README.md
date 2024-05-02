@@ -30,6 +30,37 @@ Maps :
 Styles :
 - there is no consistency in the styles. 
 
+Index.html : 
+- menu with help, credits
+- compress the page
+
+Arcgis : 
+- eliminate the sketch layer, create a FeatureLayer with popups of the church from which you can click and opens result.html with the artifacts
+- missing floor-plants and artifacts
+- add layer 'chiese_laguna'
+- link artifacts_layer and data_artifacts to color artifacts by degree of completion (same for churches)
+- search for a good satellite base-map
+- fix alignment of search-box in map
+
 JS : 
 - Extraction JS code from all the html files 
+
+Transcription: 
+- help for transcription syntax (look in 2004 box)
+
+result.html : 
+- artifact's botton smaller
+- IDEA : the button is thought with an addition of "Floor image", "Arts", ecc (The data exist in the 2004 bucket on FIrebase and AWS S3)
+- show number of artifacts, number of inscription, number of incomplete artifacts : https://docs.google.com/document/d/1Z0OByWWDto5QMQCBp8fMlwid5n7-xADqeJoRoAwrjF4/edit
+
+clickReperto.hmtl : 
+- add a library/function for photo manipulation (rotation, sharpening)
+
+Churches: 
+- link the database of the churches (remove the reading from the csv)
+- create an ULTIMATE database for the churches 
+
+Artifact
+- add some fields like "Name", "Surname", "Profession"... as in the reperti.csv file of 2004
+
 

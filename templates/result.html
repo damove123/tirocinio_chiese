@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results of search for "{{ query }}"</title>
+    <title>"{{ query }}"</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <link rel="icon" href="/static/icon.ico" type="image/x-icon">
@@ -87,7 +87,7 @@
 <body>
 <a href="/" class="btn btn-primary" id="home-button">Homepage</a>
 <div class="container">
-    <h2>Results of search for "{{ query }}"</h2>
+    <h2>"{{ query }}"</h2>
     <div class="church-info">
         <p><strong>Local Name:</strong> {{ church_data.local_name }}</p>
         <p><strong>Full Name:</strong> {{ church_data.full_name }}</p>

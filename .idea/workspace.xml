@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="Modifiche visualizzazione" />
+    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="cliiiiickkkkk">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +37,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/Matteo" />
+    <option name="BRANCH" value="origin/master" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
@@ -69,33 +73,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Node.js.app.js.executor&quot;: &quot;Run&quot;,
-    &quot;Node.js.firebase.js.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data.executor&quot;: &quot;Coverage&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/pietro/Scrivania2/tirocinio_chiese&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.2421875&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.result.html.executor": "Run",
+    "Node.js.app.js.executor": "Run",
+    "Node.js.firebase.js.executor": "Run",
+    "Python.app (1).executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.data.executor": "Coverage",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Matteo",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/pietro/Scrivania2/tirocinio_chiese",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.2421875",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static" />
@@ -106,6 +111,9 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.app (1)">
+    <configuration name="result.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/tirocinio_chiese/templates/result.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="tirocinio_chiese" />
       <option name="ENV_FILES" value="" />
@@ -175,13 +183,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.result.html" />
+      <item itemvalue="Python.app (1)" />
+      <item itemvalue="Python.data" />
+      <item itemvalue="Python.app" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.app (1)" />
+        <item itemvalue="JavaScript Debug.result.html" />
         <item itemvalue="Python.data" />
         <item itemvalue="Python.app" />
         <item itemvalue="Python.app (1)" />
-        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
@@ -228,22 +242,6 @@
       <workItem from="1714462429287" duration="6521000" />
       <workItem from="1714469683592" duration="3806000" />
       <workItem from="1714479710374" duration="1642000" />
-    </task>
-    <task id="LOCAL-00005" summary="Barra di ricerca">
-      <option name="closed" value="true" />
-      <created>1712329366167</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1712329366167</updated>
-    </task>
-    <task id="LOCAL-00006" summary="update">
-      <option name="closed" value="true" />
-      <created>1713252308383</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1713252308383</updated>
     </task>
     <task id="LOCAL-00007" summary="update css">
       <option name="closed" value="true" />
@@ -581,47 +579,63 @@
       <option name="project" value="LOCAL" />
       <updated>1714641181007</updated>
     </task>
-    <task id="LOCAL-00049" summary="Risolto errore mappa">
+    <task id="LOCAL-00049" summary="messo a posto mappa">
       <option name="closed" value="true" />
-      <created>1714642812896</created>
+      <created>1714644517816</created>
       <option name="number" value="00049" />
       <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
-      <updated>1714642812896</updated>
+      <updated>1714644517816</updated>
     </task>
-    <task id="LOCAL-00050" summary="Risolto errore mappa">
+    <task id="LOCAL-00050" summary="un po' di commenti">
       <option name="closed" value="true" />
-      <created>1714654477050</created>
+      <created>1714646201665</created>
       <option name="number" value="00050" />
       <option name="presentableId" value="LOCAL-00050" />
       <option name="project" value="LOCAL" />
-      <updated>1714654477051</updated>
+      <updated>1714646201665</updated>
     </task>
-    <task id="LOCAL-00051" summary="Modifiche visualizzazione">
+    <task id="LOCAL-00051" summary="un po' di commenti">
       <option name="closed" value="true" />
-      <created>1714655775518</created>
+      <created>1714646470893</created>
       <option name="number" value="00051" />
       <option name="presentableId" value="LOCAL-00051" />
       <option name="project" value="LOCAL" />
-      <updated>1714655775518</updated>
+      <updated>1714646470895</updated>
     </task>
-    <task id="LOCAL-00052" summary="Modifiche visualizzazione">
+    <task id="LOCAL-00052" summary="un po' di commenti">
       <option name="closed" value="true" />
-      <created>1714656845302</created>
+      <created>1714654250876</created>
       <option name="number" value="00052" />
       <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1714656845302</updated>
+      <updated>1714654250876</updated>
     </task>
-    <task id="LOCAL-00053" summary="Modifiche visualizzazione">
+    <task id="LOCAL-00053" summary="un po' di commenti">
       <option name="closed" value="true" />
-      <created>1714657136435</created>
+      <created>1714655011858</created>
       <option name="number" value="00053" />
       <option name="presentableId" value="LOCAL-00053" />
       <option name="project" value="LOCAL" />
-      <updated>1714657136435</updated>
+      <updated>1714655011858</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="un po' di commenti">
+      <option name="closed" value="true" />
+      <created>1714655823929</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1714655823929</updated>
+    </task>
+    <task id="LOCAL-00055" summary="cliiiiickkkkk">
+      <option name="closed" value="true" />
+      <created>1714656925533</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1714656925533</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -639,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="aggiunto connessione al database" />
     <MESSAGE value="aggiunto connessione al database con js" />
     <MESSAGE value="stampa chiese su web app" />
     <MESSAGE value="Barra di ricerca" />
@@ -662,13 +675,14 @@
     <MESSAGE value="Risolto immagini assenti" />
     <MESSAGE value="Risolto favico" />
     <MESSAGE value="Risolto errore container" />
-    <MESSAGE value="Risolto errore mappa" />
-    <MESSAGE value="Modifiche visualizzazione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifiche visualizzazione" />
+    <MESSAGE value="messo a posto mappa" />
+    <MESSAGE value="un po' di commenti" />
+    <MESSAGE value="cliiiiickkkkk" />
+    <option name="LAST_COMMIT_MESSAGE" value="cliiiiickkkkk" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/tirocinio_chiese$tirocinio_chiese.coverage" NAME="tirocinio_chiese Coverage Results" MODIFIED="1714481963336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/tirocinio_chiese$app.coverage" NAME="app Coverage Results" MODIFIED="1713272797723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714656313474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714656724358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
