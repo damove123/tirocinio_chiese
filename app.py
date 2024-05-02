@@ -3,6 +3,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, f
 from fuzzywuzzy import process
 import csv
 import data
+import os
 import re
 import pandas as pd
 from difflib import SequenceMatcher
@@ -233,4 +234,4 @@ def search_reperto():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=os.environ['debug'])
