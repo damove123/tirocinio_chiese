@@ -179,7 +179,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ reperti[i] }}</h5>
                         <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
-                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
+                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary" onsubmit="return disableButton(this);">Details</a>
                     </div>
                 </div>
             </div>

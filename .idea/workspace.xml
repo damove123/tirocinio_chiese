@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="Risolto errore mappa">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="Modifiche visualizzazione">
       <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,14 +230,6 @@
       <workItem from="1714462429287" duration="6521000" />
       <workItem from="1714469683592" duration="3806000" />
       <workItem from="1714479710374" duration="1642000" />
-    </task>
-    <task id="LOCAL-00002" summary="aggiunto connessione al database con js">
-      <option name="closed" value="true" />
-      <created>1712311901722</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1712311901722</updated>
     </task>
     <task id="LOCAL-00003" summary="stampa chiese su web app">
       <option name="closed" value="true" />
@@ -625,7 +615,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714654477051</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Modifiche visualizzazione">
+      <option name="closed" value="true" />
+      <created>1714655775518</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1714655775518</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,11 +665,12 @@
     <MESSAGE value="Risolto favico" />
     <MESSAGE value="Risolto errore container" />
     <MESSAGE value="Risolto errore mappa" />
-    <option name="LAST_COMMIT_MESSAGE" value="Risolto errore mappa" />
+    <MESSAGE value="Modifiche visualizzazione" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifiche visualizzazione" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/tirocinio_chiese$tirocinio_chiese.coverage" NAME="tirocinio_chiese Coverage Results" MODIFIED="1714481963336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/tirocinio_chiese$app.coverage" NAME="app Coverage Results" MODIFIED="1713272797723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714655660432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714656313474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
