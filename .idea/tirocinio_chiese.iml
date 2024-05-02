@@ -13,6 +13,10 @@
     <orderEntry type="library" name="firebase-app-compat" level="application" />
     <orderEntry type="library" name="firebase-auth-compat" level="application" />
   </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="GOOGLE" />
+    <option name="myDocStringFormat" value="Google" />
+  </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
       <list>
