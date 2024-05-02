@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="Risolto nomi rotti">
+    <list default="true" id="b596b467-eaa1-4079-9ab6-2ab6d399e98e" name="Changes" comment="Risolto errore container">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +36,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/master" />
+    <option name="BRANCH" value="origin/Matteo" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
@@ -83,7 +82,7 @@
     "Python.app.executor": "Run",
     "Python.data.executor": "Coverage",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Matteo",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/pietro/Scrivania2/tirocinio_chiese",
     "list.type.of.created.stylesheet": "CSS",
@@ -179,11 +178,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.app (1)" />
-      <item itemvalue="Python.data" />
-      <item itemvalue="Python.app" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.app (1)" />
@@ -598,7 +592,31 @@
       <option name="project" value="LOCAL" />
       <updated>1714639888344</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Risolto immagini assenti">
+      <option name="closed" value="true" />
+      <created>1714640694382</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1714640694382</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Risolto favico">
+      <option name="closed" value="true" />
+      <created>1714640916733</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1714640916733</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Risolto errore container">
+      <option name="closed" value="true" />
+      <created>1714641181007</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1714641181007</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,11 +654,14 @@
     <MESSAGE value="update" />
     <MESSAGE value="Risolto bug search_reperto" />
     <MESSAGE value="Risolto nomi rotti" />
-    <option name="LAST_COMMIT_MESSAGE" value="Risolto nomi rotti" />
+    <MESSAGE value="Risolto immagini assenti" />
+    <MESSAGE value="Risolto favico" />
+    <MESSAGE value="Risolto errore container" />
+    <option name="LAST_COMMIT_MESSAGE" value="Risolto errore container" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/tirocinio_chiese$tirocinio_chiese.coverage" NAME="tirocinio_chiese Coverage Results" MODIFIED="1714481963336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/tirocinio_chiese$app.coverage" NAME="app Coverage Results" MODIFIED="1713272797723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714642722423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tirocinio_chiese$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1714642726138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
