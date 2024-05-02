@@ -105,7 +105,7 @@
         ], function(esriConfig, Map, MapView, WebMap, FeatureLayer) {
 
             esriConfig.apiKey = "AAPK2a2526a359db46e6b10ce18c8a226987idLBw7Pho1Go5z1MIYijwT9tZkICRaulgZW5wDcny32ZuHOJRfOiuo6CmPwlqKc8";
-
+            // same layer of the other map on index.html
             var layer = new FeatureLayer({
                 url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer",
                 outFields: ["*"],
@@ -132,6 +132,7 @@
             var map = new Map({
                 basemap: "streets-vector",
                 portalItem: {
+                    // different map id
                     id : "cb45f698056b42c88f62bdbc4cbf199f"
                 },
                 layers: [layer]
@@ -140,6 +141,7 @@
             var view = new MapView({
                 container: "mapView",
                 map: map,
+                // it centers the map on the coordinates of the church with the data in Churches.csv
                 center: [parseFloat('{{ church_data.longitude }}'), parseFloat('{{ church_data.latitude }}')],
                 zoom: 18
             });
@@ -148,6 +150,7 @@
     <div class="dropdown">
         {% if immagini %}
         <!-- Se ci sono immagini, mostra il bottone dropdown e i reperti -->
+        <!-- if there are images, it shows the button dropdown and artifacts -->
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
             Artifacts
         </button>
