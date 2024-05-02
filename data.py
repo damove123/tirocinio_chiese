@@ -1,5 +1,10 @@
 from firebase import firebase
+import firebase_admin
+from firebase_admin import auth
+from firebase_admin import credentials, db
 import pandas as pd
+import os
+import json
 from tqdm import tqdm
 import csv
 from joblib import parallel_backend, Parallel, delayed
@@ -74,3 +79,19 @@ def JtoCSV(dataList, filepath):
             writer.writerow(row)
 
     print("finished writing to file: " + filepath)
+
+
+def update_translation(id, translation,email,uid):
+    # Initialize Firebase Admin SDK
+    if not firebase_admin._apps:
+        cred = credentials.Certificate(json.loads(os.getenv('FirebaseKeySDK')))
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://cityknowledge.firebaseio.com'
+        })
+    print(email, uid)
+    check_email = auth.get_user(uid).email
+    if check_email == email:
+        ref = db.reference(f'/data/{id}')
+        ref.update({'Translation':translation})
+    else:
+        print("Are you logged in?")
