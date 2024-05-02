@@ -182,7 +182,7 @@
                         <h5 class="card-title">{{ reperti[i] }}</h5>
                         <!-- Details Button which get you to the page of the specific artifact -->
 
-                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
+                        <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary" onclick="handleLinkClick(event);">Details</a>
                     </div>
                 </div>
             </div>
@@ -240,6 +240,22 @@
                 });
             }
         });
+
+        // inizialize a var to check if a (details) button has been clicked
+        let isClicked = false;
+
+        // Function to handle the click
+        function handleLinkClick(event) {
+            if (isClicked) {
+                event.preventDefault();
+            } else {
+                isClicked = true;
+            }
+        }
+
+
+
+
 
     </script>
 </div>
