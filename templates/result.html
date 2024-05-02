@@ -159,6 +159,12 @@
                          alt="Immagine del reperto"
                          class="card-img-top lazyload"
                          loading="lazy">
+                    {% else %}
+                    <img src="/static/caricamento.jpg"
+                         data-src="/static/noimage.jpg"
+                         alt="Immagine del reperto"
+                         class="card-img-top lazyload"
+                         loading="lazy">
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ reperti[i] }}</h5>
