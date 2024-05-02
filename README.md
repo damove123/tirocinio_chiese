@@ -27,8 +27,7 @@ We welcome contributions from individuals who are passionate about preserving cu
 File index.html --> 
 - the map is not oriented. 
 
-File results.html --> 
-- there is a problem with the Map. Sometimes it works sometimes it doesn't. The console gives an error of "Multiple Define" by the Dojo Loader. There could be also an error with the layer. We can't undestrand why the map works perfectly in index.html and it does not in result.html. It is another map.
+
 
 Styles -->
 - there is no consistency in the styles. 
