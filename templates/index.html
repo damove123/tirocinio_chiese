@@ -35,9 +35,12 @@
                 window.arcGISConfigured = true;
             }
 
+
+            // layer on arcgis of the artifacts
             var layer = new FeatureLayer({
                 url: "https://services7.arcgis.com/BEVijU9IvwRENrmx/arcgis/rest/services/artifacts_web3/FeatureServer/0",
                 outFields: ["*"],
+                // here we decide to show these features
                 popupTemplate: {
                     title: "Informazioni Reperto",
                     content: [{
@@ -72,6 +75,7 @@
                 zoom: 12
             });
 
+            // tools for the map
             var searchWidget = new Search({ view: view });
             view.ui.add(searchWidget, { position: "top-right" });
             var compassWidget = new Compass({ view: view });
@@ -82,20 +86,20 @@
             view.ui.add(basemapToggle, { position: "bottom-right" });
 
             view.on("click", function(event) {
-                // Esegui il test di hit per trovare le feature al punto cliccato
+                // do a hit test to find the feature at the clicked point
                 view.hitTest(event).then(function(response) {
                     if (response.results.length > 0) {
                         var graphic = response.results.filter(function(result) {
                             return result.graphic.layer === layer;
                         })[0].graphic;
 
-                        // Apri la popup al punto cliccato
+                        // Open popup
                         view.popup.open({
                             features: [graphic],
                             location: event.mapPoint
                         });
 
-                        // Aggiorna il campo di input con il codice del reperto
+                        // update input with artifact's code
                         if (graphic.attributes && graphic.attributes.Codice_Rep) {
                             var codiceRep = graphic.attributes.Codice_Rep;
                             document.getElementById('reperto_input').value = codiceRep;
@@ -227,7 +231,7 @@
 <body>
 <h1>FLOOR-TILES</h1>
 <div class="container">
-    <!-- Bottone che attiva il modal -->
+    <!-- Button that activates the modal -->
     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#infoModal">
         Info
     </button>
@@ -251,7 +255,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                    <!-- Bottone per cambiare lingua -->
+                    <!-- button to change language -->
                     <button type="button" class="btn btn-primary" id="switchLanguageBtn">Switch to English</button>
                 </div>
             </div>
@@ -261,16 +265,16 @@
 </div>
 
 <script>
-    // Funzione per cambiare la lingua e tradurre il testo del modal
+    // function to change language and translate the modal text
     function switchLanguage() {
         // Controlla la lingua attuale
         var currentLanguage = document.documentElement.lang;
 
-        // Se la lingua attuale è l'italiano, cambiala in inglese e traduci il testo del modal
+        // ITA --> ENG
         if (currentLanguage === 'it') {
             document.documentElement.lang = 'en';
 
-            // Traduzione del testo del modal in inglese
+            // ENG
             document.getElementById('infoModalLabel').innerText = 'Application Information';
             document.querySelector('.modal-body').innerHTML = `
                 <strong>Welcome to the interactive view of our map!</strong><br><br>
@@ -282,10 +286,10 @@
             document.querySelector('.modal-footer .btn-secondary').innerText = 'Close';
             document.getElementById('switchLanguageBtn').innerText = 'Cambia in italiano';
         } else {
-            // Se la lingua attuale è l'inglese, cambiala in italiano e traduci il testo del modal
+            // ENG --> ITA
             document.documentElement.lang = 'it';
 
-            // Traduzione del testo del modal in italiano
+            // ITA
             document.getElementById('infoModalLabel').innerText = 'Informazioni sull\'Applicazione';
             document.querySelector('.modal-body').innerHTML = `
                 <strong>Benvenuto nella visualizzazione interattiva della nostra mappa!</strong><br><br>
@@ -299,7 +303,7 @@
         }
     }
 
-    // Aggiungi un gestore di eventi al bottone per cambiare lingua
+    // add event button to change language
     document.getElementById('switchLanguageBtn').addEventListener('click', switchLanguage);
 
 

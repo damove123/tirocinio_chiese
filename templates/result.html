@@ -187,33 +187,46 @@
     </div>
 
     <script>
+        // Wait until the DOM is fully loaded before executing any scripts
         $(document).ready(function() {
-            // Toggle per visualizzare i reperti
+            // This function sets up a click event handler on elements with the class "dropdown-toggle"
             $(".dropdown-toggle").click(function() {
+                // Toggle visibility of the element with id "repertiRow" each time a "dropdown-toggle" element is clicked
                 $("#repertiRow").toggle();
             });
         });
 
+        // Listen for the event that the entire content of the DOM has been loaded
         document.addEventListener("DOMContentLoaded", function() {
+            // Collect all 'img' elements with the class 'lazyload' into an array
             var lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
 
+            // Check if the browser supports the IntersectionObserver API, which helps in handling lazy loading of images efficiently
             if ("IntersectionObserver" in window) {
+                // Create a new IntersectionObserver object that will load images when they become visible in the viewport
                 let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    // Loop through each entry, which represents an image being observed
                     entries.forEach(function(entry) {
+                        // Check if the image has intersected with the viewport
                         if (entry.isIntersecting) {
                             let lazyImage = entry.target;
+                            // Change the image source from the data-src attribute to src to start loading the image
                             lazyImage.src = lazyImage.dataset.src;
+                            // Remove the 'lazyload' class once the image has loaded
                             lazyImage.classList.remove("lazyload");
+                            // Stop observing the image since it's now loaded
                             lazyImageObserver.unobserve(lazyImage);
                         }
                     });
                 });
 
+                // Start observing each lazy-loaded image using the IntersectionObserver created above
                 lazyImages.forEach(function(lazyImage) {
                     lazyImageObserver.observe(lazyImage);
                 });
             } else {
-                // Fallback per i browser che non supportano IntersectionObserver
+                // If the browser does not support IntersectionObserver, fall back to eager loading of images
+                // This loop directly assigns the image sources, bypassing lazy loading
                 lazyImages.forEach(function(lazyImage) {
                     lazyImage.src = lazyImage.dataset.src;
                 });
