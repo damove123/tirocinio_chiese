@@ -149,17 +149,15 @@
     </script>
     <div class="dropdown">
         {% if immagini %}
-        <!-- Se ci sono immagini, mostra il bottone dropdown e i reperti -->
         <!-- if there are images, it shows the button dropdown and artifacts -->
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
             Artifacts
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="repertiMenu">
-            <!-- Qui puoi inserire altri elementi che appaiono nel menu dropdown se necessario -->
         </div>
         <div class="row" id="repertiRow">
             {% for i in range(reperti|length) %}
-            <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
+            <div class="col-md-3 mb-4">
                 <div class="card">
                     {% if immagini[i] %}
                     <img src="/static/caricamento.jpg"
@@ -176,7 +174,8 @@
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ reperti[i] }}</h5>
-                        <!-- Bottone Dettagli che porta alla pagina del reperto specifico -->
+                        <!-- Details Button which get you to the page of the specific artifact -->
+
                         <a href="{{ url_for('search_reperto', query=reperti[i].split('-')[-1].strip()) }}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
@@ -184,7 +183,7 @@
             {% endfor %}
         </div>
         {% else %}
-        <!-- Se non ci sono immagini, mostra un messaggio -->
+        <!-- If there is are no artifacts -->
         <p><strong>Non ci sono reperti disponibili in questa chiesa.</strong></p>
         {% endif %}
     </div>

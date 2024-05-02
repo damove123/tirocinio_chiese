@@ -178,7 +178,7 @@ def search_reperto():
 
     reperto_traduz = None
     reperto_id = None
-    reperto_url = '/static/noimage.jpg'
+    reperto_url = None
     reperto_scritte = None
     reperto_condition = None
     reperto_length = None
@@ -208,7 +208,7 @@ def search_reperto():
                 reperto_shape = reperto.get("data_Shape", None)
                 reperto_type = reperto.get("data_Type of Artifact", None)
                 break
-
+    # code to upload translation
         if request.method == "POST":
             reperto_traduz = request.form['NEWtranslation']
             email = request.form['emailTK']
