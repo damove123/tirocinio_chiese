@@ -141,10 +141,10 @@ def search_reperto():
 
     try:
         global dati_reperti
-        if dati_reperti is None:
-            artifact_code = formatta_nome(query)
-            ck_id_list = data.getGroup(artifact_code)
-            dati_reperti = data.getData(ck_id_list)
+        dati_reperti = None
+        artifact_code = formatta_nome(query)
+        ck_id_list = data.getGroup(artifact_code)
+        dati_reperti = data.getData(ck_id_list)
 
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == query:
