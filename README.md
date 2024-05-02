@@ -24,3 +24,12 @@ We welcome contributions from individuals who are passionate about preserving cu
 
 ## Problems and Ideas:
 
+Maps :
+- The APIKeys and IDs of the maps are visibile from the inspection tool of the webpage: need to fix it hiding them in some way
+
+Styles :
+- there is no consistency in the styles. 
+
+JS : 
+- Extraction JS code from all the html files 
+

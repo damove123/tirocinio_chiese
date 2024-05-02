@@ -11,12 +11,29 @@ app = Flask(__name__)
 
 dati_reperti = None
 
-
 def split_name(name):
+    """
+    Removes a specific substring from the artifact name.
+
+    Args:
+        name (str): The full name of the artifact.
+
+    Returns:
+        str: The modified artifact name with 'Church Floor Artifact - ' removed.
+    """
     return name.replace('Church Floor Artifact - ', '')
 
-
 def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
+    """
+    Finds the closest church name match from a CSV file using fuzzy matching.
+
+    Args:
+        nome_chiesa (str): The church name to match.
+        path_file (str): The path to the CSV file containing church names. Defaults to 'Churches.csv'.
+
+    Returns:
+        str: The best matching church name.
+    """
     with open(path_file, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         chiese = [row[2] for row in reader if len(row) > 2]  # Assicurati che ci siano abbastanza colonne
@@ -25,12 +42,30 @@ def trova_miglior_corrispondenza(nome_chiesa, path_file='Churches.csv'):
     migliore, punteggio = fuzzywuzzy.process.extractOne(nome_chiesa, chiese)
     return migliore
 
-
 def sub(string: str):
+    """
+    Replaces spaces in the string with '%20' for URL encoding.
+
+    Args:
+        string (str): The string to be formatted.
+
+    Returns:
+        str: The URL-encoded string.
+    """
     return string.replace(' ', '%20')
 
 
 def seperator(dataDict):
+    """
+    Extracts specific keys from a dictionary and handles missing keys gracefully.
+
+    Args:
+        dataDict (dict): The dictionary containing artifact data.
+
+    Returns:
+        dict: A dictionary with selected artifact details, handling missing keys by setting them to None.
+    """
+
     try:
         outputdict = {
             "url": dataDict.get("media0_medium"),
@@ -48,8 +83,16 @@ def seperator(dataDict):
     return outputdict
 
 
+
+
 @app.route("/")
 def search_church():
+    """
+    Handles the index route and processes church name queries to display matching results.
+
+    Returns:
+        Rendered template: A Flask template populated with church and related artifact data.
+    """
     raw_query = request.args.get('query')
     if not raw_query:
         return render_template("index.html", message="Inserisci un termine di ricerca.")
@@ -59,7 +102,7 @@ def search_church():
     try:
         global dati_reperti
         dati_reperti = None
-        # Legge il file CSV e cerca la chiesa con il nome più simile alla query
+        # read the csv file and search the church with the closest name
         churches = pd.read_csv('Churches.csv')
         closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, query).ratio()).idxmax()
         church_info = churches.iloc[closest_match]
@@ -74,7 +117,7 @@ def search_church():
             'latitude': church_info['Latitude Coordinate'],
         }
 
-        # Estrae i dati necessari dai reperti correlati alla chiesa trovata
+        # it gets the data of the artifacts of the church
         artifact_info = None
         with open('Churches.csv', 'r', newline='', encoding='utf8') as file:
             reader = csv.reader(file)
@@ -97,7 +140,7 @@ def search_church():
             id = [split_name(item['id'])for item in cleanData]
             scritte = [item['inscription'] for item in cleanData]
 
-        # Passa le informazioni della chiesa e i dati dei reperti al template
+        # Pass the info church and artifact data to the templates result.html
         return render_template("result.html", church_data=church_data, reperti=id, scritte=scritte, immagini=immagini,
                                query=query)
     except Exception as e:
@@ -106,21 +149,36 @@ def search_church():
 
 
 def formatta_nome(codice_reperto):
+    """
+    Formats the artifact code by appending '%20Artifacts' after the first segment split by '_'.
+
+    Args:
+        codice_reperto (str): The original artifact code.
+
+    Returns:
+        str: The formatted artifact code suitable for further processing.
+    """
     uppercase_letters = codice_reperto.split('_')[0]
-    # Aggiunge "%20Artifacts" alla stringa di lettere maiuscole
+    # add "%20Artifacts" to the string
     result_string = uppercase_letters + "%20Artifacts"
     return result_string
 
 
 @app.route("/search_reperto", methods=["GET", "POST"])
 def search_reperto():
+    """
+    Handles the artifact search route, allowing users to query by artifact code.
+
+    Returns:
+        Rendered template: A Flask template showing detailed information about the queried artifact or an error message.
+    """
     query = request.args.get('query')
     if not query:
         return render_template("index.html", message="Inserisci il codice del reperto.")
 
     reperto_traduz = None
     reperto_id = None
-    reperto_url = '/static/noimage.jpg'
+    reperto_url = None
     reperto_scritte = None
     reperto_condition = None
     reperto_length = None
@@ -138,7 +196,7 @@ def search_reperto():
 
         for reperto in dati_reperti:
             if reperto["data_Artifact Code"] == query:
-                # Gestisce la possibilità che l'immagine non sia disponibile
+                # it handles the possibilty that there is no image
                 reperto_id = reperto.get("birth_certificate_ckID", None)
                 reperto_url = reperto.get("media0_medium", None)
                 reperto_scritte = reperto.get("data_Transcription", None)
@@ -149,15 +207,15 @@ def search_reperto():
                 reperto_material = reperto.get("data_Materials", None)
                 reperto_shape = reperto.get("data_Shape", None)
                 reperto_type = reperto.get("data_Type of Artifact", None)
-                break  # Esce dal ciclo una volta trovato il reperto corrispondente
-
+                break
+    # code to upload translation
         if request.method == "POST":
             reperto_traduz = request.form['NEWtranslation']
             email = request.form['emailTK']
             uid = request.form['uidTK']
             data.update_translation(reperto_id, reperto_traduz, email, uid)
 
-        if reperto_url or reperto_scritte:  # Verifica se abbiamo trovato dati utili
+        if reperto_url or reperto_scritte:  # Verifiy if we found useful data
             return render_template("clickReperto.html", reperto=query, scritte=reperto_scritte,
                                    immagini=reperto_url, traduzione=reperto_traduz, condizione=reperto_condition,
                                    length=reperto_length,
@@ -172,15 +230,6 @@ def search_reperto():
                                message="Errore nel processo di ricerca. Assicurati che il codice del reperto sia "
                                        "valido.")
 
-
-@app.route('/search')
-def search():
-    church_name = request.args.get('chiesa', '')
-    churches = pd.read_csv('Churches.csv')
-    # Utilizza SequenceMatcher per trovare il nome più simile
-    closest_match = churches['Local Name'].apply(lambda x: SequenceMatcher(None, x, church_name).ratio()).idxmax()
-    church_info = churches.iloc[closest_match]
-    return render_template('results.html', church_info=church_info)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Dettagli del Reperto</title>
+    <title>Artifacts's Detail</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -242,14 +242,14 @@
     </style>
 </head>
 <body>
-<a href="/" class="btn btn-primary" id="home-button">Torna alla Homepage</a>
+<a href="/" class="btn btn-primary" id="home-button">Homepage</a>
 <div class="container mt-4">
     <div class="header">
-        <h1>Dettagli del Reperto</h1>
+        <h1>Artifact's Detail</h1>
         <button class="button button-translate" onclick="toggleTranslate()">Translate</button>
-        <p id="status">Controllando lo stato...</p>
-        <button id="login-button" class="btn btn-secondary" onclick="showLogin()">Accedi</button>
-        <button id="logout-button" class="btn btn-secondary" onclick="logoutUser()" style="display:none;">Esci</button>
+        <p id="status">Checking the state...</p>
+        <button id="login-button" class="btn btn-secondary" onclick="showLogin()">Login</button>
+        <button id="logout-button" class="btn btn-secondary" onclick="logoutUser()" style="display:none;">Logout</button>
     </div>
     <div class="details-container">
         <div class="img-container">
@@ -259,7 +259,7 @@
             <img src="/static/noimage.jpg" alt="Immagine del Reperto" class="img-fluid">
             {% endif %}
         </div>
-        <!-- Modal per ingrandire l'immagine -->
+        <!-- Modal to zoom the image -->
         <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
