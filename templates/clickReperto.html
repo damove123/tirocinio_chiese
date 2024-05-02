@@ -325,8 +325,12 @@
             </div>
         </div>
         <div class="hidden" id="translateForm">
-            <textarea rows="4" placeholder="Type here your translation..."></textarea>
-            <button class="button">Send Translation</button>
+            <form method="POST">
+                <input type="text" name="NEWtranslation", placeholder="Type here your translation...">
+                <input id="emailTranslate" type="hidden", name="emailTK", value = "NaN">
+                <input id="uid" type="hidden", name="uidTK", value = "NaN">
+                <input class="button" type="submit"></button>
+            </form>
         </div>
     </div>
 </div>
@@ -386,13 +390,15 @@
             appId: '1:445655714967:web:874499fae4679e61aeadd2',
         };
         const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        const auth = firebase.auth(app);
 
         auth.onAuthStateChanged(function(user) {
             if (user) {
                 document.getElementById('status').innerHTML = `Logged in as: ${user.email}`;
                 document.getElementById('login-button').style.display = 'none';
                 document.getElementById('logout-button').style.display = 'inline-block';
+                document.getElementById('uid').value = user.uid
+                document.getElementById('emailTranslate').value = user.email
             } else {
                 document.getElementById('status').innerHTML = 'You are not logged in.';
                 document.getElementById('login-button').style.display = 'inline-block';
@@ -405,6 +411,7 @@
             const password = document.getElementById('password').value;
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
+                    const user = userCredential.user
                     closeModal();
                 })
                 .catch((error) => {
