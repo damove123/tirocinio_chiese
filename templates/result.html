@@ -154,8 +154,14 @@
             <div class="col-md-3 mb-4"> <!-- Imposta le dimensioni delle colonne per visualizzare più reperti per riga -->
                 <div class="card">
                     {% if immagini[i] %}
-                    <img src="caricamento.jpg"
+                    <img src="/static/caricamento.jpg"
                          data-src="{{ immagini[i] }}"
+                         alt="Immagine del reperto"
+                         class="card-img-top lazyload"
+                         loading="lazy">
+                    {% else %}
+                    <img src="/static/caricamento.jpg"
+                         data-src="/static/noimage.jpg"
                          alt="Immagine del reperto"
                          class="card-img-top lazyload"
                          loading="lazy">
